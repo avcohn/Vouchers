@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>השוברים שלי</title>
-<meta name="theme-color" content="#f6f2fb">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f6f2fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="השוברים שלי">
@@ -16,32 +17,49 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f6f2fb; --bg2:#eef5f8;
-  --card:#ffffff; --ink:#2d2640; --muted:#7b7390; --line:#ece6f4;
-  --primary:#8a78d8; --primary-soft:#ece7fb; --primary-ink:#5a48b0;
-  --mint:#dff4ea; --mint-ink:#23805a;
-  --peach:#ffe8d6; --peach-ink:#b0601f;
-  --gray:#eceaf1; --gray-ink:#6f6980;
-  --rose:#ffe3e8; --rose-ink:#b8384f;
-  --radius:20px; --shadow:0 6px 22px rgba(90,72,176,.08), 0 1px 3px rgba(90,72,176,.06);
-  --safe-b:env(safe-area-inset-bottom,0px);
+:root {
+  /* תמה בהירה (ברירת מחדל) */
+  --bg: #f6f2fb; --bg2: #eef5f8; --bg-glass: rgba(246, 242, 251, 0.85);
+  --card: #ffffff; --ink: #2d2640; --muted: #7b7390; --line: #ece6f4;
+  --primary: #8a78d8; --primary-soft: #ece7fb; --primary-ink: #5a48b0;
+  --mint: #dff4ea; --mint-ink: #23805a;
+  --peach: #ffe8d6; --peach-ink: #b0601f;
+  --gray: #eceaf1; --gray-ink: #6f6980;
+  --rose: #ffe3e8; --rose-ink: #b8384f;
+  --radius: 20px; --shadow: 0 8px 24px rgba(90,72,176,.08), 0 2px 8px rgba(90,72,176,.04);
+  --safe-b: env(safe-area-inset-bottom, 0px);
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* תמה כהה */
+    --bg: #121212; --bg2: #1a1a1a; --bg-glass: rgba(18, 18, 18, 0.85);
+    --card: #222222; --ink: #f0f0f0; --muted: #9a9a9a; --line: #333333;
+    --primary: #9b8aee; --primary-soft: #302a50; --primary-ink: #c4baf5;
+    --mint: #1e3d30; --mint-ink: #6de2aa;
+    --peach: #4a2a10; --peach-ink: #ffb880;
+    --gray: #2a2a2a; --gray-ink: #aaaaaa;
+    --rose: #4a1824; --rose-ink: #ff94a8;
+    --shadow: 0 8px 24px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2);
+  }
+}
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0}
+html,body{margin:0; scroll-behavior: smooth;}
 body{
   font-family:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
   color:var(--ink); background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%) fixed;
   min-height:100vh; font-size:16px; line-height:1.45;
 }
 button,input,select{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none}
-button:disabled{cursor:default}
-.wrap{max-width:560px;margin:0 auto;padding:16px 16px calc(110px + var(--safe-b))}
+button{cursor:pointer;border:0;background:none; transition: transform 0.1s ease;}
+button:active:not(:disabled){transform:scale(0.95);}
+button:disabled{cursor:default; opacity:0.5;}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px calc(110px + var(--safe-b));}
 [hidden]{display:none!important}
-.num{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.num{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate; font-family: system-ui, -apple-system, sans-serif;}
 
-/* ---------- setup (only until API_URL is set) ---------- */
+/* ---------- setup ---------- */
 .login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
 .login-card{width:100%;max-width:380px;background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:30px 22px}
 .logo{width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,#cdbff7,#ffd6e0);display:grid;place-items:center;font-size:32px;margin:0 auto 14px}
@@ -50,10 +68,10 @@ button:disabled{cursor:default}
 .setup-note{background:var(--peach);color:var(--peach-ink);border-radius:14px;padding:12px 14px;font-size:14px;margin-bottom:16px}
 
 /* ---------- fields ---------- */
-.field{margin-bottom:14px}
-.field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
-.field .hint{font-weight:400;color:var(--muted)}
-.input{width:100%;height:52px;border-radius:14px;border:1.5px solid var(--line);background:#fcfbfe;padding:0 14px;font-size:17px;outline:none;transition:border-color .15s,box-shadow .15s}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+.field .hint{font-weight:400;color:var(--muted);font-size: 12px;}
+.input{width:100%;height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);padding:0 14px;font-size:17px;outline:none;transition:border-color .2s,box-shadow .2s; color:var(--ink)}
 .input:focus{border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-soft)}
 .input.ltr{direction:ltr;text-align:right}
 .input-money{position:relative}
@@ -63,129 +81,154 @@ button:disabled{cursor:default}
 .preview{font-size:13px;color:var(--primary-ink);margin-top:6px}
 
 /* ---------- buttons ---------- */
-.btn{height:52px;border-radius:16px;padding:0 18px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .08s,opacity .15s,background .15s;position:relative;user-select:none}
-.btn:active:not(:disabled){transform:scale(.97)}
-.btn:disabled{opacity:.45}
+.btn{height:54px;border-radius:16px;padding:0 18px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;position:relative;user-select:none}
 .btn-block{width:100%}
-.btn-primary{background:var(--primary);color:#fff;box-shadow:0 6px 16px rgba(138,120,216,.35)}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 6px 16px rgba(138,120,216,.25)}
+.btn-primary:hover{background:var(--primary-ink)}
 .btn-soft{background:var(--primary-soft);color:var(--primary-ink)}
-.btn-ghost{background:#f4f1f9;color:var(--ink)}
+.btn-ghost{background:var(--line);color:var(--ink)}
 .btn-danger{background:var(--rose);color:var(--rose-ink)}
-.btn.loading{color:transparent!important}
-.btn.loading::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;border:2.5px solid rgba(120,100,200,.25);border-top-color:var(--primary-ink);animation:spin .7s linear infinite}
+.btn.loading{color:transparent!important; pointer-events: none;}
+.btn.loading::after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;border:2.5px solid rgba(120,100,200,.25);border-top-color:var(--primary-ink);animation:spin .7s linear infinite}
 .btn-primary.loading::after{border-color:rgba(255,255,255,.35);border-top-color:#fff}
 @keyframes spin{to{transform:rotate(360deg)}}
-.icon-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.75);box-shadow:0 1px 3px rgba(90,72,176,.08)}
+.icon-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--card);box-shadow:0 2px 6px rgba(0,0,0,.05)}
 .icon-btn svg{width:20px;height:20px;stroke:var(--ink)}
 .icon-btn.spinning svg{animation:spin .8s linear infinite}
 
 /* ---------- header / summary ---------- */
-.top{display:flex;align-items:center;justify-content:space-between;margin:4px 0 14px}
-.top h1{font-size:24px;margin:0;font-weight:800;letter-spacing:-.3px}
+.top{position: sticky; top: 0; z-index: 10; display:flex;align-items:center;justify-content:space-between; padding: 12px 0; margin-bottom:14px; background: var(--bg-glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);}
+.top h1{font-size:26px;margin:0;font-weight:800;letter-spacing:-.3px}
 .top .actions{display:flex;gap:8px}
-.summary{background:linear-gradient(135deg,#d9cffb 0%,#fde0e7 55%,#dff1ec 100%);border-radius:24px;padding:18px 18px 16px;box-shadow:var(--shadow);margin-bottom:14px}
-.summary .lbl{font-size:14px;color:#5b4f7a;font-weight:500}
-.summary .total{font-size:38px;font-weight:800;line-height:1.1;margin:2px 0 12px}
+.summary{background:linear-gradient(135deg, #a794f0 0%, #ffb1c3 55%, #aae3cd 100%);border-radius:24px;padding:22px 20px;box-shadow:var(--shadow);margin-bottom:16px; color: #1a1a1a;}
+.summary .lbl{font-size:14px;font-weight:600; opacity: 0.85;}
+.summary .total{font-size:42px;font-weight:800;line-height:1.1;margin:4px 0 16px; letter-spacing: -1px;}
 .summary .stats{display:flex;gap:8px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.7);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.8);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;}
 .pill b{font-weight:800}
 
 /* ---------- filters ---------- */
-.filters{margin-bottom:6px}
+.filters{margin-bottom:12px; position: relative;}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;height:38px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.8);border:1.5px solid var(--line);font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap}
-.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip{flex:none;height:40px;padding:0 16px;border-radius:999px;background:var(--card);border:1.5px solid var(--line);font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap; transition: all 0.2s;}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 
 /* ---------- groups / cards ---------- */
-.group{margin-top:16px}
-.group-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 4px 8px}
+.group{margin-top:24px}
+.group-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 4px 12px}
 .group-head h2{margin:0;font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
-.group-head .dot{width:10px;height:10px;border-radius:50%}
+.group-head .dot{width:12px;height:12px;border-radius:50%; box-shadow: 0 0 8px rgba(0,0,0,0.1);}
 .group-head .sub{color:var(--muted);font-size:14px;font-weight:600}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:12px;border-inline-start:6px solid var(--accent,#cdbff7);animation:rise .25s ease both}
-.card.used{opacity:.72}
-@keyframes rise{from{opacity:0;transform:translateY(6px)}}
+
+/* Ticket Card Design */
+.card {
+  position: relative;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 16px;
+  border-inline-start: 6px solid var(--accent, #cdbff7);
+  animation: rise .3s ease both;
+  overflow: hidden;
+}
+.card::before, .card::after {
+  content: ''; position: absolute; top: 62px; width: 24px; height: 24px;
+  background: var(--bg); border-radius: 50%; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+.card::before { left: -12px; }
+.card::after { right: -12px; }
+.card-divider {
+  border-top: 2px dashed var(--line);
+  margin: 16px -20px;
+  position: relative;
+  opacity: 0.6;
+}
+
+.card.used{opacity:.6; filter: grayscale(50%);}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.card .company{font-size:13px;color:var(--muted);font-weight:600}
-.card .type{font-size:19px;font-weight:800;margin:1px 0 2px;letter-spacing:.2px}
-.card .vnum{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);background:#f6f4fa;border-radius:8px;padding:3px 8px;margin-top:4px}
+.card .company{font-size:14px;color:var(--muted);font-weight:600; text-transform: uppercase; letter-spacing: 0.5px;}
+.card .type{font-size:20px;font-weight:800;margin:2px 0 4px;letter-spacing:.2px}
+.card .vnum{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink);background:var(--bg);border-radius:8px;padding:4px 10px;margin-top:4px; font-weight: 500;}
 .card .vnum.missing{color:var(--peach-ink);background:var(--peach)}
-.status{flex:none;font-size:12.5px;font-weight:700;border-radius:999px;padding:5px 10px}
+.status{flex:none;font-size:12.5px;font-weight:700;border-radius:999px;padding:6px 12px}
 .st-active{background:var(--mint);color:var(--mint-ink)}
 .st-partial{background:var(--peach);color:var(--peach-ink)}
 .st-used{background:var(--gray);color:var(--gray-ink)}
-.bal-row{display:flex;justify-content:space-between;align-items:flex-end;margin:14px 0 8px}
-.bal{font-size:30px;font-weight:800;line-height:1}
-.bal-lbl{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:4px}
-.of{font-size:13.5px;color:var(--muted);text-align:left}
-.bar{height:8px;background:#f1eef7;border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px;background:var(--accent,#cdbff7);transition:width .35s}
-.card-actions{display:grid;grid-template-columns:.8fr 1.2fr 1.2fr 44px;gap:7px;margin-top:14px}
-.card-actions .btn{height:46px;font-size:14px;padding:0 4px;border-radius:14px;white-space:nowrap;min-width:0}
-.card-actions .more{width:44px;padding:0}
-.card-actions .more svg{width:20px;height:20px;stroke:var(--ink)}
-.empty{text-align:center;color:var(--muted);padding:40px 10px}
-.empty .big{font-size:44px}
-.empty .help{font-size:14px;margin:8px auto 16px;max-width:320px;line-height:1.5}
+.bal-row{display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 10px}
+.bal{font-size:32px;font-weight:800;line-height:1}
+.bal-lbl{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:4px}
+.of{font-size:14px;color:var(--muted);text-align:left; font-weight: 500;}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--accent,#cdbff7);transition:width .5s cubic-bezier(0.2, 0.8, 0.2, 1)}
+.card-actions{display:grid;grid-template-columns:.8fr 1.2fr 1.2fr 48px;gap:8px;margin-top:16px}
+.card-actions .btn{height:46px;font-size:14px;padding:0 4px;border-radius:12px;white-space:nowrap;min-width:0}
+.card-actions .more{width:100%;padding:0}
+.card-actions .more svg{width:22px;height:22px;stroke:var(--ink)}
+
+.empty{text-align:center;color:var(--muted);padding:60px 20px; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);}
+.empty .big{font-size:54px; margin-bottom: 12px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));}
+.empty b {font-size: 18px; color: var(--ink);}
+.empty .help{font-size:15px;margin:8px auto 16px;max-width:320px;line-height:1.5}
 
 /* ---------- FAB ---------- */
-.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + var(--safe-b));height:56px;padding:0 24px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 26px rgba(45,38,64,.3);z-index:20}
-.fab:active{transform:translateX(-50%) scale(.97)}
-.fab svg{width:20px;height:20px;stroke:#fff}
+.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + var(--safe-b));height:58px;padding:0 28px;border-radius:999px;background: linear-gradient(135deg, var(--primary), var(--primary-ink));color:#fff;font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 26px rgba(90,72,176,.4);z-index:20; transition: transform 0.2s, box-shadow 0.2s;}
+.fab:active{transform:translateX(-50%) scale(.95); box-shadow:0 4px 12px rgba(90,72,176,.4);}
+.fab svg{width:22px;height:22px;stroke:#fff}
 
 /* ---------- sheet ---------- */
-.backdrop{position:fixed;inset:0;background:rgba(40,30,70,.32);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:40;opacity:0;pointer-events:none;transition:opacity .3s ease}
 .backdrop.open{opacity:1;pointer-events:auto}
-.sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;max-height:92vh;overflow-y:auto;background:#fff;border-radius:26px 26px 0 0;padding:10px 18px calc(22px + var(--safe-b));z-index:41;transform:translateY(105%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.8,.2,1),visibility 0s linear .28s;box-shadow:0 -10px 40px rgba(40,30,70,.18)}
-.sheet.open{transform:none;visibility:visible;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
-.grab{width:44px;height:5px;border-radius:9px;background:#e2dcec;margin:0 auto 14px}
-.sheet h3{margin:0 0 4px;font-size:21px;font-weight:800}
-.sheet .lead{color:var(--muted);margin:0 0 18px;font-size:15px}
-.sheet-actions{display:flex;gap:10px;margin-top:18px}
+.sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;max-height:92vh;overflow-y:auto;background:var(--card);border-radius:28px 28px 0 0;padding:12px 20px calc(24px + var(--safe-b));z-index:41;transform:translateY(100%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .35s;box-shadow:0 -10px 40px rgba(0,0,0,.2)}
+.sheet.open{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.grab{width:48px;height:6px;border-radius:10px;background:var(--line);margin:0 auto 16px}
+.sheet h3{margin:0 0 6px;font-size:22px;font-weight:800}
+.sheet .lead{color:var(--muted);margin:0 0 20px;font-size:15px}
+.sheet-actions{display:flex;gap:12px;margin-top:20px}
 .sheet-actions .btn{flex:1;white-space:nowrap}
 .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.seg button{height:50px;border-radius:14px;border:1.5px solid var(--line);background:#fcfbfe;font-weight:700;font-size:13.5px;padding:0 4px;white-space:nowrap}
+.seg button{height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);font-weight:700;font-size:14px;padding:0 4px;white-space:nowrap}
 .seg button.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary-ink)}
-.suggest{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.suggest button{height:32px;padding:0 12px;border-radius:99px;background:#f4f1f9;font-size:13.5px;font-weight:600}
-.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.quick button{height:34px;padding:0 12px;border-radius:10px;background:#f4f1f9;font-size:14px;font-weight:600}
-.infobox{background:#f8f6fc;border-radius:16px;padding:12px 14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
-.infobox .t{font-weight:700}
+.suggest, .quick {display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.suggest button, .quick button {height:36px;padding:0 16px;border-radius:99px;background:var(--line);font-size:14px;font-weight:600; color: var(--ink);}
+.infobox{background:var(--bg);border-radius:16px;padding:14px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center; border: 1px solid var(--line);}
+.infobox .t{font-weight:700; color: var(--ink);}
 .infobox .s{font-size:13px;color:var(--muted)}
 
 /* history / undo list */
 .hist{list-style:none;margin:0;padding:0}
-.hist li{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.hist li{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line)}
 .hist li:last-child{border-bottom:0}
-.hist .ic{flex:none;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:16px}
+.hist .ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:18px}
 .hist .main{flex:1;min-width:0}
 .hist .t{font-weight:700;font-size:15px}
-.hist .d{font-size:12.5px;color:var(--muted)}
-.hist .amt{font-weight:800;font-size:15px}
+.hist .d{font-size:13px;color:var(--muted); margin-top: 2px;}
+.hist .amt{font-weight:800;font-size:16px}
 .hist li.undone .t,.hist li.undone .amt{text-decoration:line-through;color:var(--muted)}
-.pick li{cursor:pointer;border-radius:14px;border:1.5px solid transparent;padding:12px 10px;margin-bottom:6px;background:#faf8fd;border-bottom:1.5px solid transparent}
+.pick li{cursor:pointer;border-radius:16px;border:2px solid transparent;padding:14px 12px;margin-bottom:8px;background:var(--bg); transition: all 0.2s;}
 .pick li.sel{border-color:var(--primary);background:var(--primary-soft)}
-.pick .radio{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid #cfc6e4}
-.pick li.sel .radio{border:7px solid var(--primary)}
-.section-title{font-weight:800;font-size:15px;margin:18px 0 8px}
-.divider{height:1px;background:var(--line);margin:18px 0}
+.pick .radio{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--muted); position: relative;}
+.pick li.sel .radio{border-color: var(--primary);}
+.pick li.sel .radio::after {content:''; position:absolute; top:4px; left:4px; right:4px; bottom:4px; background:var(--primary); border-radius:50%;}
+.section-title{font-weight:800;font-size:16px;margin:24px 0 12px; color: var(--ink);}
+.divider{height:1px;background:var(--line);margin:20px 0}
 
 /* ---------- toast ---------- */
-.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);background:var(--ink);color:#fff;border-radius:16px;padding:12px 18px;font-weight:600;font-size:15px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 32px);display:flex;gap:8px;align-items:center}
+.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);background:var(--ink);color:var(--card);border-radius:16px;padding:14px 20px;font-weight:600;font-size:15px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.2);transition:transform .4s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
 .toast.show{transform:translate(-50%,0)}
-.toast.ok{background:#23805a}
-.toast.bad{background:#b8384f}
+.toast.ok{background:var(--mint-ink); color: #fff;}
+.toast.bad{background:var(--rose-ink); color: #fff;}
 
-.skeleton{height:170px;border-radius:var(--radius);background:linear-gradient(90deg,#fff 0%,#f5f2fa 50%,#fff 100%);background-size:200% 100%;animation:sh 1.2s infinite;margin-bottom:12px;box-shadow:var(--shadow)}
+.skeleton{height:180px;border-radius:var(--radius);background:linear-gradient(90deg,var(--card) 0%,var(--line) 50%,var(--card) 100%);background-size:200% 100%;animation:sh 1.5s infinite;margin-bottom:16px;box-shadow:var(--shadow)}
 @keyframes sh{to{background-position:-200% 0}}
 @media (min-width:600px){.wrap{padding-top:28px}}
 </style>
 </head>
 <body>
 
-<!-- ========== SETUP (only until API_URL is set) ========== -->
+<!-- ========== SETUP ========== -->
 <section class="login" id="setupView" hidden>
   <div class="login-card">
     <div class="logo">🎟️</div>
@@ -202,7 +245,7 @@ button:disabled{cursor:default}
       <h1>השוברים שלי</h1>
       <div class="actions">
         <button class="icon-btn" id="refreshBtn" aria-label="רענון" title="רענון">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
         </button>
       </div>
     </header>
@@ -233,7 +276,7 @@ button:disabled{cursor:default}
 
 <script>
 /* =====================================================================
-   הגדרה — כתובת ה-Web App של Google Apps Script (מסתיימת ב-/exec)
+   הגדרה — כתובת ה-Web App של Google Apps Script
    ===================================================================== */
 const API_URL = 'https://script.google.com/macros/s/AKfycbzmuUprcurfXZ5U-z5bfzFNlNWj5OZ0yZ8af1mjwDqD4ZIUTDbKFmhuUvqUIM3YClHNrA/exec';
 
@@ -244,7 +287,7 @@ const CACHE_KEY = 'vouchers-cache:' + API;
 
 const HTZ_TYPES = ['EAT ZONE', 'CHEF ZONE', 'ALL IN ZONE'];
 const STATUS = {
-  active:  { label: 'פעיל',         cls: 'st-active'  },
+  active:  { label: 'פעיל',       cls: 'st-active'  },
   partial: { label: 'נוצל חלקית',   cls: 'st-partial' },
   used:    { label: 'נוצל במלואו',  cls: 'st-used'    },
 };
@@ -261,6 +304,14 @@ const money = n => nf.format(Number(n) || 0) + ' ₪';
 const dtf = new Intl.DateTimeFormat('he-IL', { day: 'numeric', month: 'numeric', year: '2-digit', hour: '2-digit', minute: '2-digit' });
 const fmtDate = s => { const d = new Date(s); return isNaN(d) ? '' : dtf.format(d); };
 const normCompany = s => String(s || '').trim().replace(/\s+/g, ' ').toUpperCase();
+
+// Haptic feedback function
+const vibrate = (ms = 50) => {
+  if (navigator.vibrate) {
+    try { navigator.vibrate(ms); } catch (e) {}
+  }
+};
+
 function normType(company, type) {
   const t = String(type || '').trim().replace(/\s+/g, ' ');
   if (normCompany(company) === 'HTZ') {
@@ -285,20 +336,21 @@ function accentOf(company) {
   let h = 0; for (const c of company) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return ACCENTS[2 + (h % (ACCENTS.length - 2))];
 }
-const numKey = s => String(s || '').replace(/[^0-9A-Za-z\u0590-\u05FF]/g, '').toUpperCase();   // 139381057-3719 = 139381057 3719
+const numKey = s => String(s || '').replace(/[^0-9A-Za-z\u0590-\u05FF]/g, '').toUpperCase();
 const undoableOf = id => state.actions.filter(a => a.voucher_id === id && a.action === 'use' && !a.undone_at);
 const errMsg = e => (e && e.message) || 'משהו השתבש. נסה שוב.';
 
 function toast(msg, kind = 'ok') {
+  vibrate(kind === 'ok' ? [30, 50, 30] : [50, 100, 50]); // Success pattern vs Error pattern
   const t = $('#toast');
   t.className = 'toast ' + kind;
-  t.textContent = (kind === 'ok' ? '✓ ' : '') + msg;
+  t.innerHTML = (kind === 'ok' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ' : '⚠️ ') + msg;
   requestAnimationFrame(() => t.classList.add('show'));
   clearTimeout(toast._t);
-  toast._t = setTimeout(() => t.classList.remove('show'), kind === 'ok' ? 2200 : 3800);
+  toast._t = setTimeout(() => t.classList.remove('show'), kind === 'ok' ? 2500 : 4000);
 }
 
-/* מונע לחיצה כפולה: כל פעולת שמירה עוברת כאן */
+/* Guard function for buttons */
 async function guarded(btn, fn) {
   if (busy) return;
   busy = true;
@@ -313,7 +365,7 @@ async function guarded(btn, fn) {
   }
 }
 
-/* ---------- שרת (Google Sheets דרך Apps Script) ---------- */
+/* ---------- שרת (API) ---------- */
 let inflight = 0, sentSeq = 0, appliedSeq = 0;
 const rid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
 const netError = msg => Object.assign(new Error(msg), { net: true });
@@ -326,7 +378,6 @@ async function api(action, payload = {}) {
   try {
     let res, data;
     try {
-      // גוף טקסט רגיל, בלי כותרות — כך Apps Script מקבל את הבקשה בלי בדיקת CORS מקדימה
       res = await fetch(API, { method: 'POST', body: JSON.stringify({ action, reqId: rid(), ...payload }), signal: ctrl.signal });
     } catch (e) {
       throw netError(e.name === 'AbortError' ? 'השרת לא הגיב בזמן. נסה שוב.' : 'אין חיבור לשרת. נסה שוב.');
@@ -349,7 +400,6 @@ function applyState(s) {
   render();
 }
 
-/* פתיחה: מציג מיד את מה שנטען בפעם הקודמת (רק לתצוגה), ומסנכרן מהגיליון */
 async function load() {
   if (!state.loaded) {
     let cached = null;
@@ -396,11 +446,11 @@ function render() {
 
   // list
   if (!state.vouchers.length) {
-    $('#list').innerHTML = '<div class="empty"><div class="big">🎟️</div>אין עדיין שוברים. הוסף את הראשון.</div>';
+    $('#list').innerHTML = '<div class="empty"><div class="big">🎟️</div><b>ברוכים הבאים!</b><div class="help">אין עדיין שוברים במערכת. הוסיפו את השובר הראשון שלכם.</div></div>';
     return;
   }
   if (!shown.length) {
-    $('#list').innerHTML = '<div class="empty"><div class="big">🔍</div>אין שוברים שמתאימים לסינון.</div>';
+    $('#list').innerHTML = '<div class="empty"><div class="big">🔍</div><b>לא נמצאו שוברים</b><div class="help">אין שוברים שמתאימים לסינון שבחרתם.</div></div>';
     return;
   }
   const rank = { active: 0, partial: 1, used: 2 };
@@ -434,6 +484,7 @@ function cardHTML(v, accent) {
       </div>
       <span class="status ${STATUS[st].cls}">${STATUS[st].label}</span>
     </div>
+    <div class="card-divider"></div>
     <div class="bal-row">
       <div><div class="bal-lbl">יתרה</div><div class="bal num">${money(v.balance)}</div></div>
       <div class="of">מתוך <span class="num">${money(v.initial_amount)}</span></div>
@@ -452,6 +503,7 @@ function cardHTML(v, accent) {
 
 /* ---------- sheet ---------- */
 function openSheet(html) {
+  vibrate(20);
   $('#sheetBody').innerHTML = html;
   $('#backdrop').classList.add('open');
   $('#sheet').classList.add('open');
@@ -470,7 +522,6 @@ const infoBox = v => `<div class="infobox"><div><div class="t">${esc(v.company)}
   <div class="s">${v.voucher_number ? '# <span class="num">' + esc(v.voucher_number) + '</span>' : 'ללא מספר שובר'}</div></div>
   <div style="text-align:left"><div class="s">יתרה</div><div class="t num">${money(v.balance)}</div></div></div>`;
 
-/* נוצל במלואו — עם אישור */
 function openFull(v) {
   openSheet(`<h3>לסמן שהשובר נוצל?</h3>
     <p class="lead">היתרה תתאפס והשובר יעבור לסטטוס ״נוצל במלואו״. אפשר לבטל אחר כך.</p>
@@ -486,7 +537,6 @@ function openFull(v) {
   });
 }
 
-/* נוצל חלקית — הזנת סכום */
 function openPartial(v) {
   const max = Number(v.balance);
   openSheet(`<h3>ניצול חלקי</h3>
@@ -495,7 +545,7 @@ function openPartial(v) {
     <form id="partialForm" novalidate>
       <div class="field">
         <label for="useAmt">סכום שנוצל <span class="hint">(עד ${money(max)})</span></label>
-        <div class="input-money"><input class="input num" id="useAmt" inputmode="decimal" autocomplete="off" placeholder="0"><span>₪</span></div>
+        <div class="input-money"><input class="input num" id="useAmt" inputmode="decimal" pattern="[0-9]*" autocomplete="off" placeholder="0"><span>₪</span></div>
         <div class="err" id="useErr"></div>
         <div class="preview" id="usePrev"></div>
       </div>
@@ -533,7 +583,6 @@ function openPartial(v) {
   };
 }
 
-/* ביטול ניצול — בחירת הפעולה לביטול */
 function openUndo(v) {
   const list = undoableOf(v.id).slice().reverse();
   if (!list.length) return toast('אין ניצולים לביטול בשובר הזה', 'bad');
@@ -556,7 +605,7 @@ function openUndo(v) {
     $('#confirmUndo').textContent = `החזרת ${money(a.amount)}`;
     document.querySelectorAll('#undoList li').forEach(li => li.classList.toggle('sel', Number(li.dataset.aid) === sel));
   };
-  $('#undoList').onclick = e => { const li = e.target.closest('li'); if (li && !busy) { sel = Number(li.dataset.aid); upd(); } };
+  $('#undoList').onclick = e => { const li = e.target.closest('li'); if (li && !busy) { sel = Number(li.dataset.aid); vibrate(15); upd(); } };
   upd();
   $('#confirmUndo').onclick = e => guarded(e.currentTarget, async () => {
     const a = list.find(x => x.id === sel);
@@ -567,7 +616,6 @@ function openUndo(v) {
   });
 }
 
-/* פרטים, היסטוריה, השלמת מספר, מחיקה */
 function openDetails(v) {
   const acts = state.actions.filter(a => a.voucher_id === v.id).slice().reverse();
   const row = a => {
@@ -575,9 +623,9 @@ function openDetails(v) {
       create: ['🎟️', 'נוסף לרשימה', 'var(--primary-soft)', '+'],
       use:    ['💳', a.is_full ? 'ניצול מלא' : 'ניצול חלקי', 'var(--peach)', '−'],
       undo:   ['↩️', 'ביטול ניצול', 'var(--mint)', '+'],
-      edit:   ['✏️', a.note || 'עריכה', '#f4f1f9', ''],
+      edit:   ['✏️', a.note || 'עריכה', 'var(--bg)', ''],
       delete: ['🗑️', 'מחיקה', 'var(--rose)', ''],
-    }[a.action] || ['•', a.note || '', '#f4f1f9', ''];
+    }[a.action] || ['•', a.note || '', 'var(--bg)', ''];
     const showAmt = a.amount != null && (a.action === 'create' || a.action === 'use' || a.action === 'undo');
     return `<li class="${a.undone_at ? 'undone' : ''}">
       <span class="ic" style="background:${map[2]}">${map[0]}</span>
@@ -617,7 +665,7 @@ function openDetails(v) {
   $('#delBtn').onclick = e => {
     const b = e.currentTarget;
     if (busy) return;
-    if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'לחץ שוב לאישור מחיקה'; return; }
+    if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'לחץ שוב לאישור מחיקה'; vibrate([50, 50]); return; }
     guarded(b, async () => {
       await api('remove', { voucherId: v.id });
       busy = false; closeSheet();
@@ -626,12 +674,11 @@ function openDetails(v) {
   };
 }
 
-/* הוספת שובר */
 function openAdd() {
   const companies = [...new Set(['HTZ', 'BUYME', ...state.vouchers.map(v => v.company)])];
   let htzType = null;
-  openSheet(`<h3>הוספת שובר</h3>
-    <p class="lead">השובר יופיע ברשימה מיד אחרי השמירה.</p>
+  openSheet(`<h3>הוספת שובר חדש</h3>
+    <p class="lead">השובר יתווסף לרשימה מיד לאחר השמירה.</p>
     <form id="addForm" novalidate>
       <div class="field">
         <label for="fCompany">שם החברה</label>
@@ -653,7 +700,7 @@ function openAdd() {
       </div>
       <div class="field">
         <label for="fAmount">סכום התחלתי</label>
-        <div class="input-money"><input class="input num" id="fAmount" inputmode="decimal" autocomplete="off" placeholder="0"><span>₪</span></div>
+        <div class="input-money"><input class="input num" id="fAmount" inputmode="decimal" pattern="[0-9]*" autocomplete="off" placeholder="0"><span>₪</span></div>
         <div class="quick">${[100, 200, 250, 300, 500].map(n => `<button type="button" data-a="${n}">${n} ₪</button>`).join('')}</div>
       </div>
       <div class="err" id="addErr"></div>
@@ -669,7 +716,7 @@ function openAdd() {
     $('#typeHtz').hidden = !isHtz;
     $('#typeFree').hidden = isHtz;
     if (isHtz) {
-      if (!htzType && typ.value) htzType = normType('HTZ', typ.value);   // EATZONE → EAT ZONE
+      if (!htzType && typ.value) htzType = normType('HTZ', typ.value);
       document.querySelectorAll('#typeHtz button').forEach(b => b.classList.toggle('on', b.dataset.t === htzType));
       $('#typePrev').textContent = '';
     } else {
@@ -681,9 +728,9 @@ function openAdd() {
   };
   comp.addEventListener('input', syncType);
   typ.addEventListener('input', syncType);
-  $('#addForm .suggest').onclick = e => { const b = e.target.closest('button'); if (b) { comp.value = b.dataset.c; syncType(); } };
-  $('#typeHtz').onclick = e => { const b = e.target.closest('button'); if (b) { htzType = b.dataset.t; syncType(); } };
-  $('#addForm .quick').onclick = e => { const b = e.target.closest('button'); if (b) $('#fAmount').value = b.dataset.a; };
+  $('#addForm .suggest').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(15); comp.value = b.dataset.c; syncType(); } };
+  $('#typeHtz').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(15); htzType = b.dataset.t; syncType(); } };
+  $('#addForm .quick').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(15); $('#fAmount').value = b.dataset.a; } };
   syncType();
 
   $('#addForm').onsubmit = e => {
@@ -699,7 +746,7 @@ function openAdd() {
     else if (!(amount > 0)) err = 'יש להזין סכום התחלתי גדול מ-0';
     else if (numKey(number) && state.vouchers.some(v => numKey(v.voucher_number) === numKey(number))) err = `שובר מספר ${number} כבר קיים ברשימה`;
     $('#addErr').textContent = err;
-    if (err) return;
+    if (err) { vibrate([50, 100, 50]); return; }
     guarded($('#saveAdd'), async () => {
       await api('add', { company, type, number, amount });
       state.fCompany = 'all'; state.fStatus = 'all'; render();
@@ -711,16 +758,17 @@ function openAdd() {
 
 /* ---------- events ---------- */
 $('#sheet').addEventListener('click', e => { if (e.target.closest('[data-close]')) closeSheet(); });
-$('#companyChips').onclick = e => { const b = e.target.closest('[data-company]'); if (b) { state.fCompany = b.dataset.company; render(); } };
-$('#statusChips').onclick = e => { const b = e.target.closest('[data-status]'); if (b) { state.fStatus = b.dataset.status; render(); } };
+$('#companyChips').onclick = e => { const b = e.target.closest('[data-company]'); if (b) { vibrate(10); state.fCompany = b.dataset.company; render(); } };
+$('#statusChips').onclick = e => { const b = e.target.closest('[data-status]'); if (b) { vibrate(10); state.fStatus = b.dataset.status; render(); } };
 $('#list').onclick = e => {
   if (e.target.closest('#retryBtn')) return start();
   const b = e.target.closest('[data-act]'); if (!b || b.disabled || busy) return;
   const v = findV(b.closest('.card').dataset.id); if (!v) return;
+  vibrate(15);
   ({ full: openFull, partial: openPartial, undo: openUndo, more: openDetails })[b.dataset.act](v);
 };
 $('#addBtn').onclick = openAdd;
-$('#refreshBtn').onclick = e => guarded(null, async () => { await api('state'); toast('הנתונים עודכנו'); });
+$('#refreshBtn').onclick = e => guarded(null, async () => { vibrate(20); await api('state'); toast('הנתונים עודכנו'); });
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && state.loaded && !busy && !$('#sheet').classList.contains('open'))
     api('state').catch(() => {});
