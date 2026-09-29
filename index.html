@@ -4,289 +4,349 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>השוברים שלי</title>
-<meta name="theme-color" content="#f5f6fb">
+<meta name="theme-color" content="#f8f6f1">
 <meta name="color-scheme" content="light">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="השוברים שלי">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23b9a8f0'/><text x='50' y='68' font-size='52' text-anchor='middle'>🎟️</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23b9a8f0'/><text x='50' y='68' font-size='52' text-anchor='middle'>🎟️</text></svg>">
+<link rel="icon" type="image/png" href="data:image/png;base64,__ICON64__">
+<link rel="apple-touch-icon" href="data:image/png;base64,__ICON180__">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  /* תמה בהירה (ברירת מחדל) */
-  --bg: #f6f2fb; --bg2: #eef5f8; --bg-glass: rgba(246, 242, 251, 0.85);
-  --card: #ffffff; --ink: #2d2640; --muted: #7b7390; --line: #ece6f4;
-  --primary: #8a78d8; --primary-soft: #ece7fb; --primary-ink: #5a48b0;
-  --mint: #dff4ea; --mint-ink: #23805a;
-  --peach: #ffe8d6; --peach-ink: #b0601f;
-  --gray: #eceaf1; --gray-ink: #6f6980;
-  --rose: #ffe3e8; --rose-ink: #b8384f;
-  --radius: 20px; --shadow: 0 8px 24px rgba(90,72,176,.08), 0 2px 8px rgba(90,72,176,.04);
-  --safe-b: env(safe-area-inset-bottom, 0px);
+:root{
+  --bg:#f8f6f1; --surface:#fffefb; --surface-2:#f2f0ea; --chip:#efece5;
+  --line:#ebe7de; --line-2:#dedad0;
+  --ink:#1d2a21; --ink-2:#3a463d; --muted:#767b72; --muted-2:#a4a79f;
+  --sage-100:#e2ebdb; --sage-150:#d8e4d0; --sage-200:#cddcc5; --sage-300:#b7cbaf; --sage-400:#98b28f;
+  --sage-600:#56745f; --sage-700:#3e5c47; --sage-800:#2d4635;
+  --peach:#fbe5d5; --peach-ink:#2e2520;
+  --ok-bg:#e6efe1; --ok-dot:#2f8a57; --ok-ink:#1f3d2b;
+  --part-bg:#fcefdc; --part-dot:#d98a2b; --part-ink:#6d4412;
+  --used-bg:#eeece6; --used-dot:#a4a79f; --used-ink:#5f635c;
+  --rose-bg:#fbe7e4; --rose-ink:#a23b36; --rose-solid:#b3463f;
+  --radius:22px;
+  --shadow:0 1px 2px rgba(35,50,38,.04),0 6px 20px rgba(35,50,38,.06);
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --bottom-space:calc(150px + var(--safe-b));
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* תמה כהה */
-    --bg: #121212; --bg2: #1a1a1a; --bg-glass: rgba(18, 18, 18, 0.85);
-    --card: #222222; --ink: #f0f0f0; --muted: #9a9a9a; --line: #333333;
-    --primary: #9b8aee; --primary-soft: #302a50; --primary-ink: #c4baf5;
-    --mint: #1e3d30; --mint-ink: #6de2aa;
-    --peach: #4a2a10; --peach-ink: #ffb880;
-    --gray: #2a2a2a; --gray-ink: #aaaaaa;
-    --rose: #4a1824; --rose-ink: #ff94a8;
-    --shadow: 0 8px 24px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2);
-  }
-}
-
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0; scroll-behavior: smooth;}
-body{
-  font-family:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
-  color:var(--ink); background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%) fixed;
-  min-height:100vh; font-size:16px; line-height:1.45;
-}
-button,input,select{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none; transition: transform 0.1s ease;}
-button:active:not(:disabled){transform:scale(0.95);}
-button:disabled{cursor:default; opacity:0.5;}
-.wrap{max-width:560px;margin:0 auto;padding:16px 16px calc(110px + var(--safe-b));}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100vh}
+body[data-tab=history]{--bottom-space:calc(84px + var(--safe-b))}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+button:disabled{cursor:default}
 [hidden]{display:none!important}
-.num{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate; font-family: system-ui, -apple-system, sans-serif;}
+:focus-visible{outline:3px solid var(--sage-400);outline-offset:2px}
+svg{display:block}
+.money{display:inline-flex;align-items:baseline;gap:.14em;direction:ltr;unicode-bidi:isolate;white-space:nowrap;font-variant-numeric:tabular-nums}
+.money .cur{font-size:.64em;font-weight:700}
+.ltr{direction:ltr;unicode-bidi:isolate}
 
-/* ---------- setup ---------- */
-.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
-.login-card{width:100%;max-width:380px;background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:30px 22px}
-.logo{width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,#cdbff7,#ffd6e0);display:grid;place-items:center;font-size:32px;margin:0 auto 14px}
-.login h1{text-align:center;margin:0 0 4px;font-size:24px}
-.login p.sub{text-align:center;color:var(--muted);margin:0 0 22px}
-.setup-note{background:var(--peach);color:var(--peach-ink);border-radius:14px;padding:12px 14px;font-size:14px;margin-bottom:16px}
+#app{max-width:560px;margin:0 auto;padding:8px 14px var(--bottom-space)}
 
-/* ---------- fields ---------- */
-.field{margin-bottom:16px}
-.field label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
-.field .hint{font-weight:400;color:var(--muted);font-size: 12px;}
-.input{width:100%;height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);padding:0 14px;font-size:17px;outline:none;transition:border-color .2s,box-shadow .2s; color:var(--ink)}
-.input:focus{border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-soft)}
-.input.ltr{direction:ltr;text-align:right}
-.input-money{position:relative}
-.input-money .input{padding-left:40px}
-.input-money span{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600}
-.err{color:var(--rose-ink);font-size:14px;margin-top:6px;min-height:0}
-.preview{font-size:13px;color:var(--primary-ink);margin-top:6px}
+/* ---------- header ---------- */
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:8px 2px 14px}
+.hello{justify-self:start;display:flex;align-items:center;gap:8px;min-width:0;color:var(--muted);font-size:14.5px;font-weight:500}
+.hello span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.avatar{flex:none;width:38px;height:38px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center}
+.avatar svg{width:20px;height:20px;color:var(--ink-2)}
+.top h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.6px;white-space:nowrap}
+.round-btn{justify-self:end;width:44px;height:44px;border-radius:50%;background:#efede7;display:grid;place-items:center;transition:background .15s}
+.round-btn:active{background:var(--sage-100)}
+.round-btn svg{width:21px;height:21px;color:var(--ink)}
+.round-btn.spin svg{animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(-360deg)}}
 
-/* ---------- buttons ---------- */
-.btn{height:54px;border-radius:16px;padding:0 18px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;position:relative;user-select:none}
-.btn-block{width:100%}
-.btn-primary{background:var(--primary);color:#fff;box-shadow:0 6px 16px rgba(138,120,216,.25)}
-.btn-primary:hover{background:var(--primary-ink)}
-.btn-soft{background:var(--primary-soft);color:var(--primary-ink)}
-.btn-ghost{background:var(--line);color:var(--ink)}
-.btn-danger{background:var(--rose);color:var(--rose-ink)}
-.btn.loading{color:transparent!important; pointer-events: none;}
-.btn.loading::after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;border:2.5px solid rgba(120,100,200,.25);border-top-color:var(--primary-ink);animation:spin .7s linear infinite}
-.btn-primary.loading::after{border-color:rgba(255,255,255,.35);border-top-color:#fff}
-@keyframes spin{to{transform:rotate(360deg)}}
-.icon-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--card);box-shadow:0 2px 6px rgba(0,0,0,.05)}
-.icon-btn svg{width:20px;height:20px;stroke:var(--ink)}
-.icon-btn.spinning svg{animation:spin .8s linear infinite}
+/* ---------- notices ---------- */
+.notice{display:flex;align-items:center;gap:10px;border-radius:16px;padding:10px 14px;margin:0 0 12px;font-size:14px;line-height:1.4}
+.notice svg{width:20px;height:20px;flex:none}
+.notice.off{background:var(--rose-bg);color:var(--rose-ink)}
+.notice.warn{background:var(--part-bg);color:var(--part-ink)}
+.notice .grow{flex:1;min-width:0}
+.notice button{font-weight:700;text-decoration:underline;min-height:32px;flex:none}
 
-/* ---------- header / summary ---------- */
-.top{position: sticky; top: 0; z-index: 10; display:flex;align-items:center;justify-content:space-between; padding: 12px 0; margin-bottom:14px; background: var(--bg-glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);}
-.top h1{font-size:26px;margin:0;font-weight:800;letter-spacing:-.3px}
-.top .actions{display:flex;gap:8px}
-.summary{background:linear-gradient(135deg, #a794f0 0%, #ffb1c3 55%, #aae3cd 100%);border-radius:24px;padding:22px 20px;box-shadow:var(--shadow);margin-bottom:16px; color: #1a1a1a;}
-.summary .lbl{font-size:14px;font-weight:600; opacity: 0.85;}
-.summary .total{font-size:42px;font-weight:800;line-height:1.1;margin:4px 0 16px; letter-spacing: -1px;}
-.summary .stats{display:flex;gap:8px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.8);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;}
-.pill b{font-weight:800}
+/* ---------- summary ---------- */
+.summary{position:relative;overflow:hidden;background:var(--sage-100);border-radius:26px;padding:18px 22px 16px;min-height:118px}
+.summary .leaves{position:absolute;left:0;top:0;width:66%;height:100%;pointer-events:none}
+.summary>*:not(.leaves){position:relative}
+.sum-lbl{font-size:16px;font-weight:600;color:var(--ink-2)}
+.sum-total{font-size:44px;font-weight:800;line-height:1.08;letter-spacing:-1.2px;margin:4px 0 4px;min-height:48px}
+.sum-total .money .cur{font-size:.6em;margin-inline-end:.08em}
+.sum-sub{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ink-2);min-height:26px}
+.delta{font-size:13.5px;font-weight:800;border-radius:99px;padding:1px 10px;background:rgba(255,255,255,.85);animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
+.delta.up{color:var(--ok-dot)} .delta.down{color:var(--rose-ink)}
+.delta.fade{opacity:0;transition:opacity .5s}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
 
-/* ---------- filters ---------- */
-.filters{margin-bottom:12px; position: relative;}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+/* ---------- search + chips ---------- */
+.search{position:relative;display:block;margin:14px 0 12px}
+.search input{width:100%;height:50px;border-radius:999px;border:1.5px solid var(--line-2);background:var(--surface);padding:0 20px 0 52px;font-size:16px;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{border-color:var(--sage-400);box-shadow:0 0 0 4px var(--sage-100)}
+.search input::-webkit-search-cancel-button{display:none}
+.search .s-ic{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--ink-2);pointer-events:none}
+.search .s-clear{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2)}
+.search .s-clear svg{width:16px;height:16px}
+.chips{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 8px;margin:0 -2px 2px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;height:40px;padding:0 16px;border-radius:999px;background:var(--card);border:1.5px solid var(--line);font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap; transition: all 0.2s;}
-.chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip{flex:none;height:42px;padding:0 22px;border-radius:999px;background:var(--chip);border:1.5px solid transparent;font-weight:600;font-size:15px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:background .15s,border-color .15s}
+.chip.on{background:var(--sage-200);border-color:var(--sage-400);color:var(--sage-800)}
+.chip.st{padding:0 14px;background:transparent;border-color:var(--line-2);color:var(--muted)}
+.chip.st.on{background:var(--sage-200);border-color:var(--sage-400);color:var(--sage-800)}
+.chip svg{width:17px;height:17px}
+.results{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;color:var(--muted);margin:2px 4px 6px;min-height:36px}
+.results button{color:var(--sage-700);font-weight:700;min-height:36px}
 
-/* ---------- groups / cards ---------- */
-.group{margin-top:24px}
-.group-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 4px 12px}
-.group-head h2{margin:0;font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
-.group-head .dot{width:12px;height:12px;border-radius:50%; box-shadow: 0 0 8px rgba(0,0,0,0.1);}
-.group-head .sub{color:var(--muted);font-size:14px;font-weight:600}
+/* ---------- groups + cards ---------- */
+.group-head{display:flex;align-items:baseline;justify-content:space-between;margin:14px 6px 8px;font-size:14px;color:var(--muted)}
+.group-head b{font-size:15px;color:var(--ink-2);font-weight:800;letter-spacing:.3px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 16px 12px;margin-bottom:12px;cursor:pointer;transition:transform .12s,box-shadow .2s}
+.card:active{transform:scale(.992)}
+.card.flash{animation:flash 1.8s ease}
+@keyframes flash{0%,40%{box-shadow:0 0 0 3px var(--sage-400),var(--shadow)}100%{box-shadow:var(--shadow)}}
+.card-main{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-info{min-width:0;flex:1}
+.title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge{flex:none;background:var(--peach);color:var(--peach-ink);font-weight:800;font-size:13.5px;letter-spacing:.3px;border-radius:10px;padding:3px 10px;line-height:1.5}
+.type{margin:0;font-size:21px;font-weight:800;line-height:1.25;letter-spacing:.2px;min-width:0;overflow-wrap:anywhere}
+.type button{font:inherit;text-align:right}
+.num-row{display:flex;align-items:center;gap:7px;margin-top:10px;min-height:32px;color:var(--muted);font-size:14px;text-align:right;max-width:100%;flex-wrap:wrap}
+.num-row svg{width:18px;height:18px;color:var(--ink-2);flex:none}
+.num-row .n{color:var(--ink-2);font-weight:500;font-size:15px;overflow-wrap:anywhere}
+.num-row .add{color:var(--sage-700);font-weight:700}
+.card-bal{flex:none;display:flex;flex-direction:column;align-items:flex-end}
+.status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px;font-size:13.5px;font-weight:700;white-space:nowrap}
+.status i{width:8px;height:8px;border-radius:50%}
+.st-active{background:var(--ok-bg);color:var(--ok-ink)} .st-active i{background:var(--ok-dot)}
+.st-partial{background:var(--part-bg);color:var(--part-ink)} .st-partial i{background:var(--part-dot)}
+.st-used{background:var(--used-bg);color:var(--used-ink)} .st-used i{background:var(--used-dot)}
+.bal-lbl{font-size:14px;color:var(--muted);margin-top:6px}
+.bal{font-size:34px;font-weight:800;line-height:1.05;letter-spacing:-.6px}
+.of{font-size:12.5px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.dash{border-top:1.5px dashed var(--line-2);margin:14px 0 12px}
+.acts{display:flex;align-items:center;gap:10px}
+.act{height:46px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;white-space:nowrap;transition:transform .1s,opacity .15s;min-width:0}
+.act:active:not(:disabled){transform:scale(.96)}
+.act svg{width:20px;height:20px;flex:none}
+.act-partial{flex:1.35 1 0;background:var(--sage-300);color:var(--sage-800)}
+.act-full{flex:1 1 0;background:var(--surface);border:1.5px solid var(--line-2);color:var(--ink)}
+.act-undo{flex:none;padding:0 4px;color:var(--ink-2);font-weight:600}
+.act:disabled{opacity:.4}
+.act-undo:disabled{opacity:1;color:var(--muted-2)}
+.card.used{background:#fcfbf7}
+.card.used .bal{color:var(--muted)}
+.used-note{flex:1;font-size:14px;color:var(--muted)}
+@media (max-width:374px){.act-undo .w2{display:none}.act{font-size:14px}.card{padding:14px 13px 11px}.bal{font-size:30px}.type{font-size:19px}}
 
-/* Ticket Card Design */
-.card {
-  position: relative;
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px;
-  margin-bottom: 16px;
-  border-inline-start: 6px solid var(--accent, #cdbff7);
-  animation: rise .3s ease both;
-  overflow: hidden;
-}
-.card::before, .card::after {
-  content: ''; position: absolute; top: 62px; width: 24px; height: 24px;
-  background: var(--bg); border-radius: 50%; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-}
-.card::before { left: -12px; }
-.card::after { right: -12px; }
-.card-divider {
-  border-top: 2px dashed var(--line);
-  margin: 16px -20px;
-  position: relative;
-  opacity: 0.6;
-}
+/* ---------- empty / skeleton ---------- */
+.empty{text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--radius);padding:34px 20px;margin-top:8px}
+.empty .t{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.empty .btn{margin-top:14px}
+.skel{height:168px;border-radius:var(--radius);margin-bottom:12px;background:linear-gradient(90deg,var(--surface) 0%,var(--surface-2) 50%,var(--surface) 100%);background-size:200% 100%;animation:sh 1.3s infinite;border:1px solid var(--line)}
+@keyframes sh{to{background-position:-200% 0}}
 
-.card.used{opacity:.6; filter: grayscale(50%);}
-@keyframes rise{from{opacity:0;transform:translateY(10px)}}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.card .company{font-size:14px;color:var(--muted);font-weight:600; text-transform: uppercase; letter-spacing: 0.5px;}
-.card .type{font-size:20px;font-weight:800;margin:2px 0 4px;letter-spacing:.2px}
-.card .vnum{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink);background:var(--bg);border-radius:8px;padding:4px 10px;margin-top:4px; font-weight: 500;}
-.card .vnum.missing{color:var(--peach-ink);background:var(--peach)}
-.status{flex:none;font-size:12.5px;font-weight:700;border-radius:999px;padding:6px 12px}
-.st-active{background:var(--mint);color:var(--mint-ink)}
-.st-partial{background:var(--peach);color:var(--peach-ink)}
-.st-used{background:var(--gray);color:var(--gray-ink)}
-.bal-row{display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 10px}
-.bal{font-size:32px;font-weight:800;line-height:1}
-.bal-lbl{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:4px}
-.of{font-size:14px;color:var(--muted);text-align:left; font-weight: 500;}
-.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px;background:var(--accent,#cdbff7);transition:width .5s cubic-bezier(0.2, 0.8, 0.2, 1)}
-.card-actions{display:grid;grid-template-columns:.8fr 1.2fr 1.2fr 48px;gap:8px;margin-top:16px}
-.card-actions .btn{height:46px;font-size:14px;padding:0 4px;border-radius:12px;white-space:nowrap;min-width:0}
-.card-actions .more{width:100%;padding:0}
-.card-actions .more svg{width:22px;height:22px;stroke:var(--ink)}
+/* ---------- history ---------- */
+.mini-sum{display:flex;justify-content:space-between;align-items:center;background:var(--sage-100);border-radius:20px;padding:14px 18px;margin-bottom:12px}
+.mini-sum .l{font-size:14px;color:var(--ink-2);font-weight:600}
+.mini-sum .v{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.mini-sum .s{font-size:13px;color:var(--ink-2)}
+.day{font-size:13.5px;font-weight:700;color:var(--muted);margin:16px 8px 8px}
+.feed{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.feed-row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;text-align:right;border-bottom:1px solid var(--line);background:none;min-height:64px}
+.feed-row:last-child{border-bottom:0}
+button.feed-row:active{background:var(--surface-2)}
+.feed-ic{flex:none;width:40px;height:40px;border-radius:14px;display:grid;place-items:center}
+.feed-ic svg{width:20px;height:20px}
+.ic-create{background:var(--sage-100);color:var(--sage-700)}
+.ic-use{background:var(--peach);color:#8a4a1c}
+.ic-undo{background:var(--ok-bg);color:var(--ok-dot)}
+.ic-edit{background:var(--surface-2);color:var(--ink-2)}
+.ic-delete{background:var(--rose-bg);color:var(--rose-ink)}
+.feed-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.feed-t{font-weight:700;font-size:15px}
+.feed-s{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-end{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.feed-amt{font-weight:800;font-size:15px}
+.feed-amt.plus{color:var(--ok-dot)} .feed-amt.minus{color:var(--ink)} .feed-amt.del{color:var(--rose-ink)}
+.feed-undo{font-size:12.5px;font-weight:700;color:var(--sage-700)}
+.feed-row.undone .feed-t,.feed-row.undone .feed-amt{text-decoration:line-through;color:var(--muted-2)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:99px;padding:0 8px;background:var(--used-bg);color:var(--used-ink);margin-inline-start:6px;vertical-align:1px;text-decoration:none}
 
-.empty{text-align:center;color:var(--muted);padding:60px 20px; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);}
-.empty .big{font-size:54px; margin-bottom: 12px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));}
-.empty b {font-size: 18px; color: var(--ink);}
-.empty .help{font-size:15px;margin:8px auto 16px;max-width:320px;line-height:1.5}
-
-/* ---------- FAB ---------- */
-.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + var(--safe-b));height:58px;padding:0 28px;border-radius:999px;background: linear-gradient(135deg, var(--primary), var(--primary-ink));color:#fff;font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 26px rgba(90,72,176,.4);z-index:20; transition: transform 0.2s, box-shadow 0.2s;}
-.fab:active{transform:translateX(-50%) scale(.95); box-shadow:0 4px 12px rgba(90,72,176,.4);}
-.fab svg{width:22px;height:22px;stroke:#fff}
+/* ---------- bottom bar ---------- */
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:14px 14px var(--safe-b);background:linear-gradient(to top,var(--bg) 78%,rgba(248,246,241,0))}
+.bottom-inner{max-width:560px;margin:0 auto}
+.add-btn{width:100%;height:56px;border-radius:22px;background:var(--sage-700);color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 8px 22px rgba(46,70,54,.28);transition:transform .1s,background .15s}
+.add-btn:active:not(:disabled){transform:scale(.98);background:var(--sage-800)}
+.add-btn:disabled{opacity:.55}
+.add-btn .plus{width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.add-btn .plus svg{width:18px;height:18px;color:var(--sage-700)}
+body[data-tab=history] .add-btn{display:none}
+.tabs{display:flex;align-items:stretch;height:62px;margin-top:6px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:600;color:var(--muted);position:relative}
+.tab svg{width:24px;height:24px}
+.tab .tk{fill:none;stroke:currentColor}
+.tab.on{color:var(--sage-800);font-weight:800}
+.tab.on .tk{fill:currentColor}
+.tab.on .perf{stroke:#fff}
+.tab.on::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:78px;height:4px;border-radius:4px;background:var(--sage-700)}
+.tab-sep{width:1px;background:var(--line-2);margin:16px 0}
 
 /* ---------- sheet ---------- */
-.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:40;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.backdrop{position:fixed;inset:0;background:rgba(29,42,33,.3);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
 .backdrop.open{opacity:1;pointer-events:auto}
-.sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;max-height:92vh;overflow-y:auto;background:var(--card);border-radius:28px 28px 0 0;padding:12px 20px calc(24px + var(--safe-b));z-index:41;transform:translateY(100%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .35s;box-shadow:0 -10px 40px rgba(0,0,0,.2)}
-.sheet.open{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.grab{width:48px;height:6px;border-radius:10px;background:var(--line);margin:0 auto 16px}
-.sheet h3{margin:0 0 6px;font-size:22px;font-weight:800}
-.sheet .lead{color:var(--muted);margin:0 0 20px;font-size:15px}
-.sheet-actions{display:flex;gap:12px;margin-top:20px}
-.sheet-actions .btn{flex:1;white-space:nowrap}
+.sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;max-height:90vh;max-height:90dvh;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-radius:28px 28px 0 0;padding:10px 18px calc(20px + var(--safe-b));z-index:41;transform:translateY(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s linear .3s;box-shadow:0 -12px 40px rgba(29,42,33,.16)}
+.sheet.open{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.grab{width:44px;height:5px;border-radius:9px;background:var(--line-2);margin:0 auto 14px}
+.sheet h3{margin:0 0 4px;font-size:21px;font-weight:800;outline:none}
+.sheet .lead{color:var(--muted);margin:0 0 16px;font-size:15px}
+.field{margin-bottom:16px}
+.label{display:block;font-weight:700;font-size:14.5px;margin-bottom:8px}
+.label .opt{font-weight:400;color:var(--muted)}
+.input{width:100%;height:52px;border-radius:16px;border:1.5px solid var(--line-2);background:#fff;padding:0 16px;font-size:17px;outline:none;transition:border-color .15s,box-shadow .15s}
+.input:focus{border-color:var(--sage-400);box-shadow:0 0 0 4px var(--sage-100)}
+.input[aria-invalid=true]{border-color:#d9928d}
+.input.ltr{text-align:right}
+.money-input{position:relative}
+.money-input .input{padding-left:44px;font-size:22px;font-weight:700;height:58px}
+.money-input span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:700;font-size:18px}
+.err{color:var(--rose-ink);font-size:14px;margin-top:6px}
+.err:empty{display:none}
+.hint{font-size:13.5px;color:var(--muted);margin-top:6px}
+.hint:empty{display:none}
+.good{color:var(--sage-700);font-weight:600}
+.pchips,.quick{display:flex;gap:8px;flex-wrap:wrap}
+.quick{margin-top:10px}
+.pchip,.quick button{height:40px;padding:0 16px;border-radius:999px;background:var(--chip);border:1.5px solid transparent;font-weight:700;font-size:14.5px}
+.pchip.on{background:var(--sage-200);border-color:var(--sage-400);color:var(--sage-800)}
+.pchips .input{margin-top:10px}
 .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.seg button{height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);font-weight:700;font-size:14px;padding:0 4px;white-space:nowrap}
-.seg button.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary-ink)}
-.suggest, .quick {display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.suggest button, .quick button {height:36px;padding:0 16px;border-radius:99px;background:var(--line);font-size:14px;font-weight:600; color: var(--ink);}
-.infobox{background:var(--bg);border-radius:16px;padding:14px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center; border: 1px solid var(--line);}
-.infobox .t{font-weight:700; color: var(--ink);}
-.infobox .s{font-size:13px;color:var(--muted)}
-
-/* history / undo list */
-.hist{list-style:none;margin:0;padding:0}
-.hist li{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line)}
-.hist li:last-child{border-bottom:0}
-.hist .ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:18px}
-.hist .main{flex:1;min-width:0}
-.hist .t{font-weight:700;font-size:15px}
-.hist .d{font-size:13px;color:var(--muted); margin-top: 2px;}
-.hist .amt{font-weight:800;font-size:16px}
-.hist li.undone .t,.hist li.undone .amt{text-decoration:line-through;color:var(--muted)}
-.pick li{cursor:pointer;border-radius:16px;border:2px solid transparent;padding:14px 12px;margin-bottom:8px;background:var(--bg); transition: all 0.2s;}
-.pick li.sel{border-color:var(--primary);background:var(--primary-soft)}
-.pick .radio{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--muted); position: relative;}
-.pick li.sel .radio{border-color: var(--primary);}
-.pick li.sel .radio::after {content:''; position:absolute; top:4px; left:4px; right:4px; bottom:4px; background:var(--primary); border-radius:50%;}
-.section-title{font-weight:800;font-size:16px;margin:24px 0 12px; color: var(--ink);}
-.divider{height:1px;background:var(--line);margin:20px 0}
+.seg button{height:50px;border-radius:14px;border:1.5px solid var(--line-2);background:#fff;font-weight:800;font-size:13.5px;white-space:nowrap;padding:0 4px}
+.seg button.on{background:var(--sage-200);border-color:var(--sage-400);color:var(--sage-800)}
+.infobox{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--surface-2);border-radius:18px;padding:12px 14px;margin-bottom:16px}
+.infobox .t{font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.infobox .s{font-size:13.5px;color:var(--muted)}
+.infobox .r{text-align:left;flex:none}
+.infobox .r .v{font-weight:800;font-size:19px}
+.after{border-radius:14px;background:var(--sage-100);color:var(--sage-800);padding:10px 14px;font-size:14.5px;font-weight:600;margin:-4px 0 14px}
+.after:empty{display:none}
+.btn{height:54px;border-radius:18px;padding:0 18px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;position:relative;transition:transform .1s,opacity .15s;white-space:nowrap}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn:disabled{opacity:.45}
+.btn svg{width:20px;height:20px}
+.btn-primary{background:var(--sage-700);color:#fff}
+.btn-soft{background:var(--sage-100);color:var(--sage-800)}
+.btn-ghost{background:var(--surface-2);color:var(--ink)}
+.btn-danger{background:var(--rose-bg);color:var(--rose-ink)}
+.btn-danger-solid{background:var(--rose-solid);color:#fff}
+.btn.loading{color:transparent!important}
+.btn.loading svg{visibility:hidden}
+.btn.loading::after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;border:2.5px solid rgba(62,92,71,.25);border-top-color:var(--sage-700);animation:spin2 .7s linear infinite}
+.btn-primary.loading::after,.btn-danger-solid.loading::after{border-color:rgba(255,255,255,.35);border-top-color:#fff}
+@keyframes spin2{to{transform:rotate(360deg)}}
+.sheet-actions{display:flex;gap:10px;margin-top:18px}
+.sheet-actions .btn{flex:1;min-width:0}
+.sheet-actions .btn:first-child{flex:1.4}
+.pick{list-style:none;margin:0;padding:0}
+.pick li{display:flex;align-items:center;gap:12px;border-radius:16px;border:2px solid transparent;background:var(--surface-2);padding:12px 14px;margin-bottom:8px;cursor:pointer;min-height:62px}
+.pick li.sel{border-color:var(--sage-400);background:var(--sage-100)}
+.pick .radio{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--muted-2);position:relative}
+.pick li.sel .radio{border-color:var(--sage-700)}
+.pick li.sel .radio::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--sage-700)}
+.pick .main{flex:1;min-width:0}
+.pick .t{font-weight:700}
+.pick .d{font-size:13px;color:var(--muted)}
+.pick .amt{font-weight:800}
+.d-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.d-head h3{margin:0}
+.d-bal{display:flex;justify-content:space-between;align-items:flex-end;background:var(--sage-100);border-radius:20px;padding:14px 16px;margin-bottom:16px}
+.d-bal .v{font-size:32px;font-weight:800;line-height:1.1}
+.d-bal .s{font-size:13.5px;color:var(--ink-2)}
+.num-edit{display:flex;gap:8px}
+.num-edit .input{flex:1;min-width:0}
+.num-edit .btn{height:52px;flex:none}
+.section-title{font-weight:800;font-size:15px;margin:20px 2px 8px}
+.sheet .feed{box-shadow:none}
 
 /* ---------- toast ---------- */
-.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);background:var(--ink);color:var(--card);border-radius:16px;padding:14px 20px;font-weight:600;font-size:15px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.2);transition:transform .4s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
-.toast.show{transform:translate(-50%,0)}
-.toast.ok{background:var(--mint-ink); color: #fff;}
-.toast.bad{background:var(--rose-ink); color: #fff;}
+.toast{position:fixed;left:50%;bottom:calc(var(--bottom-space) - 4px);transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--sage-800);color:#fff;border-radius:16px;padding:12px 18px;font-weight:600;font-size:15px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s;max-width:calc(100% - 28px);width:max-content;display:flex;gap:10px;align-items:center;line-height:1.4}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast.bad{background:#8f3530}
+.toast svg{width:20px;height:20px;flex:none}
 
-.skeleton{height:180px;border-radius:var(--radius);background:linear-gradient(90deg,var(--card) 0%,var(--line) 50%,var(--card) 100%);background-size:200% 100%;animation:sh 1.5s infinite;margin-bottom:16px;box-shadow:var(--shadow)}
-@keyframes sh{to{background-position:-200% 0}}
-@media (min-width:600px){.wrap{padding-top:28px}}
+/* ---------- setup ---------- */
+.setup{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.setup-card{max-width:380px;background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:28px 22px;text-align:center}
+.setup-card h1{margin:12px 0 6px;font-size:24px}
+.setup-card p{color:var(--muted);margin:0}
 
-/* Refined mobile-first pastel wallet */
-:root{color-scheme:light;--bg:#f5f6fb;--bg2:#f5f6fb;--bg-glass:rgba(245,246,251,.94);--card:#fff;--ink:#29233d;--muted:#665f77;--line:#e7e3ef;--primary:#6750a4;--primary-ink:#523a8c;--primary-soft:#eee8fa;--mint:#e1f3e9;--mint-ink:#246347;--peach:#fff0df;--peach-ink:#865019;--gray:#eeecf3;--gray-ink:#60586e;--rose:#fce6eb;--rose-ink:#9c304d;--shadow:0 4px 18px #34265308;--radius:22px}
-body{background:var(--bg);line-height:1.55}
-.wrap{max-width:1040px;padding:12px 18px calc(110px + var(--safe-b))}
-.top{margin-bottom:12px;gap:12px}.top h1{font-size:26px;letter-spacing:-.6px}.top .icon-btn{border:1px solid var(--line);box-shadow:none}
-.summary{background:#e9e1fa;border:1px solid #dfd4f3;color:var(--ink);padding:24px;border-radius:26px;box-shadow:none;margin-bottom:8px}
-.summary .total{font-size:46px;letter-spacing:-1.8px;margin:8px 0 18px}.summary .lbl{font-size:16px}.pill{font-size:14px;background:#ffffffa8;padding:5px 11px}
-.sync-line{font-size:13px;color:var(--muted);padding:6px 4px 16px;min-height:39px}.sync-line[data-kind=error]{color:var(--rose-ink);font-weight:600}
-.search-field{margin:0 0 14px}.search-field label{display:block;font-size:14px;font-weight:600;margin:0 4px 6px}.search-field .input{background:#fff;height:50px;font-size:16px;border-width:1px}
-.chips{padding-bottom:6px}.chip{height:44px;font-size:14px}.chip.on{background:var(--primary-soft);color:var(--primary-ink);border-color:#c2b2e5}.results-line{display:flex;justify-content:space-between;align-items:center;min-height:40px;font-size:14px;color:var(--muted)}.results-line button{font-size:14px;text-decoration:underline;min-height:44px;color:var(--primary-ink)}
-.group{margin-top:14px}.group-head{padding:10px 3px 12px}.group-head .dot{border-radius:4px;box-shadow:none}.group-head h2{font-size:18px}.card{border:1px solid var(--line);border-top:5px solid var(--accent);padding:18px;margin-bottom:14px;animation:none;box-shadow:var(--shadow)}.card::before,.card::after{display:none}.card .company{font-size:13px;letter-spacing:0}.card .type{font-size:20px;line-height:1.4;overflow-wrap:anywhere}.card-top>div{min-width:0}.status{font-size:12px;padding:6px 9px}.card-divider{border-top:1px solid var(--line);margin:18px 0;opacity:1}.card.used{opacity:1;filter:none;background:#f9f8fc}.card.used .bal{color:var(--muted)}
-.card .vnum{font-size:14px;max-width:100%;min-height:40px;padding:6px 8px;gap:10px;user-select:text;flex-wrap:wrap}.vnum .num{overflow-wrap:anywhere}.copy-label{font-size:12px;color:var(--primary-ink)}.bal{font-size:34px}.bal-lbl{font-size:14px}.bar{height:6px;margin-top:15px}.of{font-size:13px}.card-actions{grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.card-actions .btn{height:44px;font-size:14px;padding:0 8px}.card-actions .more{width:100%}.card-actions .more::after{content:'פרטים והיסטוריה';font-size:13px}.card-actions .more svg{width:18px}
-.btn-primary{background:var(--primary);box-shadow:none}.btn-primary:hover{background:var(--primary-ink)}.btn:focus-visible,.chip:focus-visible,button:focus-visible,[role=radio]:focus-visible{outline:3px solid #7760b9;outline-offset:3px}.btn-ghost{background:#f2f0f7}.fab{height:54px;bottom:calc(18px + var(--safe-b));background:var(--primary);box-shadow:0 5px 20px #503e7840;font-size:16px}.sheet{max-width:540px;max-height:90dvh;border:1px solid var(--line);box-shadow:0 -8px 50px #25203020}.sheet h3{outline:none}.sheet .hint{font-size:13px}.sheet-actions{gap:8px}.sheet-actions .btn{min-width:0;font-size:15px;height:auto;min-height:52px;white-space:normal;padding:10px}.input{font-size:16px}.seg{grid-template-columns:1fr}.seg button{text-align:center;font-size:16px;min-height:48px}.preview{font-size:14px}.hist .d{font-size:13px}.pick li{min-height:72px}.toast{max-width:min(500px,calc(100% - 24px));width:max-content;top:auto;bottom:calc(88px + var(--safe-b));transform:translate(-50%,160px);opacity:0;pointer-events:none;line-height:1.5}.toast.show{transform:translate(-50%,0);opacity:1}.toast svg{flex-shrink:0}.toast.ok{background:#285d46}.toast.bad{background:#87334b}
-@media(min-width:740px){.wrap{padding-top:24px}.summary{padding:28px 30px}.group{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.group-head{grid-column:1/-1}.sheet{bottom:50%;transform:translateY(calc(50% + 100vh));border-radius:26px}.sheet.open{transform:translateY(50%)}.seg{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:360px){.wrap{padding-inline:12px}.card{padding:14px}.card-top{flex-wrap:wrap}.bal{font-size:30px}.summary .total{font-size:40px}.group-head{gap:8px;flex-wrap:wrap}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-
+@media (min-width:600px){#app{padding-top:20px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
+<body data-tab="vouchers">
 
-<!-- ========== SETUP ========== -->
-<section class="login" id="setupView" hidden>
-  <div class="login-card">
-    <div class="logo">🎟️</div>
+<div id="app" hidden>
+  <header class="top">
+    <div class="hello"><span class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5"/></svg></span><span id="hello"></span></div>
+    <h1 id="pageTitle">השוברים שלי</h1>
+    <button class="round-btn" id="refreshBtn" type="button" aria-label="רענון"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"/><path d="M18.5 2.5V6.5h-4"/></svg></button>
+  </header>
+
+  <div id="notices"></div>
+
+  <main id="vouchersView">
+    <section class="summary" aria-label="סיכום">
+      <svg class="leaves" viewBox="0 0 240 130" preserveAspectRatio="xMinYMid slice" aria-hidden="true">
+        <circle cx="34" cy="138" r="86" fill="#d3e0ca" opacity=".8"/>
+        <circle cx="-8" cy="-6" r="74" fill="#dbe6d3" opacity=".9"/>
+        <path d="M104 104c-7-38 19-68 66-73-6 41-31 68-66 73z" fill="#cbdac2"/>
+        <path d="M107 100c13-21 29-40 55-62" stroke="#bdd0b3" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M150 124c9-25 39-40 71-35-15 27-42 40-71 35z" fill="#d0ddc7"/>
+        <path d="M154 121c17-12 35-21 60-28" stroke="#c2d3b9" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="sum-lbl">יתרה כוללת</div>
+      <div class="sum-total" id="sumTotal" aria-live="polite">—</div>
+      <div class="sum-sub"><span id="sumCount">טוען…</span><span class="delta" id="sumDelta" hidden></span></div>
+    </section>
+
+    <label class="search">
+      <input id="search" type="search" placeholder="חיפוש שובר" autocomplete="off" enterkeyhint="search" aria-label="חיפוש לפי חברה, סוג או מספר שובר">
+      <svg class="s-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <button class="s-clear" id="searchClear" type="button" aria-label="ניקוי החיפוש" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </label>
+    <div class="chips" id="chips" role="toolbar" aria-label="סינון שוברים"></div>
+    <div class="results" id="results" hidden></div>
+    <div id="list"></div>
+  </main>
+
+  <main id="historyView" hidden>
+    <div id="histSum"></div>
+    <div class="chips" id="histChips" role="toolbar" aria-label="סינון היסטוריה"></div>
+    <div id="histList"></div>
+  </main>
+</div>
+
+<div class="bottom" id="bottom" hidden>
+  <div class="bottom-inner">
+    <button class="add-btn" id="addBtn" type="button" disabled><span>הוספת שובר</span><span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+    <nav class="tabs" role="tablist" aria-label="ניווט">
+      <button class="tab on" type="button" role="tab" aria-selected="true" data-tab="vouchers"><span>השוברים</span><svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linejoin="round"><path class="tk" d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path class="perf" d="M15 7.5v1.5M15 11.2v1.6M15 15v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <span class="tab-sep" aria-hidden="true"></span>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="history"><span>היסטוריה</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></button>
+    </nav>
+  </div>
+</div>
+
+<section class="setup" id="setupView" hidden>
+  <div class="setup-card">
+    <img alt="" width="64" height="64" style="border-radius:16px" src="data:image/png;base64,__ICON64__">
     <h1>השוברים שלי</h1>
-    <p class="sub">כמעט מוכן</p>
-    <div class="setup-note">צריך להדביק בראש הקוד את כתובת ה-Web App של Google Apps Script (<span class="num">API_URL</span>).</div>
+    <p>צריך להדביק בראש הקוד את כתובת ה-Web App של Google Apps Script (<span class="ltr">API_URL</span>).</p>
   </div>
-</section>
-
-<!-- ========== MAIN ========== -->
-<section id="mainView" hidden>
-  <div class="wrap">
-    <header class="top">
-      <h1>השוברים שלי</h1>
-      <div class="actions">
-        <button class="icon-btn" id="refreshBtn" aria-label="רענון" title="רענון">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-        </button>
-      </div>
-    </header>
-
-    <div class="summary" id="summary">
-      <div class="lbl" id="sumLabel">יתרה כוללת</div>
-      <div class="total num" id="sumTotal">—</div>
-      <div class="stats" id="sumStats"></div>
-    </div>
-
-    <div class="sync-line" id="syncStatus" role="status" aria-live="polite">טוען את השוברים…</div>
-    <div class="search-field"><label for="searchInput">חיפוש שובר</label><input id="searchInput" class="input" type="search" placeholder="חברה, סוג או מספר שובר" autocomplete="off"></div>
-    <div class="filters">
-      <div class="chips" id="companyChips"></div>
-      <div class="chips" id="statusChips"></div>
-    </div>
-
-    <div class="results-line"><span id="resultCount"></span><button id="clearFilters" hidden>ניקוי סינון</button></div><main id="list" aria-label="רשימת שוברים"></main>
-  </div>
-
-  <button class="fab" id="addBtn">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-    הוספת שובר
-  </button>
 </section>
 
 <div class="backdrop" id="backdrop"></div>
@@ -294,49 +354,53 @@ body{background:var(--bg);line-height:1.55}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// Client upgrade: same Apps Script API. No server code was supplied.
-// The server must enforce authorization, validation, locking and reqId deduplication.
-// Local cache is read-only until the server confirms the current state.
-
 /* =====================================================================
-   הגדרה — כתובת ה-Web App של Google Apps Script
+   הגדרות
    ===================================================================== */
-const API_URL = 'https://script.google.com/macros/s/AKfycbzmuUprcurfXZ5U-z5bfzFNlNWj5OZ0yZ8af1mjwDqD4ZIUTDbKFmhuUvqUIM3YClHNrA/exec';
+const API_URL   = 'https://script.google.com/macros/s/AKfycbzmuUprcurfXZ5U-z5bfzFNlNWj5OZ0yZ8af1mjwDqD4ZIUTDbKFmhuUvqUIM3YClHNrA/exec';
+const USER_NAME = 'אבי';
 
 /* ===================================================================== */
 const API = (window.__VOUCHER_CFG && window.__VOUCHER_CFG.api) || API_URL;
 const configured = /^https?:\/\//.test(API);
 const CACHE_KEY = 'vouchers-cache:' + API;
-
+const LABELS_KEY = 'vouchers-labels:' + API;
 const HTZ_TYPES = ['EAT ZONE', 'CHEF ZONE', 'ALL IN ZONE'];
 const STATUS = {
-  active:  { label: 'פעיל',       cls: 'st-active'  },
-  partial: { label: 'נוצל חלקית',   cls: 'st-partial' },
-  used:    { label: 'נוצל במלואו',  cls: 'st-used'    },
+  active:  { label: 'פעיל',        cls: 'st-active'  },
+  partial: { label: 'נוצל חלקית',  cls: 'st-partial' },
+  used:    { label: 'נוצל במלואו', cls: 'st-used'    },
 };
-const ACCENTS = ['#b9a8f0', '#f7b7c8', '#9fd8c3', '#ffc9a3', '#a9cdf2', '#e6c3f0', '#f3dd8e'];
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const state = { vouchers: [], actions: [], loaded: false, fCompany: 'all', fStatus: 'all', query: '', synced: false };
+const S = {
+  vouchers: [], actions: [], loaded: false, synced: false, cachedAt: null, error: '', warnings: [], skipped: 0,
+  tab: 'vouchers', company: 'all', status: 'all', q: '', hist: 'all', labels: {}, scroll: { vouchers: 0, history: 0 },
+};
 let busy = false;
 
-/* ---------- helpers ---------- */
+/* ---------- עזרים ---------- */
 const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const nf = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 2 });
-const money = n => nf.format(Number(n) || 0) + ' ₪';
-const dtf = new Intl.DateTimeFormat('he-IL', { day: 'numeric', month: 'numeric', year: '2-digit', hour: '2-digit', minute: '2-digit' });
-const fmtDate = s => { const d = new Date(s); return isNaN(d) ? '' : dtf.format(d); };
-const normCompany = s => String(s || '').trim().replace(/\s+/g, ' ').toUpperCase();
-
-// Haptic feedback function
-const vibrate = (ms = 50) => {
-  if (navigator.vibrate) {
-    try { navigator.vibrate(ms); } catch (e) {}
-  }
-};
+const toCents = n => Math.round(Number(n) * 100);
+const round2 = n => toCents(n) / 100;
+const money = n => nf.format(round2(n)) + ' ₪';                                        // לטקסט רגיל
+const moneyHTML = (n, sign = '') => `<span class="money">${sign}<span class="cur">₪</span><span>${nf.format(round2(Math.abs(n)))}</span></span>`;
+const totalOf = list => list.reduce((s, v) => s + toCents(v.balance), 0) / 100;
+const countLabel = n => n === 1 ? 'שובר אחד' : `${n} שוברים`;
+const statusOf = v => v.balance <= 0 ? 'used' : v.balance >= v.initial_amount ? 'active' : 'partial';
+const normCompany = s => String(s ?? '').trim().replace(/\s+/g, ' ').toUpperCase();
+const numKey = s => String(s ?? '').replace(/[^0-9A-Za-z֐-׿]/g, '').toUpperCase();   // 139381057-3719 = 139381057 3719
+const vibrate = p => { try { navigator.vibrate && navigator.vibrate(p); } catch {} };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const rid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+const hash = str => { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0; return h.toString(36); };
+const findV = id => S.vouchers.find(v => v.id === id);
 
 function normType(company, type) {
-  const t = String(type || '').trim().replace(/\s+/g, ' ');
+  const t = String(type ?? '').trim().replace(/\s+/g, ' ');
   if (normCompany(company) === 'HTZ') {
     const k = t.replace(/[^A-Za-z]/g, '').toUpperCase();
     if (k === 'EATZONE' || k === 'EAT') return 'EAT ZONE';
@@ -346,546 +410,782 @@ function normType(company, type) {
   }
   return t ? t.toUpperCase() : null;
 }
-const cents = n => Math.round(Number(n) * 100);
-const parseAmount = s => {
-  const t = String(s ?? '').trim().replace(/₪/g, '').trim().replace(',', '.');
-  if (!/^\d+(?:\.\d{1,2})?$/.test(t)) return NaN;
-  const n = Number(t);
-  return Number.isFinite(n) && Number.isSafeInteger(cents(n)) && n <= 10000000 ? cents(n) / 100 : NaN;
-};
-const statusOf = v => Number(v.balance) <= 0 ? 'used' : Number(v.balance) >= Number(v.initial_amount) ? 'active' : 'partial';
-function accentOf(company) {
-  if (company === 'HTZ') return ACCENTS[0];
-  if (company === 'BUYME') return ACCENTS[1];
-  let h = 0; for (const c of company) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return ACCENTS[2 + (h % (ACCENTS.length - 2))];
-}
-const numKey = s => String(s || '').replace(/[^0-9A-Za-z\u0590-\u05FF]/g, '').toUpperCase();
-const undoableOf = id => state.actions.filter(a => a.voucher_id === id && a.action === 'use' && !a.undone_at);
-const errMsg = e => (e && e.message) || 'משהו השתבש. נסה שוב.';
 
+// "150", "150.5", "12,5", "1,000", "₪ 90" → מספר; כל השאר → NaN
+function parseAmount(s) {
+  let t = String(s ?? '').replace(/[₪\s]/g, '');
+  if (/^\d{1,3}(,\d{3})+(\.\d{1,2})?$/.test(t)) t = t.replace(/,/g, '');
+  else t = t.replace(',', '.');
+  if (!/^\d+(\.\d{1,2})?$/.test(t)) return NaN;
+  const n = Number(t);
+  return n > 0 && n <= 1000000 ? round2(n) : NaN;
+}
+
+const dtTime = new Intl.DateTimeFormat('he-IL', { hour: '2-digit', minute: '2-digit' });
+const dtDay = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'numeric' });
+const dtFull = new Intl.DateTimeFormat('he-IL', { day: 'numeric', month: 'numeric', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+const asDate = s => { const d = new Date(s); return isNaN(d) ? null : d; };
+const fmtTime = s => { const d = asDate(s); return d ? dtTime.format(d) : ''; };
+const fmtFull = s => { const d = asDate(s); return d ? dtFull.format(d) : ''; };
+function dayLabel(s) {
+  const d = asDate(s); if (!d) return 'ללא תאריך';
+  const start = x => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+  const diff = Math.round((start(new Date()) - start(d)) / 864e5);
+  return diff === 0 ? 'היום' : diff === 1 ? 'אתמול' : dtDay.format(d);
+}
+
+const ICON = {
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></svg>',
+  pie: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M10.8 3.3a8.8 8.8 0 1 0 9.9 9.9h-9.9z"/><path fill="currentColor" d="M13.2 1.9v9.1h9.1a9.1 9.1 0 0 0-9.1-9.1z"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.2 12.3 2.6 2.6 5-5.4"/></svg>',
+  undo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14.5 4 9.5l5-5"/><path d="M4 9.5h10a5.5 5.5 0 0 1 0 11h-3"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
+  pencil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>',
+  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
+  filter: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>',
+  ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5M12 17.2h.01"/></svg>',
+  cloudOff: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M8.5 6.3A6 6 0 0 1 17.7 10h.3a3.5 3.5 0 0 1 2.3 6.2M17 19H7a4.5 4.5 0 0 1-1-8.9"/></svg>',
+};
+
+/* ---------- toast ---------- */
 function toast(msg, kind = 'ok') {
-  vibrate(kind === 'ok' ? [30, 50, 30] : [50, 100, 50]); // Success pattern vs Error pattern
+  vibrate(kind === 'ok' ? 20 : [40, 60, 40]);
   const t = $('#toast');
   t.className = 'toast ' + kind;
-  t.innerHTML = (kind === 'ok' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ' : '⚠️ ') + esc(msg);
+  t.innerHTML = (kind === 'ok' ? ICON.ok : ICON.alert) + '<span>' + esc(msg) + '</span>';
   requestAnimationFrame(() => t.classList.add('show'));
-  clearTimeout(toast._t);
-  toast._t = setTimeout(() => t.classList.remove('show'), kind === 'ok' ? 2500 : 4000);
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => t.classList.remove('show'), kind === 'ok' ? 2600 : 4200);
 }
 
-/* Guard function for buttons */
-async function guarded(btn, fn) {
-  if (busy || inflight > 0) return;
-  busy = true;
-  $('#addBtn').disabled = true; $('#refreshBtn').disabled = true;
-  const savedControls = [...$('#sheet').querySelectorAll('button,input,select')].map(el => [el,el.disabled]);
-  savedControls.forEach(([el]) => el.disabled = true);
-  document.querySelectorAll('.sheet .btn, .card-actions .btn').forEach(b => b.disabled = true);
-  if (btn) { btn.classList.add('loading'); btn.disabled = true; }
-  try { await fn(); }
-  catch (e) { console.error(e); toast(errMsg(e), 'bad'); }
-  finally {
-    busy = false;
-    savedControls.forEach(([el,disabled]) => { if(el.isConnected) el.disabled = disabled; });
-    $('#addBtn').disabled = !state.synced; $('#refreshBtn').disabled = false;
-    if (btn) { btn.classList.remove('loading'); btn.disabled = btn.dataset.off === '1'; }
-    document.querySelectorAll('.sheet .btn, .card-actions .btn').forEach(b => b.disabled = b.dataset.off === '1' || (!state.synced && !b.hasAttribute('data-close') && b.dataset.act !== 'more'));
-  }
-}
+/* =====================================================================
+   שרת: Google Sheets דרך Apps Script
+   כל פעולה נשלחת עם מזהה בקשה. אם החיבור נפל באמצע, שולחים שוב עם אותו מזהה
+   — השרת מזהה אותו ולא מבצע פעמיים.
+   ===================================================================== */
+class ApiError extends Error { constructor(msg, kind) { super(msg); this.kind = kind; } }
+let pending = 0, sentSeq = 0, appliedSeq = 0, lastFetch = 0;
 
-/* ---------- שרת (API) ---------- */
-let inflight = 0, sentSeq = 0, appliedSeq = 0;
-const rid = () => globalThis.crypto?.randomUUID?.() || Date.now().toString(36) + Math.random().toString(36).slice(2);
-const netError = msg => Object.assign(new Error(msg), { net: true });
-
-function setSync(message, kind = '') {
-  const el = $('#syncStatus'); el.textContent = message; el.dataset.kind = kind;
-}
-function normalizeState(s) {
-  if (!s || !Array.isArray(s.vouchers) || !Array.isArray(s.actions)) throw new Error('השרת החזיר נתונים לא תקינים. הרשימה הקודמת נשמרה.');
-  const ids = new Set();
-  const vouchers = s.vouchers.map(v => {
-    const id = String(v.id ?? '');
-    const initial = Number(v.initial_amount), balance = Number(v.balance);
-    if (!id || ids.has(id) || !Number.isFinite(initial) || initial <= 0 || !Number.isFinite(balance) || balance < 0 || cents(balance) > cents(initial)) throw new Error('נתוני שובר לא תקינים. יש לרענן ולבדוק את הנתונים בשרת.');
-    ids.add(id);
-    const company = normCompany(v.company);
-    if (!company || !String(v.voucher_type ?? '').trim()) throw new Error('חסרים פרטי שובר בשרת.');
-    return {...v, _wireId: v._wireId ?? v.id, id, company, voucher_type: normType(company, v.voucher_type) || String(v.voucher_type), voucher_number: String(v.voucher_number ?? ''), initial_amount: cents(initial)/100, balance: cents(balance)/100};
-  });
-  const actionIds = new Set();
-  const actions = s.actions.map(a => {
-    const id = String(a.id ?? '');
-    if (!id || actionIds.has(id) || (a.amount != null && (!Number.isFinite(Number(a.amount)) || Number(a.amount) < 0))) throw new Error('היסטוריית הפעולות אינה תקינה.');
-    actionIds.add(id);
-    return {...a, _wireId: a._wireId ?? a.id, id, voucher_id: String(a.voucher_id), is_full: a.is_full === true || a.is_full === 1 || a.is_full === 'true', amount: a.amount == null ? null : cents(a.amount)/100};
-  });
-  return {vouchers, actions};
-}
-async function api(action, payload = {}) {
-  const mutation = action !== 'state';
-  if (mutation && !state.synced) throw new Error('יש לרענן את הנתונים לפני ביצוע שינוי נוסף.');
-  payload = {...payload};
-  if (payload.voucherId != null) payload.voucherId = findV(String(payload.voucherId))?._wireId ?? payload.voucherId;
-  if (payload.actionId != null) payload.actionId = state.actions.find(a => a.id === String(payload.actionId))?._wireId ?? payload.actionId;
-  const seq = ++sentSeq;
-  inflight++; $('#refreshBtn').classList.add('spinning');
-  setSync(mutation ? 'שומר את השינוי…' : 'מעדכן את הרשימה…');
+async function post(body) {
+  if (navigator.onLine === false) throw new ApiError('אין חיבור לאינטרנט', 'net');
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 30000);
+  const timer = setTimeout(() => ctrl.abort(), 25000);
   try {
-    const res = await fetch(API, { method: 'POST', body: JSON.stringify({ action, reqId: rid(), ...payload }), signal: ctrl.signal, redirect: 'follow' });
-    if (!res.ok) throw new Error('השרת אינו זמין כרגע (' + res.status + ').');
-    const data = await res.json();
-    if (!data || data.ok !== true) throw Object.assign(new Error(String(data?.error || 'לא ניתן לשמור את הפעולה.')), {rejected: true});
-    if (!data.state) throw new Error('לא התקבל אישור ליתרה המעודכנת.');
-    const validated = normalizeState(data.state);
-    if (seq > appliedSeq) { appliedSeq = seq; applyState(validated, true); }
+    let res;
+    try { res = await fetch(API, { method: 'POST', body: JSON.stringify(body), signal: ctrl.signal }); }   // טקסט רגיל: בלי בדיקת CORS מקדימה
+    catch (e) { throw new ApiError(e.name === 'AbortError' ? 'השרת לא הגיב בזמן' : 'אין חיבור לשרת', 'net'); }
+    try { return await res.json(); }
+    catch { throw new ApiError('התקבלה תשובה לא תקינה מהשרת', 'net'); }
+  } finally { clearTimeout(timer); }
+}
+
+async function api(action, payload = {}, reqId = rid()) {
+  const seq = ++sentSeq;
+  pending++; syncIndicator();
+  try {
+    let data;
+    for (let attempt = 0; ; attempt++) {
+      try { data = await post({ action, reqId, ...payload }); break; }
+      catch (e) { if (e.kind !== 'net' || attempt >= 2) throw e; await sleep(attempt ? 2200 : 800); }
+    }
+    lastFetch = Date.now();
+    if (data && data.state && seq > appliedSeq) { appliedSeq = seq; applyState(data.state, { fromServer: true, warnings: data.warnings }); }
+    if (!data || data.ok !== true) throw new ApiError((data && data.error) || 'הפעולה לא נשמרה', 'rejected');
     return data;
   } catch (e) {
-    state.synced = false;
-    const message = mutation && !e.rejected
-      ? 'לא התקבל אישור לשמירה. ייתכן שהפעולה בוצעה. יש לרענן לפני פעולה נוספת.'
-      : e.name === 'AbortError' ? 'השרת לא הגיב בזמן. אפשר לנסות לרענן.'
-      : e instanceof TypeError ? 'אין חיבור לשרת. בדוק את החיבור ונסה לרענן.' : errMsg(e);
-    setSync(message, 'error');
-    render();
-    throw new Error(message);
-  } finally {
-    clearTimeout(timer);
-    if (--inflight === 0) $('#refreshBtn').classList.remove('spinning');
-  }
-}
-function applyState(s, synced = false) {
-  const validated = normalizeState(s);
-  state.vouchers = validated.vouchers; state.actions = validated.actions;
-  state.loaded = true; state.synced = synced;
-  if (synced) {
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify({...validated, cachedAt: new Date().toISOString()})); } catch {}
-    setSync('עודכן ב־' + new Intl.DateTimeFormat('he-IL', {hour:'2-digit',minute:'2-digit'}).format(new Date()));
-  }
-  render();
-}
-async function load() {
-  if (!state.loaded) {
-    try {
-      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-      if (cached) { applyState(cached); setSync('מציג את העותק האחרון · מתחבר לעדכון'); }
-    } catch { try { localStorage.removeItem(CACHE_KEY); } catch {} }
-    if (!state.loaded) $('#list').innerHTML = '<div class="skeleton"></div><div class="skeleton"></div>';
-  }
-  await api('state');
+    if (e.kind === 'net') { S.synced = false; S.error = e.message; renderNotices(); }
+    throw e;
+  } finally { pending--; syncIndicator(); }
 }
 
-/* ---------- render ---------- */
-function render() {
-  const companies = [...new Set(state.vouchers.map(v => v.company))].sort((a, b) => {
-    const order = c => c === 'HTZ' ? 0 : c === 'BUYME' ? 1 : 2;
-    return order(a) - order(b) || a.localeCompare(b, 'he');
+// מזהה בקשה לכל חלון פעולה: אותו תוכן → אותו מזהה (לחיצה חוזרת אחרי תקלה בטוחה)
+const newOp = () => { const base = rid(); return payload => base + '-' + hash(JSON.stringify(payload)); };
+
+function syncIndicator() { $('#refreshBtn').classList.toggle('spin', pending > 0); }
+
+/* ---------- נתונים ---------- */
+// מקבל כל תשובה מהשרת בלי להפיל את כל המסך בגלל שורה אחת לא תקינה
+function sanitize(raw) {
+  const vouchers = [], ids = new Set(); let skipped = 0;
+  (raw && Array.isArray(raw.vouchers) ? raw.vouchers : []).forEach((v, i) => {
+    if (!v) { skipped++; return; }
+    const id = String(v.id ?? '').trim();
+    let init = Number(v.initial_amount), bal = Number(v.balance);
+    if (v.balance == null || !Number.isFinite(bal) || bal < 0) bal = NaN;
+    if (v.initial_amount == null || !Number.isFinite(init) || init <= 0) init = bal;
+    if (!Number.isFinite(bal)) bal = init;
+    if (!id || ids.has(id) || !(init > 0) || !Number.isFinite(bal)) { skipped++; return; }
+    ids.add(id);
+    vouchers.push({
+      id,
+      company: normCompany(v.company) || 'ללא חברה',
+      voucher_type: String(v.voucher_type ?? '').trim() || 'ללא סוג',
+      voucher_number: String(v.voucher_number ?? '').trim(),
+      initial_amount: round2(init),
+      balance: round2(bal),
+      created_at: v.created_at || '',
+      ord: Number.isFinite(Number(v.ord)) ? Number(v.ord) : i,
+    });
   });
-  if (state.fCompany !== 'all' && !companies.includes(state.fCompany)) state.fCompany = 'all';
+  const actions = (raw && Array.isArray(raw.actions) ? raw.actions : []).filter(a => a && a.id != null).map(a => ({
+    id: String(a.id),
+    voucher_id: String(a.voucher_id ?? ''),
+    action: String(a.action || ''),
+    amount: a.amount == null || a.amount === '' || !Number.isFinite(Number(a.amount)) ? null : round2(a.amount),
+    is_full: a.is_full === true || a.is_full === 'true',
+    balance_before: a.balance_before == null || a.balance_before === '' ? null : round2(a.balance_before),
+    balance_after: a.balance_after == null || a.balance_after === '' ? null : round2(a.balance_after),
+    undone_at: a.undone_at || null,
+    note: String(a.note || ''),
+    label: String(a.voucher_label || ''),
+    created_at: a.created_at || '',
+  }));
+  return { vouchers, actions, skipped };
+}
 
-  // chips
-  $('#companyChips').innerHTML = [['all', 'כל החברות'], ...companies.map(c => [c, c])]
-    .map(([k, l]) => `<button class="chip ${state.fCompany === k ? 'on' : ''}" aria-pressed="${state.fCompany === k}" data-company="${esc(k)}">${esc(l)}</button>`).join('');
-  $('#statusChips').innerHTML = [['all', 'כל הסטטוסים'], ['active', 'פעיל'], ['partial', 'נוצל חלקית'], ['used', 'נוצל במלואו']]
-    .map(([k, l]) => `<button class="chip ${state.fStatus === k ? 'on' : ''}" aria-pressed="${state.fStatus === k}" data-status="${k}">${l}</button>`).join('');
+function applyState(raw, { fromServer = false, warnings = [], cachedAt = null } = {}) {
+  const prevTotal = S.loaded ? totalOf(S.vouchers) : null;
+  const { vouchers, actions, skipped } = sanitize(raw);
+  S.vouchers = vouchers; S.actions = actions; S.skipped = skipped; S.loaded = true;
+  if (fromServer) {
+    S.synced = true; S.error = ''; S.cachedAt = new Date().toISOString();
+    S.warnings = Array.isArray(warnings) ? warnings.map(String) : [];
+    vouchers.forEach(v => { S.labels[v.id] = labelOf(v); });
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ state: raw, at: S.cachedAt }));
+      localStorage.setItem(LABELS_KEY, JSON.stringify(S.labels));
+    } catch {}
+  } else if (cachedAt) S.cachedAt = cachedAt;
+  render();
+  const next = totalOf(S.vouchers);
+  if (prevTotal !== null && toCents(prevTotal) !== toCents(next)) animateTotal(prevTotal, next);
+}
 
-  const shown = state.vouchers.filter(v =>
-    (state.fCompany === 'all' || v.company === state.fCompany) &&
-    (state.fStatus === 'all' || statusOf(v) === state.fStatus) && (!state.query || [v.company,v.voucher_type,v.voucher_number].join(' ').toLocaleLowerCase().includes(state.query.toLocaleLowerCase())));
+/* ---------- יתרה כוללת: תמיד מחושבת מכל השוברים, עם אנימציה ותווית שינוי ---------- */
+let totalAnim = 0, animating = false;
+function setTotal(n) { $('#sumTotal').innerHTML = moneyHTML(n); }
+function animateTotal(from, to) {
+  cancelAnimationFrame(totalAnim);
+  const d = $('#sumDelta'), diff = round2(to - from);
+  d.hidden = false; d.className = 'delta ' + (diff > 0 ? 'up' : 'down');
+  d.innerHTML = moneyHTML(diff, diff > 0 ? '+' : '−');
+  clearTimeout(animateTotal.t1); clearTimeout(animateTotal.t2);
+  animateTotal.t1 = setTimeout(() => d.classList.add('fade'), 2400);
+  animateTotal.t2 = setTimeout(() => { d.hidden = true; }, 2950);
+  if (reduceMotion) { setTotal(to); return; }
+  animating = true;
+  const t0 = performance.now(), dur = 700;
+  const step = t => {
+    const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    setTotal(k < 1 ? Math.round(from + (to - from) * e) : to);
+    if (k < 1) totalAnim = requestAnimationFrame(step); else animating = false;
+  };
+  setTotal(from);
+  totalAnim = requestAnimationFrame(step);
+}
 
-  // summary
-  const filtered = state.fCompany !== 'all' || state.fStatus !== 'all' || !!state.query;
-  const total = shown.reduce((s, v) => s + cents(v.balance), 0) / 100;
-  const cnt = { active: 0, partial: 0, used: 0 };
-  shown.forEach(v => cnt[statusOf(v)]++);
-  $('#sumLabel').textContent = filtered ? 'יתרה בסינון הנוכחי' : 'יתרה כוללת';
-  $('#sumTotal').textContent = money(total);
-  $('#sumStats').innerHTML =
-    `<span class="pill"><b>${shown.length}</b> שוברים</span>` +
-    `<span class="pill">פעילים <b>${cnt.active}</b></span>` +
-    `<span class="pill">חלקית <b>${cnt.partial}</b></span>` +
-    `<span class="pill">נוצלו <b>${cnt.used}</b></span>`;
+/* =====================================================================
+   תצוגה
+   ===================================================================== */
+const companiesOf = list => [...new Set(list.map(v => v.company))].sort((a, b) => {
+  const o = c => c === 'HTZ' ? 0 : c === 'BUYME' ? 1 : 2;
+  return o(a) - o(b) || a.localeCompare(b, 'he');
+});
+const labelOf = v => `${v.company} · ${v.voucher_type}${v.voucher_number ? ' · ' + v.voucher_number : ''}`;
+const undoableOf = id => S.actions.filter(a => a.voucher_id === id && a.action === 'use' && !a.undone_at);
 
-  $('#resultCount').textContent = `${shown.length} שוברים${filtered ? ' בסינון' : ' ברשימה'}`;
-  $('#clearFilters').hidden = !filtered;
-  $('#addBtn').disabled = !state.synced || busy;
-  // list
-  if (!state.vouchers.length) {
-    $('#list').innerHTML = '<div class="empty"><div class="big">🎟️</div><b>ברוכים הבאים!</b><div class="help">אין עדיין שוברים במערכת. הוסיפו את השובר הראשון שלכם.</div></div>';
+function matches(v) {
+  if (S.company !== 'all' && v.company !== S.company) return false;
+  if (S.status !== 'all' && statusOf(v) !== S.status) return false;
+  if (S.q) {
+    const q = S.q.toLowerCase(), qk = numKey(S.q);
+    const text = `${v.company} ${v.voucher_type}`.toLowerCase();
+    if (!text.includes(q) && !(qk && numKey(v.voucher_number).includes(qk))) return false;
+  }
+  return true;
+}
+
+function render() {
+  document.body.dataset.tab = S.tab;
+  $('#pageTitle').textContent = S.tab === 'history' ? 'היסטוריה' : 'השוברים שלי';
+  $$('.tab').forEach(t => { const on = t.dataset.tab === S.tab; t.classList.toggle('on', on); t.setAttribute('aria-selected', String(on)); });
+  $('#vouchersView').hidden = S.tab !== 'vouchers';
+  $('#historyView').hidden = S.tab !== 'history';
+  $('#addBtn').disabled = !S.loaded || busy;
+  renderNotices();
+  if (S.tab === 'vouchers') renderVouchers(); else renderHistory();
+}
+
+function renderNotices() {
+  const out = [];
+  if (S.loaded && !S.synced && S.error) {
+    const when = S.cachedAt ? ` · מוצגים נתונים מ-${fmtFull(S.cachedAt)}` : '';
+    out.push(`<div class="notice off">${ICON.cloudOff}<span class="grow">${esc(S.error)}${esc(when)}</span><button type="button" data-retry>נסה שוב</button></div>`);
+  }
+  if (S.warnings.length) {
+    const more = S.warnings.length > 1 ? ` (ועוד ${S.warnings.length - 1})` : '';
+    out.push(`<div class="notice warn">${ICON.alert}<span class="grow">${esc(S.warnings[0])}${esc(more)}</span></div>`);
+  }
+  if (S.skipped) out.push(`<div class="notice warn">${ICON.alert}<span class="grow">${S.skipped} שורות בגיליון לא הוצגו כי חסרים בהן נתונים</span></div>`);
+  $('#notices').innerHTML = out.join('');
+}
+
+function renderVouchers() {
+  // סיכום — כל השוברים, בלי קשר לסינון
+  if (!animating) { if (S.loaded) setTotal(totalOf(S.vouchers)); else $('#sumTotal').textContent = '—'; }
+  $('#sumCount').textContent = S.loaded ? countLabel(S.vouchers.length) : 'טוען…';
+
+  const companies = companiesOf(S.vouchers);
+  if (S.company !== 'all' && !companies.includes(S.company)) S.company = 'all';
+  const stOn = S.status !== 'all';
+  $('#chips').innerHTML =
+    [['all', 'הכול'], ...companies.map(c => [c, c])].map(([k, l]) =>
+      `<button type="button" class="chip ${S.company === k ? 'on' : ''}" aria-pressed="${S.company === k}" data-company="${esc(k)}">${esc(l)}</button>`).join('') +
+    `<button type="button" class="chip st ${stOn ? 'on' : ''}" id="statusChip" aria-haspopup="dialog">${ICON.filter}${stOn ? esc(STATUS[S.status].label) : 'סטטוס'}${stOn ? ICON.x : ''}</button>`;
+  $('#searchClear').hidden = !S.q;
+
+  if (!S.loaded) { $('#list').innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>'; $('#results').hidden = true; return; }
+
+  const shown = S.vouchers.filter(matches);
+  const filtered = S.company !== 'all' || S.status !== 'all' || !!S.q;
+  $('#results').hidden = !filtered;
+  if (filtered) $('#results').innerHTML = `<span>${shown.length ? `${countLabel(shown.length)} · יתרה ${moneyHTML(totalOf(shown))}` : 'אין תוצאות'}</span><button type="button" data-clear>ניקוי סינון</button>`;
+
+  if (!S.vouchers.length) {
+    $('#list').innerHTML = `<div class="empty"><div class="t">אין עדיין שוברים</div>אפשר להוסיף שובר ראשון עכשיו.<br><button type="button" class="btn btn-soft" data-add>${ICON.plus}הוספת שובר</button></div>`;
     return;
   }
   if (!shown.length) {
-    $('#list').innerHTML = '<div class="empty"><div class="big">🔍</div><b>לא נמצאו שוברים</b><div class="help">אין שוברים שמתאימים לסינון שבחרתם.</div></div>';
+    $('#list').innerHTML = `<div class="empty"><div class="t">לא נמצאו שוברים</div>אין שוברים שמתאימים לחיפוש או לסינון.<br><button type="button" class="btn btn-soft" data-clear>ניקוי סינון</button></div>`;
     return;
   }
   const rank = { active: 0, partial: 1, used: 2 };
+  const showHeads = S.company === 'all' && companies.length > 1;
   $('#list').innerHTML = companies.map(c => {
-    const items = shown.filter(v => v.company === c)
-      .sort((a, b) => rank[statusOf(a)] - rank[statusOf(b)] || (a.ord || 0) - (b.ord || 0));
+    const items = shown.filter(v => v.company === c).sort((a, b) => rank[statusOf(a)] - rank[statusOf(b)] || a.ord - b.ord);
     if (!items.length) return '';
-    const sub = items.reduce((s, v) => s + cents(v.balance), 0) / 100;
-    const accent = accentOf(c);
-    return `<section class="group" data-group="${esc(c)}">
-      <div class="group-head"><h2><span class="dot" style="background:${accent}"></span>${esc(c)}</h2>
-        <span class="sub"><span class="num">${money(sub)}</span> · ${items.length} שוברים</span></div>
-      ${items.map(v => cardHTML(v, accent)).join('')}
-    </section>`;
+    const head = showHeads ? `<div class="group-head"><b>${esc(c)}</b><span>${countLabel(items.length)} · ${moneyHTML(totalOf(items))}</span></div>` : '';
+    return `<section aria-label="${esc(c)}">${head}${items.map(cardHTML).join('')}</section>`;
   }).join('');
 }
 
-function cardHTML(v, accent) {
-  const st = statusOf(v);
-  const pct = Math.max(0, Math.min(100, Number(v.balance) / Number(v.initial_amount) * 100));
+function cardHTML(v) {
+  const st = statusOf(v), used = st === 'used';
   const canUndo = undoableOf(v.id).length > 0;
-  const used = st === 'used';
-  const locked = !state.synced;
-  return `<article class="card ${used ? 'used' : ''}" style="--accent:${accent}" data-id="${esc(v.id)}">
-    <div class="card-top">
-      <div>
-        <div class="company">${esc(v.company)}</div>
-        <div class="type">${esc(v.voucher_type)}</div>
-        ${v.voucher_number
-          ? `<button class="vnum" data-act="copy" aria-label="העתקת מספר שובר"><span class="num">${esc(v.voucher_number)}</span><span class="copy-label">העתקה</span></button>`
-          : `<span class="vnum missing">ללא מספר שובר</span>`}
+  const lastUse = used ? undoableOf(v.id).slice(-1)[0] : null;
+  const num = v.voucher_number
+    ? `<button type="button" class="num-row" data-act="copy" aria-label="העתקת מספר השובר ${esc(v.voucher_number)}">${ICON.copy}<span>מס׳ שובר</span><span class="n ltr">${esc(v.voucher_number)}</span></button>`
+    : `<button type="button" class="num-row" data-act="addnum">${ICON.copy}<span>מס׳ שובר</span><span>ללא מספר ·</span><span class="add">הוספה</span></button>`;
+  const undoBtn = `<button type="button" class="act act-undo" data-act="undo" aria-label="ביטול ניצול" ${canUndo ? '' : 'disabled'}><span>ביטול<span class="w2"> ניצול</span></span>${ICON.undo}</button>`;
+  const actions = used
+    ? `<span class="used-note">${lastUse ? 'נוצל ב-' + esc(fmtFull(lastUse.created_at).split(',')[0] || '') : 'נוצל במלואו'}</span>${undoBtn}`
+    : `<button type="button" class="act act-partial" data-act="partial"><span>נוצל חלקית</span>${ICON.pie}</button>
+       <button type="button" class="act act-full" data-act="full"><span>נוצל</span>${ICON.check}</button>
+       ${undoBtn}`;
+  return `<article class="card ${used ? 'used' : ''}" data-id="${esc(v.id)}">
+    <div class="card-main">
+      <div class="card-info">
+        <div class="title-row"><span class="badge">${esc(v.company)}</span><h3 class="type"><button type="button" data-act="details">${esc(v.voucher_type)}</button></h3></div>
+        ${num}
       </div>
-      <span class="status ${STATUS[st].cls}">${STATUS[st].label}</span>
+      <div class="card-bal">
+        <span class="status ${STATUS[st].cls}"><span>${STATUS[st].label}</span><i></i></span>
+        <span class="bal-lbl">יתרה</span>
+        <span class="bal">${moneyHTML(v.balance)}</span>
+        ${st !== 'active' ? `<span class="of">מתוך ${moneyHTML(v.initial_amount)}</span>` : ''}
+      </div>
     </div>
-    <div class="card-divider"></div>
-    <div class="bal-row">
-      <div><div class="bal-lbl">יתרה</div><div class="bal num">${money(v.balance)}</div></div>
-      <div class="of">מתוך <span class="num">${money(v.initial_amount)}</span></div>
-    </div>
-    <div class="bar" role="meter" aria-label="יתרת השובר" aria-valuemin="0" aria-valuemax="${Number(v.initial_amount)}" aria-valuenow="${Number(v.balance)}"><i style="width:${pct}%"></i></div>
-    <div class="card-actions">
-      <button class="btn btn-soft" data-act="full" ${used || locked ? 'disabled data-off="1"' : ''}>נוצל</button>
-      <button class="btn btn-soft" data-act="partial" ${used || locked ? 'disabled data-off="1"' : ''}>נוצל חלקית</button>
-      <button class="btn btn-ghost" data-act="undo" ${canUndo && !locked ? '' : 'disabled data-off="1"'}>ביטול ניצול</button>
-      <button class="btn btn-ghost more" data-act="more" aria-label="פרטים והיסטוריה" title="פרטים והיסטוריה">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M12 5h.01M12 12h.01M12 19h.01"/></svg>
-      </button>
-    </div>
+    <div class="dash"></div>
+    <div class="acts">${actions}</div>
   </article>`;
 }
 
-/* ---------- sheet ---------- */
-let returnFocus = null, focusTimer;
-function openSheet(html) {
-  if (busy) return;
-  returnFocus = document.activeElement;
+/* ---------- היסטוריה ---------- */
+function actionView(a) {
+  const v = findV(a.voucher_id);
+  const label = v ? labelOf(v) : (a.label || S.labels[a.voucher_id] || 'שובר שנמחק');
+  const fromSheet = a.note === 'נוסף ישירות בגיליון';
+  const map = {
+    create: { ic: ICON.plus,   cls: 'ic-create', t: fromSheet ? 'נוסף בגיליון' : 'שובר נוסף', amt: a.amount, sign: '+', amtCls: 'plus' },
+    use:    { ic: a.is_full ? ICON.check : ICON.pie, cls: 'ic-use', t: a.is_full ? 'ניצול מלא' : 'ניצול חלקי', amt: a.amount, sign: '−', amtCls: 'minus' },
+    undo:   { ic: ICON.undo,   cls: 'ic-undo',   t: 'ביטול ניצול', amt: a.amount, sign: '+', amtCls: 'plus' },
+    edit:   { ic: ICON.pencil, cls: 'ic-edit',   t: 'מספר שובר עודכן', amt: null },
+    delete: { ic: ICON.trash,  cls: 'ic-delete', t: 'שובר נמחק', amt: a.balance_before, sign: '−', amtCls: 'del' },
+  }[a.action] || { ic: ICON.pencil, cls: 'ic-edit', t: a.note || 'פעולה', amt: null };
+  const canUndo = a.action === 'use' && !a.undone_at && !!v;
+  return { v, label, canUndo, ...map };
+}
+
+function feedRow(a, { showLabel = true, allowOpen = true } = {}) {
+  const x = actionView(a);
+  const clickable = x.canUndo || (allowOpen && x.v);
+  const tag = clickable ? 'button' : 'div';
+  const amt = x.amt != null && x.amt > 0 ? `<span class="feed-amt ${x.amtCls}">${moneyHTML(x.amt, x.sign)}</span>` : '';
+  const sub = [showLabel ? x.label : '', a.action === 'edit' ? a.note.replace(/^מספר שובר:\s*/, '') : '', showLabel ? fmtTime(a.created_at) : fmtFull(a.created_at)].filter(Boolean).join(' · ');
+  return `<${tag} ${clickable ? 'type="button"' : ''} class="feed-row ${a.undone_at ? 'undone' : ''}" data-aid="${esc(a.id)}">
+    <span class="feed-ic ${x.cls}">${x.ic}</span>
+    <span class="feed-main"><span class="feed-t">${esc(x.t)}${a.undone_at ? '<span class="tag">בוטל</span>' : ''}</span><span class="feed-s">${esc(sub)}</span></span>
+    <span class="feed-end">${amt}${x.canUndo ? '<span class="feed-undo">ביטול</span>' : ''}</span>
+  </${tag}>`;
+}
+
+function sortedActions(list) {
+  return list.slice().sort((a, b) => (String(b.created_at).localeCompare(String(a.created_at))) || (Number(b.id) - Number(a.id)));
+}
+
+function renderHistory() {
+  const now = new Date();
+  const monthUses = S.actions.filter(a => a.action === 'use' && !a.undone_at && (d => d && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear())(asDate(a.created_at)));
+  $('#histSum').innerHTML = S.loaded
+    ? `<div class="mini-sum"><div><div class="l">נוצל החודש</div><div class="s">${monthUses.length === 1 ? 'ניצול אחד' : monthUses.length + ' ניצולים'}</div></div><div class="v">${moneyHTML(monthUses.reduce((s, a) => s + toCents(a.amount), 0) / 100)}</div></div>`
+    : '';
+  const kinds = [['all', 'הכול'], ['use', 'ניצולים'], ['undo', 'ביטולים'], ['other', 'הוספות ושינויים']];
+  $('#histChips').innerHTML = kinds.map(([k, l]) => `<button type="button" class="chip ${S.hist === k ? 'on' : ''}" aria-pressed="${S.hist === k}" data-hist="${k}">${l}</button>`).join('');
+  if (!S.loaded) { $('#histList').innerHTML = '<div class="skel"></div><div class="skel"></div>'; return; }
+  const list = sortedActions(S.actions.filter(a => S.hist === 'all' || (S.hist === 'other' ? !['use', 'undo'].includes(a.action) : a.action === S.hist)));
+  if (!list.length) { $('#histList').innerHTML = '<div class="empty"><div class="t">אין פעולות להצגה</div>כל ניצול, ביטול והוספה יופיעו כאן.</div>'; return; }
+  const days = [];
+  list.forEach(a => { const d = dayLabel(a.created_at); if (!days.length || days[days.length - 1].d !== d) days.push({ d, items: [] }); days[days.length - 1].items.push(a); });
+  $('#histList').innerHTML = days.map(g => `<div class="day">${esc(g.d)}</div><div class="feed">${g.items.map(a => feedRow(a)).join('')}</div>`).join('');
+}
+
+/* =====================================================================
+   חלונות (bottom sheet)
+   ===================================================================== */
+let sheetOpen = false, ignorePop = false, returnFocus = null;
+function openSheet(html, focusSel) {
   $('#sheetBody').innerHTML = html;
-  const title = $('#sheetBody h3'); if (title) {title.id = 'sheetTitle'; title.tabIndex = -1;}
-  $('#backdrop').classList.add('open'); $('#sheet').classList.add('open');
-  $('#sheet').scrollTop = 0;
-  $('#mainView').inert = true; document.body.style.overflow = 'hidden';
-  clearTimeout(focusTimer); focusTimer = setTimeout(() => (title || $('#sheet')).focus(), 50);
-}
-function closeSheet() {
-  if (busy) return;
-  clearTimeout(focusTimer);
-  $('#backdrop').classList.remove('open'); $('#sheet').classList.remove('open');
-  $('#mainView').inert = false; document.body.style.overflow = '';
-  if (returnFocus?.isConnected) returnFocus.focus();
-  else $('#addBtn').focus();
-}
-$('#backdrop').addEventListener('click', closeSheet);
-document.addEventListener('keydown', e => {
-  if (!$('#sheet').classList.contains('open')) return;
-  if (e.key === 'Escape') { e.preventDefault(); closeSheet(); }
-  if (e.key === 'Tab') {
-    const list = [...$('#sheet').querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),[tabindex="0"]')].filter(el => el.getClientRects().length);
-    if (!list.length) {e.preventDefault(); return;}
-    if (e.shiftKey && (document.activeElement === list[0] || !list.includes(document.activeElement))) {e.preventDefault(); list.at(-1).focus();}
-    else if (!e.shiftKey && (document.activeElement === list.at(-1) || !list.includes(document.activeElement))) {e.preventDefault(); list[0].focus();}
+  const title = $('#sheetBody h3'); if (title) { title.id = 'sheetTitle'; title.tabIndex = -1; }
+  if (!sheetOpen) {
+    sheetOpen = true; returnFocus = document.activeElement;
+    try { history.pushState({ vsheet: 1 }, ''); } catch {}
+    $('#backdrop').classList.add('open'); $('#sheet').classList.add('open');
+    $('#app').inert = true; $('#bottom').inert = true; document.body.style.overflow = 'hidden';
   }
+  $('#sheet').scrollTop = 0;
+  setTimeout(() => { const f = focusSel && $(focusSel); (f || title || $('#sheet')).focus({ preventScroll: true }); }, focusSel ? 320 : 60);
+}
+function closeSheet({ force = false, fromPop = false } = {}) {
+  if (!sheetOpen || (busy && !force && !fromPop)) return;
+  sheetOpen = false;
+  $('#backdrop').classList.remove('open'); $('#sheet').classList.remove('open');
+  $('#app').inert = false; $('#bottom').inert = false; document.body.style.overflow = '';
+  if (!fromPop && history.state && history.state.vsheet) { ignorePop = true; history.back(); }
+  if (returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
+}
+window.addEventListener('popstate', () => { if (ignorePop) { ignorePop = false; return; } if (sheetOpen) closeSheet({ fromPop: true }); });
+$('#backdrop').addEventListener('click', () => closeSheet());
+$('#sheet').addEventListener('click', e => { if (e.target.closest('[data-close]')) closeSheet(); });
+document.addEventListener('keydown', e => {
+  if (!sheetOpen) return;
+  if (e.key === 'Escape') { e.preventDefault(); closeSheet(); return; }
+  if (e.key !== 'Tab') return;
+  const items = $$('#sheet button:not(:disabled), #sheet input:not(:disabled), #sheet [tabindex="0"]').filter(el => el.getClientRects().length);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && (document.activeElement === first || !items.includes(document.activeElement))) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && (document.activeElement === last || !items.includes(document.activeElement))) { e.preventDefault(); first.focus(); }
 });
 
-const findV = id => state.vouchers.find(v => v.id === id);
-const infoBox = v => `<div class="infobox"><div><div class="t">${esc(v.company)} · ${esc(v.voucher_type)}</div>
-  <div class="s">${v.voucher_number ? '# <span class="num">' + esc(v.voucher_number) + '</span>' : 'ללא מספר שובר'}</div></div>
-  <div style="text-align:left"><div class="s">יתרה</div><div class="t num">${money(v.balance)}</div></div></div>`;
+// מונע לחיצה כפולה: בזמן שמירה כל החלון נעול והכפתור מסתובב
+async function guarded(btn, fn) {
+  if (busy) return;
+  busy = true;
+  const controls = $$('#sheet button, #sheet input').map(el => [el, el.disabled]);
+  controls.forEach(([el]) => { el.disabled = true; });
+  if (btn) btn.classList.add('loading');
+  try { await fn(); }
+  catch (e) {
+    console.error(e);
+    toast(e.kind === 'net' ? `${e.message}. אפשר ללחוץ שוב — הפעולה לא תירשם פעמיים.` : (e.message || 'משהו השתבש'), 'bad');
+  } finally {
+    busy = false;
+    if (btn) btn.classList.remove('loading');
+    controls.forEach(([el, was]) => { if (el.isConnected) el.disabled = was; });
+    $('#addBtn').disabled = !S.loaded;
+  }
+}
+function finish(msg) { closeSheet({ force: true }); toast(msg); }
 
+const infoBox = v => `<div class="infobox">
+  <div><div class="t"><span class="badge">${esc(v.company)}</span>${esc(v.voucher_type)}</div>
+  <div class="s">${v.voucher_number ? 'מס׳ שובר <span class="ltr">' + esc(v.voucher_number) + '</span>' : 'ללא מספר שובר'}</div></div>
+  <div class="r"><div class="s">יתרה</div><div class="v">${moneyHTML(v.balance)}</div></div></div>`;
+
+/* ---------- נוצל (במלואו) ---------- */
 function openFull(v) {
+  const op = newOp();
   openSheet(`<h3>לסמן שהשובר נוצל?</h3>
-    <p class="lead">היתרה תתאפס והשובר יעבור לסטטוס ״נוצל במלואו״. אפשר לבטל אחר כך.</p>
+    <p class="lead">היתרה תתאפס והשובר יעבור ל״נוצל במלואו״. אפשר לבטל אחר כך.</p>
     ${infoBox(v)}
-    <div class="sheet-actions">
-      <button class="btn btn-primary" id="confirmFull">כן, נוצל (${money(v.balance)})</button>
-      <button class="btn btn-ghost" data-close>ביטול</button>
-    </div>`);
-  $('#confirmFull').onclick = e => guarded(e.currentTarget, async () => {
-    await api('use', { voucherId: v.id, full: true });
-    busy = false; closeSheet();
-    toast('השובר סומן כנוצל במלואו');
+    <div class="sheet-actions"><button type="button" class="btn btn-primary" id="goFull">כן, נוצל · ${moneyHTML(v.balance)}</button><button type="button" class="btn btn-ghost" data-close>ביטול</button></div>`);
+  $('#goFull').onclick = e => guarded(e.currentTarget, async () => {
+    const p = { voucherId: v.id, full: true };
+    await api('use', p, op(p));
+    finish('השובר סומן כנוצל במלואו');
   });
 }
 
+/* ---------- נוצל חלקית ---------- */
 function openPartial(v) {
-  const max = Number(v.balance);
+  const op = newOp(), max = v.balance;
+  const quick = [20, 50, 100, 200].filter(n => n < max);
   openSheet(`<h3>ניצול חלקי</h3>
     <p class="lead">כמה נוצל מהשובר?</p>
     ${infoBox(v)}
-    <form id="partialForm" novalidate>
+    <form id="partialForm" novalidate autocomplete="off">
       <div class="field">
-        <label for="useAmt">סכום שנוצל <span class="hint">(עד ${money(max)})</span></label>
-        <div class="input-money"><input class="input num" id="useAmt" aria-describedby="useErr usePrev" inputmode="decimal" maxlength="12" autocomplete="off" placeholder="0"><span>₪</span></div>
+        <label class="label" for="useAmt">סכום שנוצל</label>
+        <div class="money-input"><input class="input" id="useAmt" inputmode="decimal" placeholder="0" aria-describedby="useErr usePrev"><span>₪</span></div>
+        <div class="quick">${quick.map(n => `<button type="button" data-a="${n}">${n} ₪</button>`).join('')}<button type="button" data-a="${max}">כל היתרה</button></div>
         <div class="err" id="useErr"></div>
-        <div class="preview" id="usePrev"></div>
+        <div class="hint" id="usePrev"></div>
       </div>
-      <div class="sheet-actions">
-        <button class="btn btn-primary" id="savePartial" type="submit">עדכון יתרה</button>
-        <button class="btn btn-ghost" type="button" data-close>ביטול</button>
-      </div>
-    </form>`);
+      <div class="sheet-actions"><button type="submit" class="btn btn-primary" id="savePartial" disabled>עדכון יתרה</button><button type="button" class="btn btn-ghost" data-close>ביטול</button></div>
+    </form>`, '#useAmt');
   const inp = $('#useAmt'), btn = $('#savePartial');
   const check = () => {
-    const a = parseAmount(inp.value);
+    const raw = inp.value.trim(), a = parseAmount(raw);
     let err = '';
-    if (inp.value.trim() === '') err = '';
-    else if (!(a > 0)) err = 'יש להזין סכום גדול מ-0';
+    if (raw && !(a > 0)) err = 'יש להזין סכום תקין';
     else if (a > max) err = `הסכום גבוה מהיתרה (${money(max)})`;
     $('#useErr').textContent = err;
     inp.setAttribute('aria-invalid', String(!!err));
-    $('#usePrev').textContent = (!err && a > 0) ? `יתרה אחרי העדכון: ${money((cents(max) - cents(a))/100)}` : '';
     const ok = !err && a > 0;
-    btn.dataset.off = ok ? '' : '1';
-    btn.disabled = !ok || busy || !state.synced;
+    $('#usePrev').innerHTML = ok ? `יתרה אחרי העדכון: <b>${moneyHTML(max - a)}</b>${a === max ? ' · השובר יסומן כנוצל במלואו' : ''}` : '';
+    if (!busy) btn.disabled = !ok;
     return ok;
   };
   inp.addEventListener('input', check);
-  check();
-  clearTimeout(focusTimer); focusTimer = setTimeout(() => inp.focus(), 150);
+  $('#partialForm .quick').onclick = e => { const b = e.target.closest('[data-a]'); if (b) { inp.value = b.dataset.a; check(); inp.focus(); } };
   $('#partialForm').onsubmit = e => {
     e.preventDefault();
     if (busy || !check()) return;
     const a = parseAmount(inp.value);
     guarded(btn, async () => {
-      await api('use', { voucherId: v.id, amount: a });
-      busy = false; closeSheet();
-      toast(`נוצלו ${money(a)} · נותרו ${money((cents(max) - cents(a))/100)}`);
+      const p = { voucherId: v.id, amount: a };
+      await api('use', p, op(p));
+      const nv = findV(v.id);
+      finish(`נוצלו ${money(a)} · נותרו ${money(nv ? nv.balance : max - a)}`);
     });
   };
 }
 
+/* ---------- ביטול ניצול ---------- */
 function openUndo(v) {
   const list = undoableOf(v.id).slice().reverse();
   if (!list.length) return toast('אין ניצולים לביטול בשובר הזה', 'bad');
+  const op = newOp();
   let sel = list[0].id;
   openSheet(`<h3>ביטול ניצול</h3>
-    <p class="lead">בחר איזה ניצול לבטל — הסכום יחזור ליתרה.</p>
+    <p class="lead">${list.length > 1 ? 'בחר איזה ניצול לבטל — הסכום יחזור ליתרה.' : 'הסכום יחזור ליתרת השובר.'}</p>
     ${infoBox(v)}
-    <ul class="hist pick" id="undoList">
-      ${list.map(a => `<li tabindex="0" role="radio" aria-checked="${a.id === sel}" data-aid="${esc(a.id)}" class="${a.id === sel ? 'sel' : ''}">
-        <span class="radio"></span>
-        <div class="main"><div class="t">${a.is_full ? 'ניצול מלא' : 'ניצול חלקי'}</div><div class="d">${fmtDate(a.created_at)}</div></div>
-        <div class="amt num">${money(a.amount)}</div></li>`).join('')}
+    <ul class="pick" id="undoList" role="radiogroup" aria-label="ניצול לביטול">
+      ${list.map(a => `<li role="radio" tabindex="0" data-aid="${esc(a.id)}"><span class="radio"></span>
+        <div class="main"><div class="t">${a.is_full ? 'ניצול מלא' : 'ניצול חלקי'}</div><div class="d">${esc(fmtFull(a.created_at))}</div></div>
+        <div class="amt">${moneyHTML(a.amount)}</div></li>`).join('')}
     </ul>
-    <div class="sheet-actions">
-      <button class="btn btn-primary" id="confirmUndo"></button>
-      <button class="btn btn-ghost" data-close>סגירה</button>
-    </div>`);
+    <div class="sheet-actions"><button type="button" class="btn btn-primary" id="goUndo"></button><button type="button" class="btn btn-ghost" data-close>סגירה</button></div>`);
   const upd = () => {
     const a = list.find(x => x.id === sel);
-    $('#confirmUndo').textContent = `החזרת ${money(a.amount)}`;
-    document.querySelectorAll('#undoList li').forEach(li => (li.classList.toggle('sel', li.dataset.aid === sel), li.setAttribute('aria-checked', String(li.dataset.aid === sel))));
+    $('#goUndo').innerHTML = `החזרת ${moneyHTML(a.amount)} ליתרה`;
+    $$('#undoList li').forEach(li => { const on = li.dataset.aid === sel; li.classList.toggle('sel', on); li.setAttribute('aria-checked', String(on)); });
   };
-  $('#undoList').onclick = e => { const li = e.target.closest('li'); if (li && !busy) { sel = li.dataset.aid; vibrate(15); upd(); } };
-  $('#undoList').setAttribute('role', 'radiogroup');
-  $('#undoList').setAttribute('aria-label', 'בחירת ניצול לביטול');
-  $('#undoList').onkeydown = e => { const items=[...$('#undoList').children]; const item=e.target.closest('li'); if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); item?.click(); } else if (['ArrowDown','ArrowUp','ArrowRight','ArrowLeft'].includes(e.key)) { e.preventDefault(); const delta=['ArrowDown','ArrowLeft'].includes(e.key)?1:-1; const next=items[(items.indexOf(item)+delta+items.length)%items.length]; next?.focus(); next?.click(); } };
+  const pick = li => { if (li && !busy) { sel = li.dataset.aid; vibrate(10); upd(); } };
+  $('#undoList').onclick = e => pick(e.target.closest('li'));
+  $('#undoList').onkeydown = e => {
+    const items = $$('#undoList li'), i = items.indexOf(e.target.closest('li'));
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); pick(items[i]); }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]; n.focus(); pick(n); }
+  };
   upd();
-  $('#confirmUndo').onclick = e => guarded(e.currentTarget, async () => {
-    const a = list.find(x => x.id === sel);
-    await api('undo', { actionId: a.id });
-    busy = false; closeSheet();
+  $('#goUndo').onclick = e => guarded(e.currentTarget, async () => {
+    const a = list.find(x => x.id === sel), p = { actionId: a.id };
+    await api('undo', p, op(p));
     const nv = findV(v.id);
-    toast(`הניצול בוטל · ${money(a.amount)} חזרו ליתרה${nv ? ' (' + STATUS[statusOf(nv)].label + ')' : ''}`);
+    finish(`הניצול בוטל · ${money(a.amount)} חזרו ליתרה${nv ? ' (' + STATUS[statusOf(nv)].label + ')' : ''}`);
   });
 }
 
-function openDetails(v) {
-  const acts = state.actions.filter(a => a.voucher_id === v.id).slice().reverse();
-  const row = a => {
-    const map = {
-      create: ['🎟️', 'נוסף לרשימה', 'var(--primary-soft)', '+'],
-      use:    ['💳', a.is_full ? 'ניצול מלא' : 'ניצול חלקי', 'var(--peach)', '−'],
-      undo:   ['↩️', 'ביטול ניצול', 'var(--mint)', '+'],
-      edit:   ['✏️', a.note || 'עריכה', 'var(--bg)', ''],
-      delete: ['🗑️', 'מחיקה', 'var(--rose)', ''],
-    }[a.action] || ['•', a.note || '', 'var(--bg)', ''];
-    const showAmt = a.amount != null && (a.action === 'create' || a.action === 'use' || a.action === 'undo');
-    return `<li class="${a.undone_at ? 'undone' : ''}">
-      <span class="ic" style="background:${map[2]}">${map[0]}</span>
-      <div class="main"><div class="t">${esc(map[1])}${a.undone_at ? ' · בוטל' : ''}</div>
-        <div class="d">${fmtDate(a.created_at)}${showAmt && a.balance_after != null ? ' · יתרה: ' + money(a.balance_after) : ''}</div></div>
-      ${showAmt ? `<div class="amt num">${map[3]}${money(a.amount)}</div>` : ''}
-    </li>`;
-  };
-  openSheet(`<h3>${esc(v.company)} · ${esc(v.voucher_type)}</h3>
-    <p class="lead">יתרה <span class="num">${money(v.balance)}</span> מתוך <span class="num">${money(v.initial_amount)}</span> · ${STATUS[statusOf(v)].label}</p>
-    <form id="numForm" novalidate>
-      <div class="field">
-        <label for="numInp">מספר שובר <span class="hint">${v.voucher_number ? '' : '(חסר — אפשר להשלים)'}</span></label>
-        <input class="input ltr num" id="numInp" value="${esc(v.voucher_number || '')}" inputmode="text" autocomplete="off" placeholder="לדוגמה 139381057-3719">
-      </div>
-      <button class="btn btn-soft btn-block" id="saveNum" type="submit">שמירת מספר</button>
+// ביטול ניצול מסוים (מלשונית ההיסטוריה)
+function openUndoOne(a) {
+  const v = findV(a.voucher_id); if (!v) return;
+  const op = newOp();
+  openSheet(`<h3>לבטל את הניצול?</h3>
+    <p class="lead">${a.is_full ? 'ניצול מלא' : 'ניצול חלקי'} מ-${esc(fmtFull(a.created_at))}. הסכום יחזור ליתרת השובר.</p>
+    ${infoBox(v)}
+    <div class="sheet-actions"><button type="button" class="btn btn-primary" id="goUndoOne">החזרת ${moneyHTML(a.amount)} ליתרה</button><button type="button" class="btn btn-ghost" data-close>סגירה</button></div>`);
+  $('#goUndoOne').onclick = e => guarded(e.currentTarget, async () => {
+    const p = { actionId: a.id };
+    await api('undo', p, op(p));
+    finish(`הניצול בוטל · ${money(a.amount)} חזרו ליתרה`);
+  });
+}
+
+/* ---------- פרטים: מספר שובר, היסטוריה, מחיקה ---------- */
+function openDetails(v, focusNumber = false) {
+  const st = statusOf(v);
+  const acts = sortedActions(S.actions.filter(a => a.voucher_id === v.id));
+  const op = newOp();
+  openSheet(`<div class="d-head"><span class="badge">${esc(v.company)}</span><h3>${esc(v.voucher_type)}</h3></div>
+    <div class="d-bal"><div><div class="s">יתרה</div><div class="v">${moneyHTML(v.balance)}</div><div class="s">מתוך ${moneyHTML(v.initial_amount)}</div></div>
+      <span class="status ${STATUS[st].cls}"><span>${STATUS[st].label}</span><i></i></span></div>
+    <form id="numForm" novalidate autocomplete="off">
+      <label class="label" for="numInp">מספר שובר ${v.voucher_number ? '' : '<span class="opt">(חסר — אפשר להשלים)</span>'}</label>
+      <div class="num-edit"><input class="input ltr" id="numInp" value="${esc(v.voucher_number)}" placeholder="לדוגמה 139381057-3719" inputmode="text"><button type="submit" class="btn btn-soft" id="saveNum">שמירה</button></div>
+      <div class="err" id="numErr"></div>
     </form>
-    <div class="section-title">היסטוריית פעולות</div>
-    <ul class="hist">${acts.map(row).join('') || '<li>אין פעולות</li>'}</ul>
-    <div class="divider"></div>
-    <div class="sheet-actions" style="margin-top:0">
-      <button class="btn btn-danger" id="delBtn">מחיקת השובר</button>
-      <button class="btn btn-ghost" data-close>סגירה</button>
-    </div>`);
-  $('#saveNum').disabled = !state.synced; $('#saveNum').dataset.off = state.synced ? '' : '1';
-  $('#delBtn').disabled = !state.synced; $('#delBtn').dataset.off = state.synced ? '' : '1';
+    <div class="section-title">היסטוריית השובר</div>
+    <div class="feed">${acts.map(a => feedRow(a, { showLabel: false, allowOpen: false })).join('') || '<div class="feed-row"><span class="feed-main">אין פעולות</span></div>'}</div>
+    <div class="sheet-actions"><button type="button" class="btn btn-danger" id="delBtn">${ICON.trash}מחיקת השובר</button><button type="button" class="btn btn-ghost" data-close>סגירה</button></div>`, focusNumber ? '#numInp' : null);
+
+  $('#sheetBody .feed').onclick = e => { const r = e.target.closest('button.feed-row'); if (r) { const a = S.actions.find(x => x.id === r.dataset.aid); if (a) openUndoOne(a); } };
   $('#numForm').onsubmit = e => {
     e.preventDefault();
     if (busy) return;
     const val = $('#numInp').value.replace(/\s+/g, '');
-    if (val === (v.voucher_number || '')) return toast('לא בוצע שינוי', 'bad');
-    if (numKey(val) && state.vouchers.some(x => x.id !== v.id && numKey(x.voucher_number) === numKey(val))) return toast(`שובר מספר ${val} כבר קיים ברשימה`, 'bad');
+    const dup = numKey(val) && S.vouchers.find(x => x.id !== v.id && numKey(x.voucher_number) === numKey(val));
+    $('#numErr').textContent = dup ? `המספר כבר קיים: ${labelOf(dup)}` : '';
+    if (dup) return;
+    if (val === v.voucher_number) return closeSheet();
     guarded($('#saveNum'), async () => {
-      await api('setNumber', { voucherId: v.id, number: val });
-      busy = false; closeSheet();
-      toast(val ? 'מספר השובר נשמר' : 'מספר השובר הוסר');
+      const p = { voucherId: v.id, number: val };
+      await api('setNumber', p, op(p));
+      finish(val ? 'מספר השובר נשמר' : 'מספר השובר הוסר');
     });
   };
-  $('#delBtn').onclick = e => {
-    const b = e.currentTarget;
-    if (busy) return;
-    if (!b.dataset.sure) {
-      openSheet(`<h3>מחיקת השובר?</h3><p class="lead">השובר יוסר מהרשימה. הפעולה אינה ביטול ניצול.</p>${infoBox(v)}<div class="sheet-actions"><button id="deleteConfirm" class="btn btn-danger">מחיקה</button><button class="btn btn-ghost" data-close>ביטול</button></div>`);
-      $('#deleteConfirm').onclick = () => guarded($('#deleteConfirm'), async () => { await api('remove', {voucherId:v.id}); busy=false; closeSheet(); toast('השובר נמחק'); }); return;
-    }
-    guarded(b, async () => {
-      await api('remove', { voucherId: v.id });
-      busy = false; closeSheet();
-      toast('השובר נמחק');
-    });
-  };
+  $('#delBtn').onclick = () => { if (!busy) openDelete(v); };
 }
 
+function openDelete(v) {
+  const op = newOp();
+  const total = totalOf(S.vouchers), after = round2(total - v.balance);
+  const effect = v.balance > 0
+    ? `היתרה הכוללת תרד ב-${money(v.balance)} ותהיה ${money(after)}.`
+    : 'לשובר אין יתרה, כך שהיתרה הכוללת לא תשתנה.';
+  openSheet(`<h3>למחוק את השובר?</h3>
+    <p class="lead">השובר יוסר מהרשימה. ${effect} ההיסטוריה שלו נשמרת בגיליון.</p>
+    ${infoBox(v)}
+    <div class="sheet-actions"><button type="button" class="btn btn-danger-solid" id="goDelete">${ICON.trash}מחיקה</button><button type="button" class="btn btn-ghost" data-close>ביטול</button></div>`);
+  $('#goDelete').onclick = e => guarded(e.currentTarget, async () => {
+    const p = { voucherId: v.id };
+    await api('remove', p, op(p));
+    finish(`השובר נמחק · יתרה כוללת ${money(totalOf(S.vouchers))}`);
+  });
+}
+
+/* ---------- הוספת שובר ---------- */
 function openAdd() {
-  if (busy || !state.synced) return;
-  const companies = [...new Set(['HTZ', 'BUYME', ...state.vouchers.map(v => v.company)])];
-  let htzType = null;
-  openSheet(`<h3>הוספת שובר חדש</h3>
-    <p class="lead">השובר יתווסף לרשימה מיד לאחר השמירה.</p>
-    <form id="addForm" novalidate>
+  if (!S.loaded || busy) return;
+  const op = newOp();
+  const companies = [...new Set(['HTZ', 'BUYME', ...companiesOf(S.vouchers)])];
+  let company = '', htzType = null, other = false;
+  openSheet(`<h3>הוספת שובר</h3>
+    <p class="lead">השובר ייכנס לרשימה וליתרה הכוללת מיד אחרי השמירה.</p>
+    <form id="addForm" novalidate autocomplete="off">
       <div class="field">
-        <label for="fCompany">שם החברה</label>
-        <input class="input" id="fCompany" autocomplete="off" placeholder="לדוגמה HTZ">
-        <div class="suggest">${companies.map(c => `<button type="button" data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+        <span class="label" id="coLbl">חברה</span>
+        <div class="pchips" id="coChips" role="group" aria-labelledby="coLbl">${companies.map(c => `<button type="button" class="pchip" data-c="${esc(c)}">${esc(c)}</button>`).join('')}<button type="button" class="pchip" data-c="">חברה אחרת</button></div>
+        <input class="input" id="fCompany" placeholder="שם החברה" aria-label="שם החברה" hidden style="margin-top:10px">
+      </div>
+      <div class="field" id="typeField" hidden>
+        <label class="label" for="fType">סוג השובר</label>
+        <div class="seg" id="typeHtz" hidden>${HTZ_TYPES.map(t => `<button type="button" data-t="${t}">${t}</button>`).join('')}</div>
+        <input class="input" id="fType" list="typeList" placeholder="לדוגמה BUYME ALL"><datalist id="typeList"></datalist>
+        <div class="hint" id="typeHint"></div>
       </div>
       <div class="field">
-        <label for="fType">סוג השובר</label>
-        <div id="typeHtz" class="seg" hidden>${HTZ_TYPES.map(t => `<button type="button" data-t="${t}">${t}</button>`).join('')}</div>
-        <div id="typeFree">
-          <input class="input" id="fType" autocomplete="off" list="typeList" placeholder="לדוגמה BUYME ALL">
-          <datalist id="typeList"></datalist>
-        </div>
-        <div class="preview" id="typePrev"></div>
+        <label class="label" for="fNumber">מספר שובר <span class="opt">(לא חובה)</span></label>
+        <input class="input ltr" id="fNumber" placeholder="אפשר להשלים אחר כך" inputmode="text">
+        <div class="err" id="numErr"></div>
       </div>
       <div class="field">
-        <label for="fNumber">מספר השובר <span class="hint">(אפשר להשאיר ריק)</span></label>
-        <input class="input ltr num" id="fNumber" autocomplete="off" inputmode="text">
+        <label class="label" for="fAmount">סכום בשובר</label>
+        <div class="money-input"><input class="input" id="fAmount" inputmode="decimal" placeholder="0"><span>₪</span></div>
+        <div class="quick" id="quickAmt">${[100, 200, 250, 300, 500].map(n => `<button type="button" data-a="${n}">${n} ₪</button>`).join('')}</div>
+        <div class="err" id="amtErr"></div>
       </div>
-      <div class="field">
-        <label for="fAmount">סכום התחלתי</label>
-        <div class="input-money"><input class="input num" id="fAmount" inputmode="decimal" maxlength="12" autocomplete="off" placeholder="0"><span>₪</span></div>
-        <div class="quick">${[100, 200, 250, 300, 500].map(n => `<button type="button" data-a="${n}">${n} ₪</button>`).join('')}</div>
-      </div>
+      <div class="after" id="afterLine"></div>
       <div class="err" id="addErr"></div>
-      <div class="sheet-actions">
-        <button class="btn btn-primary" id="saveAdd" type="submit">שמירת שובר</button>
-        <button class="btn btn-ghost" type="button" data-close>ביטול</button>
-      </div>
+      <div class="sheet-actions"><button type="submit" class="btn btn-primary" id="saveAdd">הוספת שובר</button><button type="button" class="btn btn-ghost" data-close>ביטול</button></div>
     </form>`);
 
-  const comp = $('#fCompany'), typ = $('#fType');
-  const syncType = () => {
-    const isHtz = normCompany(comp.value) === 'HTZ';
-    $('#typeHtz').hidden = !isHtz;
-    $('#typeFree').hidden = isHtz;
+  const comp = $('#fCompany'), typ = $('#fType'), num = $('#fNumber'), amt = $('#fAmount');
+  const currentCompany = () => normCompany(other ? comp.value : company);
+  const sync = () => {
+    const c = currentCompany();
+    $$('#coChips .pchip').forEach(b => b.classList.toggle('on', other ? b.dataset.c === '' : b.dataset.c === company && !!company));
+    comp.hidden = !other;
+    $('#typeField').hidden = !c;
+    const isHtz = c === 'HTZ';
+    $('#typeHtz').hidden = !isHtz; typ.hidden = isHtz;
     if (isHtz) {
       if (!htzType && typ.value) htzType = normType('HTZ', typ.value);
-      document.querySelectorAll('#typeHtz button').forEach(b => b.classList.toggle('on', b.dataset.t === htzType));
-      $('#typePrev').textContent = '';
-    } else {
-      const known = [...new Set(state.vouchers.filter(v => v.company === normCompany(comp.value)).map(v => v.voucher_type))];
+      $$('#typeHtz button').forEach(b => b.classList.toggle('on', b.dataset.t === htzType));
+      $('#typeHint').textContent = '';
+    } else if (c) {
+      const known = [...new Set(S.vouchers.filter(v => v.company === c).map(v => v.voucher_type))];
       $('#typeList').innerHTML = known.map(t => `<option value="${esc(t)}">`).join('');
-      const n = normType(comp.value, typ.value);
-      $('#typePrev').textContent = n && n !== typ.value.trim() ? `יישמר כ: ${n}` : '';
+      if (!typ.value && known.length === 1) typ.value = known[0];      // BUYME → BUYME ALL
+      const n = normType(c, typ.value);
+      $('#typeHint').textContent = n && n !== typ.value.trim() ? `יישמר כ: ${n}` : '';
     }
+    // מספר כפול — בודקים כבר בזמן ההקלדה
+    const nv = num.value.replace(/\s+/g, '');
+    const dup = numKey(nv) && S.vouchers.find(v => numKey(v.voucher_number) === numKey(nv));
+    $('#numErr').textContent = dup ? `המספר כבר קיים: ${labelOf(dup)}` : '';
+    num.setAttribute('aria-invalid', String(!!dup));
+    // סכום + איך ישתנה הסכום הכולל
+    const a = parseAmount(amt.value);
+    $('#amtErr').textContent = amt.value.trim() && !(a > 0) ? 'יש להזין סכום תקין' : '';
+    $('#afterLine').innerHTML = a > 0 ? `היתרה הכוללת תעלה ל-${moneyHTML(totalOf(S.vouchers) + a)}` : '';
+    return { c, dup };
   };
-  comp.addEventListener('input', syncType);
-  typ.addEventListener('input', syncType);
-  $('#addForm .suggest').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(15); comp.value = b.dataset.c; syncType(); } };
-  $('#typeHtz').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(15); htzType = b.dataset.t; syncType(); } };
-  $('#addForm .quick').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(15); $('#fAmount').value = b.dataset.a; } };
-  syncType();
+  $('#coChips').onclick = e => {
+    const b = e.target.closest('.pchip'); if (!b) return;
+    vibrate(10);
+    if (b.dataset.c === '') { other = true; company = ''; sync(); comp.focus(); }
+    else { other = false; company = b.dataset.c; htzType = null; if (!normType(company, typ.value)) typ.value = ''; sync(); }
+  };
+  $('#typeHtz').onclick = e => { const b = e.target.closest('button'); if (b) { vibrate(10); htzType = b.dataset.t; sync(); } };
+  $('#quickAmt').onclick = e => { const b = e.target.closest('[data-a]'); if (b) { amt.value = b.dataset.a; sync(); } };
+  [comp, typ, num, amt].forEach(el => el.addEventListener('input', sync));
 
   $('#addForm').onsubmit = e => {
     e.preventDefault();
     if (busy) return;
-    const company = normCompany(comp.value);
-    const type = company === 'HTZ' ? htzType : normType(company, typ.value);
-    const number = $('#fNumber').value.replace(/\s+/g, '');
-    const amount = parseAmount($('#fAmount').value);
-    let err = '';
-    if (!company) err = 'יש להזין שם חברה';
-    else if (!type) err = company === 'HTZ' ? 'יש לבחור סוג שובר: EAT ZONE, CHEF ZONE או ALL IN ZONE' : 'יש להזין סוג שובר';
-    else if (!(amount > 0)) err = 'יש להזין סכום התחלתי גדול מ-0';
-    else if (numKey(number) && state.vouchers.some(v => numKey(v.voucher_number) === numKey(number))) err = `שובר מספר ${number} כבר קיים ברשימה`;
+    const { c, dup } = sync();
+    const type = c === 'HTZ' ? htzType : normType(c, typ.value);
+    const number = num.value.replace(/\s+/g, '');
+    const amount = parseAmount(amt.value);
+    const err = !c ? 'יש לבחור חברה'
+      : !type ? (c === 'HTZ' ? 'יש לבחור סוג: EAT ZONE, CHEF ZONE או ALL IN ZONE' : 'יש להזין סוג שובר')
+      : dup ? 'מספר השובר כבר קיים ברשימה'
+      : !(amount > 0) ? 'יש להזין סכום התחלתי'
+      : '';
     $('#addErr').textContent = err;
-    if (err) { vibrate([50, 100, 50]); return; }
+    if (err) { vibrate([40, 60, 40]); return; }
     guarded($('#saveAdd'), async () => {
-      await api('add', { company, type, number, amount });
-      state.fCompany = 'all'; state.fStatus = 'all'; state.query = ''; $('#searchInput').value = ''; render();
-      busy = false; closeSheet();
-      toast(`השובר נוסף · ${company} ${type} · ${money(amount)}`);
+      const p = { company: c, type, number, amount };
+      const data = await api('add', p, op(p));
+      const id = data.result && data.result.id;
+      const nv = id && findV(id);
+      if (nv && !matches(nv)) { S.company = 'all'; S.status = 'all'; S.q = ''; $('#search').value = ''; }
+      if (S.tab !== 'vouchers') S.tab = 'vouchers';
+      render();
+      finish(`השובר נוסף · יתרה כוללת ${money(totalOf(S.vouchers))}`);
+      if (nv) highlight(nv.id);
     });
   };
+  sync();
 }
 
-/* ---------- events ---------- */
-$('#sheet').addEventListener('click', e => { if (e.target.closest('[data-close]')) closeSheet(); });
-$('#companyChips').onclick = e => { const b = e.target.closest('[data-company]'); if (b) { vibrate(10); state.fCompany = b.dataset.company; render(); } };
-$('#statusChips').onclick = e => { const b = e.target.closest('[data-status]'); if (b) { vibrate(10); state.fStatus = b.dataset.status; render(); } };
-$('#list').onclick = e => {
-  if (e.target.closest('#retryBtn')) return start();
-  const b = e.target.closest('[data-act]'); if (!b || b.disabled || busy) return;
-  const v = findV(b.closest('.card').dataset.id); if (!v) return;
-  vibrate(15);
-  ({ full: openFull, partial: openPartial, undo: openUndo, more: openDetails, copy: async v => {try {await navigator.clipboard.writeText(v.voucher_number); toast('מספר השובר הועתק');} catch {toast('לא ניתן להעתיק אוטומטית. אפשר לסמן את המספר ולהעתיק.', 'bad');}} })[b.dataset.act](v);
-};
-$('#addBtn').onclick = openAdd;
-$('#refreshBtn').onclick = e => guarded(null, async () => { vibrate(20); await api('state'); toast('הנתונים עודכנו'); });
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && state.loaded && !inflight && !busy && !$('#sheet').classList.contains('open'))
-    api('state').catch(() => {});
-});
+function highlight(id) {
+  const el = document.querySelector(`.card[data-id="${CSS.escape(id)}"]`);
+  if (!el) return;
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+}
 
-/* ---------- start ---------- */
+/* ---------- סינון לפי סטטוס ---------- */
+function openStatusFilter() {
+  const count = k => S.vouchers.filter(v => k === 'all' || statusOf(v) === k).length;
+  const opts = [['all', 'כל הסטטוסים'], ['active', 'פעיל'], ['partial', 'נוצל חלקית'], ['used', 'נוצל במלואו']];
+  openSheet(`<h3>סינון לפי סטטוס</h3><p class="lead">אילו שוברים להציג?</p>
+    <ul class="pick" id="stList" role="radiogroup" aria-label="סטטוס">${opts.map(([k, l]) => `<li role="radio" tabindex="0" aria-checked="${S.status === k}" class="${S.status === k ? 'sel' : ''}" data-k="${k}"><span class="radio"></span><div class="main"><div class="t">${l}</div></div><div class="d">${countLabel(count(k))}</div></li>`).join('')}</ul>`);
+  const pick = li => { if (!li) return; S.status = li.dataset.k; vibrate(10); closeSheet(); render(); };
+  $('#stList').onclick = e => pick(e.target.closest('li'));
+  $('#stList').onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(e.target.closest('li')); } };
+}
+
+/* ---------- העתקה ---------- */
+async function copyNumber(v) {
+  try { await navigator.clipboard.writeText(v.voucher_number); }
+  catch {
+    const t = document.createElement('textarea'); t.value = v.voucher_number; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); } catch {}
+    t.remove();
+  }
+  toast('מספר השובר הועתק');
+}
+
+/* =====================================================================
+   אירועים
+   ===================================================================== */
+$('#list').addEventListener('click', e => {
+  if (e.target.closest('[data-clear]')) return clearFilters();
+  if (e.target.closest('[data-add]')) return openAdd();
+  const card = e.target.closest('.card'); if (!card || busy) return;
+  const v = findV(card.dataset.id); if (!v) return;
+  const b = e.target.closest('[data-act]');
+  if (b && b.disabled) return;
+  vibrate(10);
+  const act = b ? b.dataset.act : 'details';
+  ({ full: openFull, partial: openPartial, undo: openUndo, details: x => openDetails(x), addnum: x => openDetails(x, true), copy: copyNumber })[act](v);
+});
+$('#results').addEventListener('click', e => { if (e.target.closest('[data-clear]')) clearFilters(); });
+$('#chips').addEventListener('click', e => {
+  if (e.target.closest('#statusChip')) return openStatusFilter();
+  const b = e.target.closest('[data-company]'); if (!b) return;
+  vibrate(10); S.company = b.dataset.company; render();
+});
+$('#histChips').addEventListener('click', e => { const b = e.target.closest('[data-hist]'); if (b) { S.hist = b.dataset.hist; render(); } });
+$('#histList').addEventListener('click', e => {
+  const r = e.target.closest('button.feed-row'); if (!r || busy) return;
+  const a = S.actions.find(x => x.id === r.dataset.aid); if (!a) return;
+  const x = actionView(a);
+  if (x.canUndo) openUndoOne(a); else if (x.v) openDetails(x.v);
+});
+$('#notices').addEventListener('click', e => { if (e.target.closest('[data-retry]')) refresh(true); });
+$('#search').addEventListener('input', e => { S.q = e.target.value.trim(); render(); });
+$('#searchClear').addEventListener('click', () => { S.q = ''; $('#search').value = ''; render(); $('#search').focus(); });
+$('#addBtn').addEventListener('click', () => { vibrate(10); openAdd(); });
+$('#refreshBtn').addEventListener('click', () => refresh(true));
+$$('.tab').forEach(t => t.addEventListener('click', () => {
+  if (S.tab === t.dataset.tab) return window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  S.scroll[S.tab] = window.scrollY;
+  S.tab = t.dataset.tab; vibrate(10); render();
+  window.scrollTo(0, S.scroll[S.tab] || 0);
+}));
+function clearFilters() { S.company = 'all'; S.status = 'all'; S.q = ''; $('#search').value = ''; render(); }
+
+async function refresh(manual = false) {
+  if (pending && !manual) return;
+  try { await api('state'); if (manual) toast('הנתונים עודכנו'); }
+  catch (e) { if (manual) toast(e.message || 'הרענון נכשל', 'bad'); }
+}
+// חוזרים לאפליקציה → מסנכרנים (שינויים ממכשיר אחר או מהגיליון)
+const autoRefresh = () => { if (document.visibilityState === 'visible' && S.loaded && !busy && !sheetOpen && Date.now() - lastFetch > 4000) refresh(); };
+document.addEventListener('visibilitychange', autoRefresh);
+window.addEventListener('focus', autoRefresh);
+window.addEventListener('online', () => refresh());
+window.addEventListener('pageshow', e => { if (e.persisted) autoRefresh(); });
+
+/* =====================================================================
+   התחלה
+   ===================================================================== */
 async function start() {
-  try { await load(); }
+  $('#hello').textContent = USER_NAME ? `היי ${USER_NAME}` : 'היי';
+  try { S.labels = JSON.parse(localStorage.getItem(LABELS_KEY) || '{}') || {}; } catch { S.labels = {}; }
+  try {
+    const c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    if (c && c.state) applyState(c.state, { cachedAt: c.at });            // תצוגה מיידית מהפעם הקודמת — רק לתצוגה
+  } catch {}
+  render();
+  try { await api('state'); }
   catch (e) {
-    console.error(e);
-    if (state.loaded) toast('מוצגים הנתונים האחרונים. יש לרענן לפני ביצוע שינויים.', 'bad');
-    else $('#list').innerHTML = `<div class="empty"><div class="big">⚠️</div><b>${esc(errMsg(e))}</b>
-      <div class="help">לא ניתן לטעון את השוברים כרגע. בדוק את החיבור ונסה שוב.</div>
-      <button class="btn btn-soft" id="retryBtn">נסה שוב</button></div>`;
+    if (!S.loaded) $('#list').innerHTML = `<div class="empty"><div class="t">${esc(e.message || 'לא ניתן לטעון את השוברים')}</div>
+      בדוק את החיבור לאינטרנט. בהפעלה ראשונה: ודא שה-Apps Script פורסם כ״אפליקציית אינטרנט״ עם גישה ל״כל אחד״.<br>
+      <button type="button" class="btn btn-soft" id="retryBtn">נסה שוב</button></div>`;
   }
 }
+$('#list').addEventListener('click', e => { if (e.target.closest('#retryBtn')) { $('#list').innerHTML = '<div class="skel"></div><div class="skel"></div>'; start(); } });
 
-$('#searchInput').addEventListener('input', e => { state.query = e.target.value.trim(); render(); });
-$('#clearFilters').onclick = () => {state.query=''; state.fCompany='all'; state.fStatus='all'; $('#searchInput').value=''; render();};
-window.addEventListener('offline', () => {state.synced=false; setSync('אין חיבור · השוברים זמינים לצפייה בלבד', 'error'); render();});
 if (!configured) $('#setupView').hidden = false;
-else { $('#mainView').hidden = false; start(); }
+else { $('#app').hidden = false; $('#bottom').hidden = false; start(); }
 </script>
 </body>
 </html>
