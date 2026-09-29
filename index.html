@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>השוברים שלי</title>
-<meta name="theme-color" content="#f6f2fb" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f6fb">
+<meta name="color-scheme" content="light">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="השוברים שלי">
@@ -224,6 +223,24 @@ button:disabled{cursor:default; opacity:0.5;}
 .skeleton{height:180px;border-radius:var(--radius);background:linear-gradient(90deg,var(--card) 0%,var(--line) 50%,var(--card) 100%);background-size:200% 100%;animation:sh 1.5s infinite;margin-bottom:16px;box-shadow:var(--shadow)}
 @keyframes sh{to{background-position:-200% 0}}
 @media (min-width:600px){.wrap{padding-top:28px}}
+
+/* Refined mobile-first pastel wallet */
+:root{color-scheme:light;--bg:#f5f6fb;--bg2:#f5f6fb;--bg-glass:rgba(245,246,251,.94);--card:#fff;--ink:#29233d;--muted:#665f77;--line:#e7e3ef;--primary:#6750a4;--primary-ink:#523a8c;--primary-soft:#eee8fa;--mint:#e1f3e9;--mint-ink:#246347;--peach:#fff0df;--peach-ink:#865019;--gray:#eeecf3;--gray-ink:#60586e;--rose:#fce6eb;--rose-ink:#9c304d;--shadow:0 4px 18px #34265308;--radius:22px}
+body{background:var(--bg);line-height:1.55}
+.wrap{max-width:1040px;padding:12px 18px calc(110px + var(--safe-b))}
+.top{margin-bottom:12px;gap:12px}.top h1{font-size:26px;letter-spacing:-.6px}.top .icon-btn{border:1px solid var(--line);box-shadow:none}
+.summary{background:#e9e1fa;border:1px solid #dfd4f3;color:var(--ink);padding:24px;border-radius:26px;box-shadow:none;margin-bottom:8px}
+.summary .total{font-size:46px;letter-spacing:-1.8px;margin:8px 0 18px}.summary .lbl{font-size:16px}.pill{font-size:14px;background:#ffffffa8;padding:5px 11px}
+.sync-line{font-size:13px;color:var(--muted);padding:6px 4px 16px;min-height:39px}.sync-line[data-kind=error]{color:var(--rose-ink);font-weight:600}
+.search-field{margin:0 0 14px}.search-field label{display:block;font-size:14px;font-weight:600;margin:0 4px 6px}.search-field .input{background:#fff;height:50px;font-size:16px;border-width:1px}
+.chips{padding-bottom:6px}.chip{height:44px;font-size:14px}.chip.on{background:var(--primary-soft);color:var(--primary-ink);border-color:#c2b2e5}.results-line{display:flex;justify-content:space-between;align-items:center;min-height:40px;font-size:14px;color:var(--muted)}.results-line button{font-size:14px;text-decoration:underline;min-height:44px;color:var(--primary-ink)}
+.group{margin-top:14px}.group-head{padding:10px 3px 12px}.group-head .dot{border-radius:4px;box-shadow:none}.group-head h2{font-size:18px}.card{border:1px solid var(--line);border-top:5px solid var(--accent);padding:18px;margin-bottom:14px;animation:none;box-shadow:var(--shadow)}.card::before,.card::after{display:none}.card .company{font-size:13px;letter-spacing:0}.card .type{font-size:20px;line-height:1.4;overflow-wrap:anywhere}.card-top>div{min-width:0}.status{font-size:12px;padding:6px 9px}.card-divider{border-top:1px solid var(--line);margin:18px 0;opacity:1}.card.used{opacity:1;filter:none;background:#f9f8fc}.card.used .bal{color:var(--muted)}
+.card .vnum{font-size:14px;max-width:100%;min-height:40px;padding:6px 8px;gap:10px;user-select:text;flex-wrap:wrap}.vnum .num{overflow-wrap:anywhere}.copy-label{font-size:12px;color:var(--primary-ink)}.bal{font-size:34px}.bal-lbl{font-size:14px}.bar{height:6px;margin-top:15px}.of{font-size:13px}.card-actions{grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.card-actions .btn{height:44px;font-size:14px;padding:0 8px}.card-actions .more{width:100%}.card-actions .more::after{content:'פרטים והיסטוריה';font-size:13px}.card-actions .more svg{width:18px}
+.btn-primary{background:var(--primary);box-shadow:none}.btn-primary:hover{background:var(--primary-ink)}.btn:focus-visible,.chip:focus-visible,button:focus-visible,[role=radio]:focus-visible{outline:3px solid #7760b9;outline-offset:3px}.btn-ghost{background:#f2f0f7}.fab{height:54px;bottom:calc(18px + var(--safe-b));background:var(--primary);box-shadow:0 5px 20px #503e7840;font-size:16px}.sheet{max-width:540px;max-height:90dvh;border:1px solid var(--line);box-shadow:0 -8px 50px #25203020}.sheet h3{outline:none}.sheet .hint{font-size:13px}.sheet-actions{gap:8px}.sheet-actions .btn{min-width:0;font-size:15px;height:auto;min-height:52px;white-space:normal;padding:10px}.input{font-size:16px}.seg{grid-template-columns:1fr}.seg button{text-align:center;font-size:16px;min-height:48px}.preview{font-size:14px}.hist .d{font-size:13px}.pick li{min-height:72px}.toast{max-width:min(500px,calc(100% - 24px));width:max-content;top:auto;bottom:calc(88px + var(--safe-b));transform:translate(-50%,160px);opacity:0;pointer-events:none;line-height:1.5}.toast.show{transform:translate(-50%,0);opacity:1}.toast svg{flex-shrink:0}.toast.ok{background:#285d46}.toast.bad{background:#87334b}
+@media(min-width:740px){.wrap{padding-top:24px}.summary{padding:28px 30px}.group{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.group-head{grid-column:1/-1}.sheet{bottom:50%;transform:translateY(calc(50% + 100vh));border-radius:26px}.sheet.open{transform:translateY(50%)}.seg{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:360px){.wrap{padding-inline:12px}.card{padding:14px}.card-top{flex-wrap:wrap}.bal{font-size:30px}.summary .total{font-size:40px}.group-head{gap:8px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
 </style>
 </head>
 <body>
@@ -256,12 +273,14 @@ button:disabled{cursor:default; opacity:0.5;}
       <div class="stats" id="sumStats"></div>
     </div>
 
+    <div class="sync-line" id="syncStatus" role="status" aria-live="polite">טוען את השוברים…</div>
+    <div class="search-field"><label for="searchInput">חיפוש שובר</label><input id="searchInput" class="input" type="search" placeholder="חברה, סוג או מספר שובר" autocomplete="off"></div>
     <div class="filters">
       <div class="chips" id="companyChips"></div>
       <div class="chips" id="statusChips"></div>
     </div>
 
-    <main id="list"></main>
+    <div class="results-line"><span id="resultCount"></span><button id="clearFilters" hidden>ניקוי סינון</button></div><main id="list" aria-label="רשימת שוברים"></main>
   </div>
 
   <button class="fab" id="addBtn">
@@ -271,10 +290,14 @@ button:disabled{cursor:default; opacity:0.5;}
 </section>
 
 <div class="backdrop" id="backdrop"></div>
-<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="grab"></div><div id="sheetBody"></div></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" tabindex="-1"><div class="grab"></div><div id="sheetBody"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+// Client upgrade: same Apps Script API. No server code was supplied.
+// The server must enforce authorization, validation, locking and reqId deduplication.
+// Local cache is read-only until the server confirms the current state.
+
 /* =====================================================================
    הגדרה — כתובת ה-Web App של Google Apps Script
    ===================================================================== */
@@ -293,7 +316,7 @@ const STATUS = {
 };
 const ACCENTS = ['#b9a8f0', '#f7b7c8', '#9fd8c3', '#ffc9a3', '#a9cdf2', '#e6c3f0', '#f3dd8e'];
 
-const state = { vouchers: [], actions: [], loaded: false, fCompany: 'all', fStatus: 'all' };
+const state = { vouchers: [], actions: [], loaded: false, fCompany: 'all', fStatus: 'all', query: '', synced: false };
 let busy = false;
 
 /* ---------- helpers ---------- */
@@ -323,11 +346,12 @@ function normType(company, type) {
   }
   return t ? t.toUpperCase() : null;
 }
+const cents = n => Math.round(Number(n) * 100);
 const parseAmount = s => {
-  const t = String(s || '').replace(/[₪\s]/g, '').replace(',', '.');
-  if (t === '') return NaN;
+  const t = String(s ?? '').trim().replace(/₪/g, '').trim().replace(',', '.');
+  if (!/^\d+(?:\.\d{1,2})?$/.test(t)) return NaN;
   const n = Number(t);
-  return Number.isFinite(n) ? Math.round(n * 100) / 100 : NaN;
+  return Number.isFinite(n) && Number.isSafeInteger(cents(n)) && n <= 10000000 ? cents(n) / 100 : NaN;
 };
 const statusOf = v => Number(v.balance) <= 0 ? 'used' : Number(v.balance) >= Number(v.initial_amount) ? 'active' : 'partial';
 function accentOf(company) {
@@ -344,7 +368,7 @@ function toast(msg, kind = 'ok') {
   vibrate(kind === 'ok' ? [30, 50, 30] : [50, 100, 50]); // Success pattern vs Error pattern
   const t = $('#toast');
   t.className = 'toast ' + kind;
-  t.innerHTML = (kind === 'ok' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ' : '⚠️ ') + msg;
+  t.innerHTML = (kind === 'ok' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ' : '⚠️ ') + esc(msg);
   requestAnimationFrame(() => t.classList.add('show'));
   clearTimeout(toast._t);
   toast._t = setTimeout(() => t.classList.remove('show'), kind === 'ok' ? 2500 : 4000);
@@ -352,63 +376,104 @@ function toast(msg, kind = 'ok') {
 
 /* Guard function for buttons */
 async function guarded(btn, fn) {
-  if (busy) return;
+  if (busy || inflight > 0) return;
   busy = true;
+  $('#addBtn').disabled = true; $('#refreshBtn').disabled = true;
+  const savedControls = [...$('#sheet').querySelectorAll('button,input,select')].map(el => [el,el.disabled]);
+  savedControls.forEach(([el]) => el.disabled = true);
   document.querySelectorAll('.sheet .btn, .card-actions .btn').forEach(b => b.disabled = true);
   if (btn) { btn.classList.add('loading'); btn.disabled = true; }
   try { await fn(); }
   catch (e) { console.error(e); toast(errMsg(e), 'bad'); }
   finally {
     busy = false;
+    savedControls.forEach(([el,disabled]) => { if(el.isConnected) el.disabled = disabled; });
+    $('#addBtn').disabled = !state.synced; $('#refreshBtn').disabled = false;
     if (btn) { btn.classList.remove('loading'); btn.disabled = btn.dataset.off === '1'; }
-    document.querySelectorAll('.sheet .btn, .card-actions .btn').forEach(b => b.disabled = b.dataset.off === '1');
+    document.querySelectorAll('.sheet .btn, .card-actions .btn').forEach(b => b.disabled = b.dataset.off === '1' || (!state.synced && !b.hasAttribute('data-close') && b.dataset.act !== 'more'));
   }
 }
 
 /* ---------- שרת (API) ---------- */
 let inflight = 0, sentSeq = 0, appliedSeq = 0;
-const rid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+const rid = () => globalThis.crypto?.randomUUID?.() || Date.now().toString(36) + Math.random().toString(36).slice(2);
 const netError = msg => Object.assign(new Error(msg), { net: true });
 
+function setSync(message, kind = '') {
+  const el = $('#syncStatus'); el.textContent = message; el.dataset.kind = kind;
+}
+function normalizeState(s) {
+  if (!s || !Array.isArray(s.vouchers) || !Array.isArray(s.actions)) throw new Error('השרת החזיר נתונים לא תקינים. הרשימה הקודמת נשמרה.');
+  const ids = new Set();
+  const vouchers = s.vouchers.map(v => {
+    const id = String(v.id ?? '');
+    const initial = Number(v.initial_amount), balance = Number(v.balance);
+    if (!id || ids.has(id) || !Number.isFinite(initial) || initial <= 0 || !Number.isFinite(balance) || balance < 0 || cents(balance) > cents(initial)) throw new Error('נתוני שובר לא תקינים. יש לרענן ולבדוק את הנתונים בשרת.');
+    ids.add(id);
+    const company = normCompany(v.company);
+    if (!company || !String(v.voucher_type ?? '').trim()) throw new Error('חסרים פרטי שובר בשרת.');
+    return {...v, _wireId: v._wireId ?? v.id, id, company, voucher_type: normType(company, v.voucher_type) || String(v.voucher_type), voucher_number: String(v.voucher_number ?? ''), initial_amount: cents(initial)/100, balance: cents(balance)/100};
+  });
+  const actionIds = new Set();
+  const actions = s.actions.map(a => {
+    const id = String(a.id ?? '');
+    if (!id || actionIds.has(id) || (a.amount != null && (!Number.isFinite(Number(a.amount)) || Number(a.amount) < 0))) throw new Error('היסטוריית הפעולות אינה תקינה.');
+    actionIds.add(id);
+    return {...a, _wireId: a._wireId ?? a.id, id, voucher_id: String(a.voucher_id), is_full: a.is_full === true || a.is_full === 1 || a.is_full === 'true', amount: a.amount == null ? null : cents(a.amount)/100};
+  });
+  return {vouchers, actions};
+}
 async function api(action, payload = {}) {
+  const mutation = action !== 'state';
+  if (mutation && !state.synced) throw new Error('יש לרענן את הנתונים לפני ביצוע שינוי נוסף.');
+  payload = {...payload};
+  if (payload.voucherId != null) payload.voucherId = findV(String(payload.voucherId))?._wireId ?? payload.voucherId;
+  if (payload.actionId != null) payload.actionId = state.actions.find(a => a.id === String(payload.actionId))?._wireId ?? payload.actionId;
   const seq = ++sentSeq;
   inflight++; $('#refreshBtn').classList.add('spinning');
+  setSync(mutation ? 'שומר את השינוי…' : 'מעדכן את הרשימה…');
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 30000);
   try {
-    let res, data;
-    try {
-      res = await fetch(API, { method: 'POST', body: JSON.stringify({ action, reqId: rid(), ...payload }), signal: ctrl.signal });
-    } catch (e) {
-      throw netError(e.name === 'AbortError' ? 'השרת לא הגיב בזמן. נסה שוב.' : 'אין חיבור לשרת. נסה שוב.');
-    }
-    try { data = await res.json(); } catch { throw netError('תשובה לא תקינה מהשרת.'); }
-    if (data.state && seq > appliedSeq) { appliedSeq = seq; applyState(data.state); }
-    if (!data.ok) throw new Error(data.error || 'משהו השתבש. נסה שוב.');
+    const res = await fetch(API, { method: 'POST', body: JSON.stringify({ action, reqId: rid(), ...payload }), signal: ctrl.signal, redirect: 'follow' });
+    if (!res.ok) throw new Error('השרת אינו זמין כרגע (' + res.status + ').');
+    const data = await res.json();
+    if (!data || data.ok !== true) throw Object.assign(new Error(String(data?.error || 'לא ניתן לשמור את הפעולה.')), {rejected: true});
+    if (!data.state) throw new Error('לא התקבל אישור ליתרה המעודכנת.');
+    const validated = normalizeState(data.state);
+    if (seq > appliedSeq) { appliedSeq = seq; applyState(validated, true); }
     return data;
+  } catch (e) {
+    state.synced = false;
+    const message = mutation && !e.rejected
+      ? 'לא התקבל אישור לשמירה. ייתכן שהפעולה בוצעה. יש לרענן לפני פעולה נוספת.'
+      : e.name === 'AbortError' ? 'השרת לא הגיב בזמן. אפשר לנסות לרענן.'
+      : e instanceof TypeError ? 'אין חיבור לשרת. בדוק את החיבור ונסה לרענן.' : errMsg(e);
+    setSync(message, 'error');
+    render();
+    throw new Error(message);
   } finally {
     clearTimeout(timer);
     if (--inflight === 0) $('#refreshBtn').classList.remove('spinning');
   }
 }
-
-function applyState(s) {
-  state.vouchers = s.vouchers || [];
-  state.actions = s.actions || [];
-  state.loaded = true;
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ vouchers: state.vouchers, actions: state.actions })); } catch {}
+function applyState(s, synced = false) {
+  const validated = normalizeState(s);
+  state.vouchers = validated.vouchers; state.actions = validated.actions;
+  state.loaded = true; state.synced = synced;
+  if (synced) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({...validated, cachedAt: new Date().toISOString()})); } catch {}
+    setSync('עודכן ב־' + new Intl.DateTimeFormat('he-IL', {hour:'2-digit',minute:'2-digit'}).format(new Date()));
+  }
   render();
 }
-
 async function load() {
   if (!state.loaded) {
-    let cached = null;
-    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch {}
-    if (cached && Array.isArray(cached.vouchers)) {
-      state.vouchers = cached.vouchers; state.actions = cached.actions || []; state.loaded = true; render();
-    } else {
-      $('#list').innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
-    }
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached) { applyState(cached); setSync('מציג את העותק האחרון · מתחבר לעדכון'); }
+    } catch { try { localStorage.removeItem(CACHE_KEY); } catch {} }
+    if (!state.loaded) $('#list').innerHTML = '<div class="skeleton"></div><div class="skeleton"></div>';
   }
   await api('state');
 }
@@ -423,17 +488,17 @@ function render() {
 
   // chips
   $('#companyChips').innerHTML = [['all', 'כל החברות'], ...companies.map(c => [c, c])]
-    .map(([k, l]) => `<button class="chip ${state.fCompany === k ? 'on' : ''}" data-company="${esc(k)}">${esc(l)}</button>`).join('');
+    .map(([k, l]) => `<button class="chip ${state.fCompany === k ? 'on' : ''}" aria-pressed="${state.fCompany === k}" data-company="${esc(k)}">${esc(l)}</button>`).join('');
   $('#statusChips').innerHTML = [['all', 'כל הסטטוסים'], ['active', 'פעיל'], ['partial', 'נוצל חלקית'], ['used', 'נוצל במלואו']]
-    .map(([k, l]) => `<button class="chip ${state.fStatus === k ? 'on' : ''}" data-status="${k}">${l}</button>`).join('');
+    .map(([k, l]) => `<button class="chip ${state.fStatus === k ? 'on' : ''}" aria-pressed="${state.fStatus === k}" data-status="${k}">${l}</button>`).join('');
 
   const shown = state.vouchers.filter(v =>
     (state.fCompany === 'all' || v.company === state.fCompany) &&
-    (state.fStatus === 'all' || statusOf(v) === state.fStatus));
+    (state.fStatus === 'all' || statusOf(v) === state.fStatus) && (!state.query || [v.company,v.voucher_type,v.voucher_number].join(' ').toLocaleLowerCase().includes(state.query.toLocaleLowerCase())));
 
   // summary
-  const filtered = state.fCompany !== 'all' || state.fStatus !== 'all';
-  const total = shown.reduce((s, v) => s + Number(v.balance), 0);
+  const filtered = state.fCompany !== 'all' || state.fStatus !== 'all' || !!state.query;
+  const total = shown.reduce((s, v) => s + cents(v.balance), 0) / 100;
   const cnt = { active: 0, partial: 0, used: 0 };
   shown.forEach(v => cnt[statusOf(v)]++);
   $('#sumLabel').textContent = filtered ? 'יתרה בסינון הנוכחי' : 'יתרה כוללת';
@@ -444,6 +509,9 @@ function render() {
     `<span class="pill">חלקית <b>${cnt.partial}</b></span>` +
     `<span class="pill">נוצלו <b>${cnt.used}</b></span>`;
 
+  $('#resultCount').textContent = `${shown.length} שוברים${filtered ? ' בסינון' : ' ברשימה'}`;
+  $('#clearFilters').hidden = !filtered;
+  $('#addBtn').disabled = !state.synced || busy;
   // list
   if (!state.vouchers.length) {
     $('#list').innerHTML = '<div class="empty"><div class="big">🎟️</div><b>ברוכים הבאים!</b><div class="help">אין עדיין שוברים במערכת. הוסיפו את השובר הראשון שלכם.</div></div>';
@@ -458,7 +526,7 @@ function render() {
     const items = shown.filter(v => v.company === c)
       .sort((a, b) => rank[statusOf(a)] - rank[statusOf(b)] || (a.ord || 0) - (b.ord || 0));
     if (!items.length) return '';
-    const sub = items.reduce((s, v) => s + Number(v.balance), 0);
+    const sub = items.reduce((s, v) => s + cents(v.balance), 0) / 100;
     const accent = accentOf(c);
     return `<section class="group" data-group="${esc(c)}">
       <div class="group-head"><h2><span class="dot" style="background:${accent}"></span>${esc(c)}</h2>
@@ -473,13 +541,14 @@ function cardHTML(v, accent) {
   const pct = Math.max(0, Math.min(100, Number(v.balance) / Number(v.initial_amount) * 100));
   const canUndo = undoableOf(v.id).length > 0;
   const used = st === 'used';
+  const locked = !state.synced;
   return `<article class="card ${used ? 'used' : ''}" style="--accent:${accent}" data-id="${esc(v.id)}">
     <div class="card-top">
       <div>
         <div class="company">${esc(v.company)}</div>
         <div class="type">${esc(v.voucher_type)}</div>
         ${v.voucher_number
-          ? `<span class="vnum"># <span class="num">${esc(v.voucher_number)}</span></span>`
+          ? `<button class="vnum" data-act="copy" aria-label="העתקת מספר שובר"><span class="num">${esc(v.voucher_number)}</span><span class="copy-label">העתקה</span></button>`
           : `<span class="vnum missing">ללא מספר שובר</span>`}
       </div>
       <span class="status ${STATUS[st].cls}">${STATUS[st].label}</span>
@@ -489,12 +558,12 @@ function cardHTML(v, accent) {
       <div><div class="bal-lbl">יתרה</div><div class="bal num">${money(v.balance)}</div></div>
       <div class="of">מתוך <span class="num">${money(v.initial_amount)}</span></div>
     </div>
-    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="bar" role="meter" aria-label="יתרת השובר" aria-valuemin="0" aria-valuemax="${Number(v.initial_amount)}" aria-valuenow="${Number(v.balance)}"><i style="width:${pct}%"></i></div>
     <div class="card-actions">
-      <button class="btn btn-soft" data-act="full" ${used ? 'disabled data-off="1"' : ''}>נוצל</button>
-      <button class="btn btn-soft" data-act="partial" ${used ? 'disabled data-off="1"' : ''}>נוצל חלקית</button>
-      <button class="btn btn-ghost" data-act="undo" ${canUndo ? '' : 'disabled data-off="1"'}>ביטול ניצול</button>
-      <button class="btn btn-ghost more" data-act="more" aria-label="פרטים והיסטוריה">
+      <button class="btn btn-soft" data-act="full" ${used || locked ? 'disabled data-off="1"' : ''}>נוצל</button>
+      <button class="btn btn-soft" data-act="partial" ${used || locked ? 'disabled data-off="1"' : ''}>נוצל חלקית</button>
+      <button class="btn btn-ghost" data-act="undo" ${canUndo && !locked ? '' : 'disabled data-off="1"'}>ביטול ניצול</button>
+      <button class="btn btn-ghost more" data-act="more" aria-label="פרטים והיסטוריה" title="פרטים והיסטוריה">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M12 5h.01M12 12h.01M12 19h.01"/></svg>
       </button>
     </div>
@@ -502,20 +571,36 @@ function cardHTML(v, accent) {
 }
 
 /* ---------- sheet ---------- */
+let returnFocus = null, focusTimer;
 function openSheet(html) {
-  vibrate(20);
+  if (busy) return;
+  returnFocus = document.activeElement;
   $('#sheetBody').innerHTML = html;
-  $('#backdrop').classList.add('open');
-  $('#sheet').classList.add('open');
+  const title = $('#sheetBody h3'); if (title) {title.id = 'sheetTitle'; title.tabIndex = -1;}
+  $('#backdrop').classList.add('open'); $('#sheet').classList.add('open');
   $('#sheet').scrollTop = 0;
+  $('#mainView').inert = true; document.body.style.overflow = 'hidden';
+  clearTimeout(focusTimer); focusTimer = setTimeout(() => (title || $('#sheet')).focus(), 50);
 }
 function closeSheet() {
   if (busy) return;
-  $('#backdrop').classList.remove('open');
-  $('#sheet').classList.remove('open');
+  clearTimeout(focusTimer);
+  $('#backdrop').classList.remove('open'); $('#sheet').classList.remove('open');
+  $('#mainView').inert = false; document.body.style.overflow = '';
+  if (returnFocus?.isConnected) returnFocus.focus();
+  else $('#addBtn').focus();
 }
 $('#backdrop').addEventListener('click', closeSheet);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+document.addEventListener('keydown', e => {
+  if (!$('#sheet').classList.contains('open')) return;
+  if (e.key === 'Escape') { e.preventDefault(); closeSheet(); }
+  if (e.key === 'Tab') {
+    const list = [...$('#sheet').querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),[tabindex="0"]')].filter(el => el.getClientRects().length);
+    if (!list.length) {e.preventDefault(); return;}
+    if (e.shiftKey && (document.activeElement === list[0] || !list.includes(document.activeElement))) {e.preventDefault(); list.at(-1).focus();}
+    else if (!e.shiftKey && (document.activeElement === list.at(-1) || !list.includes(document.activeElement))) {e.preventDefault(); list[0].focus();}
+  }
+});
 
 const findV = id => state.vouchers.find(v => v.id === id);
 const infoBox = v => `<div class="infobox"><div><div class="t">${esc(v.company)} · ${esc(v.voucher_type)}</div>
@@ -545,7 +630,7 @@ function openPartial(v) {
     <form id="partialForm" novalidate>
       <div class="field">
         <label for="useAmt">סכום שנוצל <span class="hint">(עד ${money(max)})</span></label>
-        <div class="input-money"><input class="input num" id="useAmt" inputmode="decimal" pattern="[0-9]*" autocomplete="off" placeholder="0"><span>₪</span></div>
+        <div class="input-money"><input class="input num" id="useAmt" aria-describedby="useErr usePrev" inputmode="decimal" maxlength="12" autocomplete="off" placeholder="0"><span>₪</span></div>
         <div class="err" id="useErr"></div>
         <div class="preview" id="usePrev"></div>
       </div>
@@ -562,15 +647,16 @@ function openPartial(v) {
     else if (!(a > 0)) err = 'יש להזין סכום גדול מ-0';
     else if (a > max) err = `הסכום גבוה מהיתרה (${money(max)})`;
     $('#useErr').textContent = err;
-    $('#usePrev').textContent = (!err && a > 0) ? `יתרה אחרי העדכון: ${money(max - a)}` : '';
+    inp.setAttribute('aria-invalid', String(!!err));
+    $('#usePrev').textContent = (!err && a > 0) ? `יתרה אחרי העדכון: ${money((cents(max) - cents(a))/100)}` : '';
     const ok = !err && a > 0;
     btn.dataset.off = ok ? '' : '1';
-    btn.disabled = !ok || busy;
+    btn.disabled = !ok || busy || !state.synced;
     return ok;
   };
   inp.addEventListener('input', check);
   check();
-  setTimeout(() => inp.focus(), 250);
+  clearTimeout(focusTimer); focusTimer = setTimeout(() => inp.focus(), 150);
   $('#partialForm').onsubmit = e => {
     e.preventDefault();
     if (busy || !check()) return;
@@ -578,7 +664,7 @@ function openPartial(v) {
     guarded(btn, async () => {
       await api('use', { voucherId: v.id, amount: a });
       busy = false; closeSheet();
-      toast(`נוצלו ${money(a)} · נותרו ${money(max - a)}`);
+      toast(`נוצלו ${money(a)} · נותרו ${money((cents(max) - cents(a))/100)}`);
     });
   };
 }
@@ -591,7 +677,7 @@ function openUndo(v) {
     <p class="lead">בחר איזה ניצול לבטל — הסכום יחזור ליתרה.</p>
     ${infoBox(v)}
     <ul class="hist pick" id="undoList">
-      ${list.map(a => `<li data-aid="${a.id}" class="${a.id === sel ? 'sel' : ''}">
+      ${list.map(a => `<li tabindex="0" role="radio" aria-checked="${a.id === sel}" data-aid="${esc(a.id)}" class="${a.id === sel ? 'sel' : ''}">
         <span class="radio"></span>
         <div class="main"><div class="t">${a.is_full ? 'ניצול מלא' : 'ניצול חלקי'}</div><div class="d">${fmtDate(a.created_at)}</div></div>
         <div class="amt num">${money(a.amount)}</div></li>`).join('')}
@@ -603,9 +689,12 @@ function openUndo(v) {
   const upd = () => {
     const a = list.find(x => x.id === sel);
     $('#confirmUndo').textContent = `החזרת ${money(a.amount)}`;
-    document.querySelectorAll('#undoList li').forEach(li => li.classList.toggle('sel', Number(li.dataset.aid) === sel));
+    document.querySelectorAll('#undoList li').forEach(li => (li.classList.toggle('sel', li.dataset.aid === sel), li.setAttribute('aria-checked', String(li.dataset.aid === sel))));
   };
-  $('#undoList').onclick = e => { const li = e.target.closest('li'); if (li && !busy) { sel = Number(li.dataset.aid); vibrate(15); upd(); } };
+  $('#undoList').onclick = e => { const li = e.target.closest('li'); if (li && !busy) { sel = li.dataset.aid; vibrate(15); upd(); } };
+  $('#undoList').setAttribute('role', 'radiogroup');
+  $('#undoList').setAttribute('aria-label', 'בחירת ניצול לביטול');
+  $('#undoList').onkeydown = e => { const items=[...$('#undoList').children]; const item=e.target.closest('li'); if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); item?.click(); } else if (['ArrowDown','ArrowUp','ArrowRight','ArrowLeft'].includes(e.key)) { e.preventDefault(); const delta=['ArrowDown','ArrowLeft'].includes(e.key)?1:-1; const next=items[(items.indexOf(item)+delta+items.length)%items.length]; next?.focus(); next?.click(); } };
   upd();
   $('#confirmUndo').onclick = e => guarded(e.currentTarget, async () => {
     const a = list.find(x => x.id === sel);
@@ -650,6 +739,8 @@ function openDetails(v) {
       <button class="btn btn-danger" id="delBtn">מחיקת השובר</button>
       <button class="btn btn-ghost" data-close>סגירה</button>
     </div>`);
+  $('#saveNum').disabled = !state.synced; $('#saveNum').dataset.off = state.synced ? '' : '1';
+  $('#delBtn').disabled = !state.synced; $('#delBtn').dataset.off = state.synced ? '' : '1';
   $('#numForm').onsubmit = e => {
     e.preventDefault();
     if (busy) return;
@@ -665,7 +756,10 @@ function openDetails(v) {
   $('#delBtn').onclick = e => {
     const b = e.currentTarget;
     if (busy) return;
-    if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'לחץ שוב לאישור מחיקה'; vibrate([50, 50]); return; }
+    if (!b.dataset.sure) {
+      openSheet(`<h3>מחיקת השובר?</h3><p class="lead">השובר יוסר מהרשימה. הפעולה אינה ביטול ניצול.</p>${infoBox(v)}<div class="sheet-actions"><button id="deleteConfirm" class="btn btn-danger">מחיקה</button><button class="btn btn-ghost" data-close>ביטול</button></div>`);
+      $('#deleteConfirm').onclick = () => guarded($('#deleteConfirm'), async () => { await api('remove', {voucherId:v.id}); busy=false; closeSheet(); toast('השובר נמחק'); }); return;
+    }
     guarded(b, async () => {
       await api('remove', { voucherId: v.id });
       busy = false; closeSheet();
@@ -675,6 +769,7 @@ function openDetails(v) {
 }
 
 function openAdd() {
+  if (busy || !state.synced) return;
   const companies = [...new Set(['HTZ', 'BUYME', ...state.vouchers.map(v => v.company)])];
   let htzType = null;
   openSheet(`<h3>הוספת שובר חדש</h3>
@@ -700,7 +795,7 @@ function openAdd() {
       </div>
       <div class="field">
         <label for="fAmount">סכום התחלתי</label>
-        <div class="input-money"><input class="input num" id="fAmount" inputmode="decimal" pattern="[0-9]*" autocomplete="off" placeholder="0"><span>₪</span></div>
+        <div class="input-money"><input class="input num" id="fAmount" inputmode="decimal" maxlength="12" autocomplete="off" placeholder="0"><span>₪</span></div>
         <div class="quick">${[100, 200, 250, 300, 500].map(n => `<button type="button" data-a="${n}">${n} ₪</button>`).join('')}</div>
       </div>
       <div class="err" id="addErr"></div>
@@ -749,7 +844,7 @@ function openAdd() {
     if (err) { vibrate([50, 100, 50]); return; }
     guarded($('#saveAdd'), async () => {
       await api('add', { company, type, number, amount });
-      state.fCompany = 'all'; state.fStatus = 'all'; render();
+      state.fCompany = 'all'; state.fStatus = 'all'; state.query = ''; $('#searchInput').value = ''; render();
       busy = false; closeSheet();
       toast(`השובר נוסף · ${company} ${type} · ${money(amount)}`);
     });
@@ -765,12 +860,12 @@ $('#list').onclick = e => {
   const b = e.target.closest('[data-act]'); if (!b || b.disabled || busy) return;
   const v = findV(b.closest('.card').dataset.id); if (!v) return;
   vibrate(15);
-  ({ full: openFull, partial: openPartial, undo: openUndo, more: openDetails })[b.dataset.act](v);
+  ({ full: openFull, partial: openPartial, undo: openUndo, more: openDetails, copy: async v => {try {await navigator.clipboard.writeText(v.voucher_number); toast('מספר השובר הועתק');} catch {toast('לא ניתן להעתיק אוטומטית. אפשר לסמן את המספר ולהעתיק.', 'bad');}} })[b.dataset.act](v);
 };
 $('#addBtn').onclick = openAdd;
 $('#refreshBtn').onclick = e => guarded(null, async () => { vibrate(20); await api('state'); toast('הנתונים עודכנו'); });
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && state.loaded && !busy && !$('#sheet').classList.contains('open'))
+  if (document.visibilityState === 'visible' && state.loaded && !inflight && !busy && !$('#sheet').classList.contains('open'))
     api('state').catch(() => {});
 });
 
@@ -779,13 +874,16 @@ async function start() {
   try { await load(); }
   catch (e) {
     console.error(e);
-    if (state.loaded) toast('אין חיבור לשרת — מוצגים הנתונים האחרונים שנטענו', 'bad');
+    if (state.loaded) toast('מוצגים הנתונים האחרונים. יש לרענן לפני ביצוע שינויים.', 'bad');
     else $('#list').innerHTML = `<div class="empty"><div class="big">⚠️</div><b>${esc(errMsg(e))}</b>
-      <div class="help">בהפעלה ראשונה: ודא שה-Apps Script פורסם כ״אפליקציית אינטרנט״ עם גישה ל״כל אחד״, ושהכתובת בקוד מסתיימת ב-<span class="num">/exec</span>.</div>
+      <div class="help">לא ניתן לטעון את השוברים כרגע. בדוק את החיבור ונסה שוב.</div>
       <button class="btn btn-soft" id="retryBtn">נסה שוב</button></div>`;
   }
 }
 
+$('#searchInput').addEventListener('input', e => { state.query = e.target.value.trim(); render(); });
+$('#clearFilters').onclick = () => {state.query=''; state.fCompany='all'; state.fStatus='all'; $('#searchInput').value=''; render();};
+window.addEventListener('offline', () => {state.synced=false; setSync('אין חיבור · השוברים זמינים לצפייה בלבד', 'error'); render();});
 if (!configured) $('#setupView').hidden = false;
 else { $('#mainView').hidden = false; start(); }
 </script>
