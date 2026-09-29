@@ -15,7 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 :root{
   --bg:#f6f2fb; --bg2:#eef5f8;
@@ -42,7 +41,7 @@ button:disabled{cursor:default}
 [hidden]{display:none!important}
 .num{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
 
-/* ---------- login ---------- */
+/* ---------- setup (only until API_URL is set) ---------- */
 .login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
 .login-card{width:100%;max-width:380px;background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:30px 22px}
 .logo{width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,#cdbff7,#ffd6e0);display:grid;place-items:center;font-size:32px;margin:0 auto 14px}
@@ -78,6 +77,7 @@ button:disabled{cursor:default}
 @keyframes spin{to{transform:rotate(360deg)}}
 .icon-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.75);box-shadow:0 1px 3px rgba(90,72,176,.08)}
 .icon-btn svg{width:20px;height:20px;stroke:var(--ink)}
+.icon-btn.spinning svg{animation:spin .8s linear infinite}
 
 /* ---------- header / summary ---------- */
 .top{display:flex;align-items:center;justify-content:space-between;margin:4px 0 14px}
@@ -127,6 +127,7 @@ button:disabled{cursor:default}
 .card-actions .more svg{width:20px;height:20px;stroke:var(--ink)}
 .empty{text-align:center;color:var(--muted);padding:40px 10px}
 .empty .big{font-size:44px}
+.empty .help{font-size:14px;margin:8px auto 16px;max-width:320px;line-height:1.5}
 
 /* ---------- FAB ---------- */
 .fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + var(--safe-b));height:56px;padding:0 24px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 26px rgba(45,38,64,.3);z-index:20}
@@ -144,7 +145,7 @@ button:disabled{cursor:default}
 .sheet-actions{display:flex;gap:10px;margin-top:18px}
 .sheet-actions .btn{flex:1;white-space:nowrap}
 .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.seg button{height:50px;border-radius:14px;border:1.5px solid var(--line);background:#fcfbfe;font-weight:700;font-size:14px}
+.seg button{height:50px;border-radius:14px;border:1.5px solid var(--line);background:#fcfbfe;font-weight:700;font-size:13.5px;padding:0 4px;white-space:nowrap}
 .seg button.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary-ink)}
 .suggest{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .suggest button{height:32px;padding:0 12px;border-radius:99px;background:#f4f1f9;font-size:13.5px;font-weight:600}
@@ -184,26 +185,14 @@ button:disabled{cursor:default}
 </head>
 <body>
 
-<!-- ========== LOGIN ========== -->
-<section class="login" id="loginView" hidden>
-  <form class="login-card" id="loginForm" novalidate>
+<!-- ========== SETUP (only until API_URL is set) ========== -->
+<section class="login" id="setupView" hidden>
+  <div class="login-card">
     <div class="logo">🎟️</div>
     <h1>השוברים שלי</h1>
-    <p class="sub">כניסה אישית לניהול השוברים</p>
-    <div class="setup-note" id="setupNote" hidden>
-      צריך להגדיר את כתובת ה-Supabase והמפתח בראש הקוד (SUPABASE_URL ו-SUPABASE_ANON_KEY).
-    </div>
-    <div class="field">
-      <label for="email">אימייל</label>
-      <input class="input ltr" id="email" type="email" autocomplete="username" inputmode="email" required>
-    </div>
-    <div class="field">
-      <label for="password">סיסמה</label>
-      <input class="input ltr" id="password" type="password" autocomplete="current-password" required>
-    </div>
-    <div class="err" id="loginErr"></div>
-    <button class="btn btn-primary btn-block" id="loginBtn" type="submit" style="margin-top:8px">כניסה</button>
-  </form>
+    <p class="sub">כמעט מוכן</p>
+    <div class="setup-note">צריך להדביק בראש הקוד את כתובת ה-Web App של Google Apps Script (<span class="num">API_URL</span>).</div>
+  </div>
 </section>
 
 <!-- ========== MAIN ========== -->
@@ -214,9 +203,6 @@ button:disabled{cursor:default}
       <div class="actions">
         <button class="icon-btn" id="refreshBtn" aria-label="רענון" title="רענון">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-        </button>
-        <button class="icon-btn" id="logoutBtn" aria-label="יציאה" title="יציאה">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
         </button>
       </div>
     </header>
@@ -247,17 +233,14 @@ button:disabled{cursor:default}
 
 <script>
 /* =====================================================================
-   הגדרות — להחליף בערכים מ-Supabase → Project Settings → API
+   הגדרה — כתובת ה-Web App של Google Apps Script (מסתיימת ב-/exec)
    ===================================================================== */
-const SUPABASE_URL      = 'https://YOUR-PROJECT-ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzmuUprcurfXZ5U-z5bfzFNlNWj5OZ0yZ8af1mjwDqD4ZIUTDbKFmhuUvqUIM3YClHNrA/exec';
 
 /* ===================================================================== */
-const CFG = window.__VOUCHER_CFG || { url: SUPABASE_URL, key: SUPABASE_ANON_KEY };
-const configured = !/YOUR-/.test(CFG.url + CFG.key);
-const sb = configured ? window.supabase.createClient(CFG.url, CFG.key, {
-  auth: { persistSession: true, autoRefreshToken: true, storageKey: 'vouchers-auth' }
-}) : null;
+const API = (window.__VOUCHER_CFG && window.__VOUCHER_CFG.api) || API_URL;
+const configured = /^https?:\/\//.test(API);
+const CACHE_KEY = 'vouchers-cache:' + API;
 
 const HTZ_TYPES = ['EAT ZONE', 'CHEF ZONE', 'ALL IN ZONE'];
 const STATUS = {
@@ -276,7 +259,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const nf = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 2 });
 const money = n => nf.format(Number(n) || 0) + ' ₪';
 const dtf = new Intl.DateTimeFormat('he-IL', { day: 'numeric', month: 'numeric', year: '2-digit', hour: '2-digit', minute: '2-digit' });
-const fmtDate = s => dtf.format(new Date(s));
+const fmtDate = s => { const d = new Date(s); return isNaN(d) ? '' : dtf.format(d); };
 const normCompany = s => String(s || '').trim().replace(/\s+/g, ' ').toUpperCase();
 function normType(company, type) {
   const t = String(type || '').trim().replace(/\s+/g, ' ');
@@ -290,7 +273,9 @@ function normType(company, type) {
   return t ? t.toUpperCase() : null;
 }
 const parseAmount = s => {
-  const n = Number(String(s || '').replace(/[₪\s]/g, '').replace(',', '.'));
+  const t = String(s || '').replace(/[₪\s]/g, '').replace(',', '.');
+  if (t === '') return NaN;
+  const n = Number(t);
   return Number.isFinite(n) ? Math.round(n * 100) / 100 : NaN;
 };
 const statusOf = v => Number(v.balance) <= 0 ? 'used' : Number(v.balance) >= Number(v.initial_amount) ? 'active' : 'partial';
@@ -300,8 +285,9 @@ function accentOf(company) {
   let h = 0; for (const c of company) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return ACCENTS[2 + (h % (ACCENTS.length - 2))];
 }
+const numKey = s => String(s || '').replace(/[^0-9A-Za-z\u0590-\u05FF]/g, '').toUpperCase();   // 139381057-3719 = 139381057 3719
 const undoableOf = id => state.actions.filter(a => a.voucher_id === id && a.action === 'use' && !a.undone_at);
-const errMsg = e => (e && (e.message || e.error_description)) || 'משהו השתבש. נסה שוב.';
+const errMsg = e => (e && e.message) || 'משהו השתבש. נסה שוב.';
 
 function toast(msg, kind = 'ok') {
   const t = $('#toast');
@@ -327,24 +313,54 @@ async function guarded(btn, fn) {
   }
 }
 
-async function rpc(fn, args) {
-  const { data, error } = await sb.rpc(fn, args || {});
-  if (error) throw error;
-  return data;
+/* ---------- שרת (Google Sheets דרך Apps Script) ---------- */
+let inflight = 0, sentSeq = 0, appliedSeq = 0;
+const rid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+const netError = msg => Object.assign(new Error(msg), { net: true });
+
+async function api(action, payload = {}) {
+  const seq = ++sentSeq;
+  inflight++; $('#refreshBtn').classList.add('spinning');
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 30000);
+  try {
+    let res, data;
+    try {
+      // גוף טקסט רגיל, בלי כותרות — כך Apps Script מקבל את הבקשה בלי בדיקת CORS מקדימה
+      res = await fetch(API, { method: 'POST', body: JSON.stringify({ action, reqId: rid(), ...payload }), signal: ctrl.signal });
+    } catch (e) {
+      throw netError(e.name === 'AbortError' ? 'השרת לא הגיב בזמן. נסה שוב.' : 'אין חיבור לשרת. נסה שוב.');
+    }
+    try { data = await res.json(); } catch { throw netError('תשובה לא תקינה מהשרת.'); }
+    if (data.state && seq > appliedSeq) { appliedSeq = seq; applyState(data.state); }
+    if (!data.ok) throw new Error(data.error || 'משהו השתבש. נסה שוב.');
+    return data;
+  } finally {
+    clearTimeout(timer);
+    if (--inflight === 0) $('#refreshBtn').classList.remove('spinning');
+  }
 }
 
-/* ---------- data ---------- */
-async function load({ quiet = false } = {}) {
-  if (!quiet && !state.loaded) $('#list').innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
-  let data = await rpc('voucher_state');
-  if (!data.seeded) {                     // נתונים התחלתיים — פעם אחת בלבד
-    await rpc('voucher_seed');
-    data = await rpc('voucher_state');
-  }
-  state.vouchers = data.vouchers || [];
-  state.actions = data.actions || [];
+function applyState(s) {
+  state.vouchers = s.vouchers || [];
+  state.actions = s.actions || [];
   state.loaded = true;
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ vouchers: state.vouchers, actions: state.actions })); } catch {}
   render();
+}
+
+/* פתיחה: מציג מיד את מה שנטען בפעם הקודמת (רק לתצוגה), ומסנכרן מהגיליון */
+async function load() {
+  if (!state.loaded) {
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch {}
+    if (cached && Array.isArray(cached.vouchers)) {
+      state.vouchers = cached.vouchers; state.actions = cached.actions || []; state.loaded = true; render();
+    } else {
+      $('#list').innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+    }
+  }
+  await api('state');
 }
 
 /* ---------- render ---------- */
@@ -390,7 +406,7 @@ function render() {
   const rank = { active: 0, partial: 1, used: 2 };
   $('#list').innerHTML = companies.map(c => {
     const items = shown.filter(v => v.company === c)
-      .sort((a, b) => rank[statusOf(a)] - rank[statusOf(b)] || a.created_at.localeCompare(b.created_at));
+      .sort((a, b) => rank[statusOf(a)] - rank[statusOf(b)] || (a.ord || 0) - (b.ord || 0));
     if (!items.length) return '';
     const sub = items.reduce((s, v) => s + Number(v.balance), 0);
     const accent = accentOf(c);
@@ -407,7 +423,7 @@ function cardHTML(v, accent) {
   const pct = Math.max(0, Math.min(100, Number(v.balance) / Number(v.initial_amount) * 100));
   const canUndo = undoableOf(v.id).length > 0;
   const used = st === 'used';
-  return `<article class="card ${used ? 'used' : ''}" style="--accent:${accent}" data-id="${v.id}">
+  return `<article class="card ${used ? 'used' : ''}" style="--accent:${accent}" data-id="${esc(v.id)}">
     <div class="card-top">
       <div>
         <div class="company">${esc(v.company)}</div>
@@ -464,10 +480,9 @@ function openFull(v) {
       <button class="btn btn-ghost" data-close>ביטול</button>
     </div>`);
   $('#confirmFull').onclick = e => guarded(e.currentTarget, async () => {
-    await rpc('voucher_use', { p_voucher_id: v.id, p_amount: null, p_full: true });
-    await load({ quiet: true });
+    await api('use', { voucherId: v.id, full: true });
     busy = false; closeSheet();
-    toast(`השובר סומן כנוצל במלואו`);
+    toast('השובר סומן כנוצל במלואו');
   });
 }
 
@@ -508,11 +523,10 @@ function openPartial(v) {
   setTimeout(() => inp.focus(), 250);
   $('#partialForm').onsubmit = e => {
     e.preventDefault();
-    if (!check()) return;
+    if (busy || !check()) return;
     const a = parseAmount(inp.value);
     guarded(btn, async () => {
-      await rpc('voucher_use', { p_voucher_id: v.id, p_amount: a, p_full: false });
-      await load({ quiet: true });
+      await api('use', { voucherId: v.id, amount: a });
       busy = false; closeSheet();
       toast(`נוצלו ${money(a)} · נותרו ${money(max - a)}`);
     });
@@ -546,8 +560,7 @@ function openUndo(v) {
   upd();
   $('#confirmUndo').onclick = e => guarded(e.currentTarget, async () => {
     const a = list.find(x => x.id === sel);
-    await rpc('voucher_undo', { p_action_id: a.id });
-    await load({ quiet: true });
+    await api('undo', { actionId: a.id });
     busy = false; closeSheet();
     const nv = findV(v.id);
     toast(`הניצול בוטל · ${money(a.amount)} חזרו ליתרה${nv ? ' (' + STATUS[statusOf(nv)].label + ')' : ''}`);
@@ -563,12 +576,14 @@ function openDetails(v) {
       use:    ['💳', a.is_full ? 'ניצול מלא' : 'ניצול חלקי', 'var(--peach)', '−'],
       undo:   ['↩️', 'ביטול ניצול', 'var(--mint)', '+'],
       edit:   ['✏️', a.note || 'עריכה', '#f4f1f9', ''],
-    }[a.action];
+      delete: ['🗑️', 'מחיקה', 'var(--rose)', ''],
+    }[a.action] || ['•', a.note || '', '#f4f1f9', ''];
+    const showAmt = a.amount != null && (a.action === 'create' || a.action === 'use' || a.action === 'undo');
     return `<li class="${a.undone_at ? 'undone' : ''}">
       <span class="ic" style="background:${map[2]}">${map[0]}</span>
       <div class="main"><div class="t">${esc(map[1])}${a.undone_at ? ' · בוטל' : ''}</div>
-        <div class="d">${fmtDate(a.created_at)}${a.action !== 'edit' && a.balance_after != null ? ' · יתרה: ' + money(a.balance_after) : ''}</div></div>
-      ${a.amount != null && a.action !== 'edit' ? `<div class="amt num">${map[3]}${money(a.amount)}</div>` : ''}
+        <div class="d">${fmtDate(a.created_at)}${showAmt && a.balance_after != null ? ' · יתרה: ' + money(a.balance_after) : ''}</div></div>
+      ${showAmt ? `<div class="amt num">${map[3]}${money(a.amount)}</div>` : ''}
     </li>`;
   };
   openSheet(`<h3>${esc(v.company)} · ${esc(v.voucher_type)}</h3>
@@ -589,21 +604,22 @@ function openDetails(v) {
     </div>`);
   $('#numForm').onsubmit = e => {
     e.preventDefault();
+    if (busy) return;
     const val = $('#numInp').value.replace(/\s+/g, '');
     if (val === (v.voucher_number || '')) return toast('לא בוצע שינוי', 'bad');
+    if (numKey(val) && state.vouchers.some(x => x.id !== v.id && numKey(x.voucher_number) === numKey(val))) return toast(`שובר מספר ${val} כבר קיים ברשימה`, 'bad');
     guarded($('#saveNum'), async () => {
-      await rpc('voucher_set_number', { p_voucher_id: v.id, p_number: val || null });
-      await load({ quiet: true });
+      await api('setNumber', { voucherId: v.id, number: val });
       busy = false; closeSheet();
       toast(val ? 'מספר השובר נשמר' : 'מספר השובר הוסר');
     });
   };
   $('#delBtn').onclick = e => {
     const b = e.currentTarget;
+    if (busy) return;
     if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'לחץ שוב לאישור מחיקה'; return; }
     guarded(b, async () => {
-      await rpc('voucher_delete', { p_voucher_id: v.id });
-      await load({ quiet: true });
+      await api('remove', { voucherId: v.id });
       busy = false; closeSheet();
       toast('השובר נמחק');
     });
@@ -672,6 +688,7 @@ function openAdd() {
 
   $('#addForm').onsubmit = e => {
     e.preventDefault();
+    if (busy) return;
     const company = normCompany(comp.value);
     const type = company === 'HTZ' ? htzType : normType(company, typ.value);
     const number = $('#fNumber').value.replace(/\s+/g, '');
@@ -680,13 +697,12 @@ function openAdd() {
     if (!company) err = 'יש להזין שם חברה';
     else if (!type) err = company === 'HTZ' ? 'יש לבחור סוג שובר: EAT ZONE, CHEF ZONE או ALL IN ZONE' : 'יש להזין סוג שובר';
     else if (!(amount > 0)) err = 'יש להזין סכום התחלתי גדול מ-0';
-    else if (number && state.vouchers.some(v => v.voucher_number === number)) err = `שובר מספר ${number} כבר קיים ברשימה`;
+    else if (numKey(number) && state.vouchers.some(v => numKey(v.voucher_number) === numKey(number))) err = `שובר מספר ${number} כבר קיים ברשימה`;
     $('#addErr').textContent = err;
     if (err) return;
     guarded($('#saveAdd'), async () => {
-      await rpc('voucher_add', { p_company: company, p_type: type, p_number: number || null, p_amount: amount });
-      state.fCompany = 'all'; state.fStatus = 'all';
-      await load({ quiet: true });
+      await api('add', { company, type, number, amount });
+      state.fCompany = 'all'; state.fStatus = 'all'; render();
       busy = false; closeSheet();
       toast(`השובר נוסף · ${company} ${type} · ${money(amount)}`);
     });
@@ -698,55 +714,32 @@ $('#sheet').addEventListener('click', e => { if (e.target.closest('[data-close]'
 $('#companyChips').onclick = e => { const b = e.target.closest('[data-company]'); if (b) { state.fCompany = b.dataset.company; render(); } };
 $('#statusChips').onclick = e => { const b = e.target.closest('[data-status]'); if (b) { state.fStatus = b.dataset.status; render(); } };
 $('#list').onclick = e => {
+  if (e.target.closest('#retryBtn')) return start();
   const b = e.target.closest('[data-act]'); if (!b || b.disabled || busy) return;
   const v = findV(b.closest('.card').dataset.id); if (!v) return;
   ({ full: openFull, partial: openPartial, undo: openUndo, more: openDetails })[b.dataset.act](v);
 };
 $('#addBtn').onclick = openAdd;
-$('#refreshBtn').onclick = e => guarded(e.currentTarget, async () => { await load({ quiet: true }); toast('הנתונים עודכנו'); });
-$('#logoutBtn').onclick = async () => { await sb.auth.signOut(); showLogin(); };
+$('#refreshBtn').onclick = e => guarded(null, async () => { await api('state'); toast('הנתונים עודכנו'); });
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && state.loaded && !busy && !$('#sheet').classList.contains('open'))
-    load({ quiet: true }).catch(() => {});
+    api('state').catch(() => {});
 });
 
-/* ---------- auth ---------- */
-function showLogin() {
-  state.loaded = false; state.vouchers = []; state.actions = [];
-  $('#mainView').hidden = true; $('#loginView').hidden = false;
-  $('#setupNote').hidden = configured;
-  $('#loginBtn').disabled = !configured;
-}
-async function showMain() {
-  $('#loginView').hidden = true; $('#mainView').hidden = false;
+/* ---------- start ---------- */
+async function start() {
   try { await load(); }
   catch (e) {
     console.error(e);
-    $('#list').innerHTML = `<div class="empty"><div class="big">⚠️</div>${esc(errMsg(e))}</div>`;
+    if (state.loaded) toast('אין חיבור לשרת — מוצגים הנתונים האחרונים שנטענו', 'bad');
+    else $('#list').innerHTML = `<div class="empty"><div class="big">⚠️</div><b>${esc(errMsg(e))}</b>
+      <div class="help">בהפעלה ראשונה: ודא שה-Apps Script פורסם כ״אפליקציית אינטרנט״ עם גישה ל״כל אחד״, ושהכתובת בקוד מסתיימת ב-<span class="num">/exec</span>.</div>
+      <button class="btn btn-soft" id="retryBtn">נסה שוב</button></div>`;
   }
 }
-$('#loginForm').onsubmit = e => {
-  e.preventDefault();
-  const email = $('#email').value.trim(), password = $('#password').value;
-  if (!email || !password) { $('#loginErr').textContent = 'יש להזין אימייל וסיסמה'; return; }
-  $('#loginErr').textContent = '';
-  guarded($('#loginBtn'), async () => {
-    const { error } = await sb.auth.signInWithPassword({ email, password });
-    if (error) {
-      $('#loginErr').textContent = /invalid/i.test(error.message) ? 'אימייל או סיסמה שגויים' : error.message;
-      return;
-    }
-    $('#password').value = '';
-    await showMain();
-  });
-};
 
-(async function init() {
-  if (!configured) return showLogin();
-  const { data } = await sb.auth.getSession();
-  data.session ? showMain() : showLogin();
-  sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_OUT') showLogin(); });
-})();
+if (!configured) $('#setupView').hidden = false;
+else { $('#mainView').hidden = false; start(); }
 </script>
 </body>
 </html>
